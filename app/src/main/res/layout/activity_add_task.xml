@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            layout="@layout/content_add_task_toolbar"/>
+        <include layout="@layout/content_add_toolbar"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/appBarLayout">
 
+            <include layout="@layout/content_add_task_center"/>
         </ScrollView>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

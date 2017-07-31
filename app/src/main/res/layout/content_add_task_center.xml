@@ -7,5 +7,123 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/backlog_radio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="backlog"
+                    android:textSize="25sp"/>
+
+                <RadioButton
+                    android:id="@+id/todo_radio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="TODO"
+                    android:textSize="25sp"/>
+            </RadioGroup>
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/title_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="title"/>
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/description_editText"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="top"
+                android:layout_marginTop="10dp"
+                android:hint="Description"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4">
+
+                </Spinner>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textSize="25sp"/>
+            </LinearLayout>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/num1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="25sp"/>
+
+                <RadioButton
+                    android:id="@+id/num2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textSize="25sp"/>
+
+                <RadioButton
+                    android:id="@+id/num3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textSize="25sp"/>
+
+                <RadioButton
+                    android:id="@+id/num4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textSize="25sp"/>
+
+                <RadioButton
+                    android:id="@+id/num5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textSize="25sp"/>
+            </RadioGroup>
+        </LinearLayout>
     </RelativeLayout>
 </merge>
