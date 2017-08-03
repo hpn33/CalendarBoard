@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import hpn332.cb.AddTag.AddTagActivity;
+import hpn332.cb.Tag.AddTagActivity;
 import hpn332.cb.R;
 import hpn332.cb.Utils.Data.ProviderHelper;
 

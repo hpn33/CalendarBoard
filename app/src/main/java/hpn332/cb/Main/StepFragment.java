@@ -45,7 +45,7 @@ public class StepFragment extends Fragment {
 
 	private void adapter(int index) {
 
-		AdapterList adapter = new AdapterList(getContext(), Contract.listStep[index]);
+		AdapterMainList adapter = new AdapterMainList(getContext(), Contract.listStep[index]);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

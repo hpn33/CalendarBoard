@@ -23,7 +23,7 @@ class DBHelper extends SQLiteOpenHelper {
 				           + Contract.TagEntry.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				           + Contract.TagEntry.TITLE + " TEXT,"
 				           + Contract.TagEntry.DESCRIPTION + " TEXT,"
-				           + Contract.TagEntry.COLOR + "  TEXT "
+				           + Contract.TagEntry.COLOR + "  INTEGER "
 				           + ");");
 
 		db.execSQL("CREATE TABLE " + Contract.TABLE_TASK + " ("

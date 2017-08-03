@@ -10,23 +10,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
-import hpn332.cb.Utils.Structure;
+import hpn332.cb.Utils.TaskStructure;
 
 
-class AdapterList extends RecyclerView.Adapter<AdapterList.ItemHolder> {
+class AdapterMainList extends RecyclerView.Adapter<AdapterMainList.ItemHolder> {
 
-	private LayoutInflater       inflater;
-	private ArrayList<Structure> arrayList;
+	private LayoutInflater           inflater;
+	private ArrayList<TaskStructure> arrayList;
 
-	AdapterList(
-			Context context, ArrayList<Structure> arrayList) {
+	AdapterMainList(
+			Context context, ArrayList<TaskStructure> arrayList) {
 		this.arrayList = arrayList;
 		inflater = LayoutInflater.from(context);
 	}
 
 	@Override
 	public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View view = inflater.inflate(R.layout.row_item, parent, false);
+		View view = inflater.inflate(R.layout.row_item_task, parent, false);
 
 		return new ItemHolder(view);
 	}

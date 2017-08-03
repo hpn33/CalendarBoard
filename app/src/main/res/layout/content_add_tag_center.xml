@@ -38,27 +38,57 @@
                     android:hint="Description"/>
             </android.support.design.widget.TextInputLayout>
 
-            <LinearLayout
+            <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <View
-                    android:id="@+id/color_view"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="4"
-                    android:background="#000"/>
-
-                <Button
+                <RadioButton
+                    android:id="@+id/color_green"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="+"
-                    android:textSize="25sp"/>
-            </LinearLayout>
+                    android:checked="true"
+                    android:text="green"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"/>
+
+                <RadioButton
+                    android:id="@+id/color_orange"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="orange"
+                    android:textColor="@color/orange"
+                    android:textSize="15sp"/>
+
+                <RadioButton
+                    android:id="@+id/color_blue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="blue"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp"/>
+
+                <RadioButton
+                    android:id="@+id/color_gold"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="gold"
+                    android:textColor="@color/gold"
+                    android:textSize="15sp"/>
+            </RadioGroup>
+
+            <View
+                android:id="@+id/color_view"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_margin="10dp"
+                android:layout_weight="4"
+                android:background="#000"/>
         </LinearLayout>
     </RelativeLayout>
 </merge>

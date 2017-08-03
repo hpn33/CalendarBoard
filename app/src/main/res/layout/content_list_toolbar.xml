@@ -22,12 +22,12 @@
                     android:src="@drawable/ic_back_arrow"/>
 
                 <ImageView
-                    android:id="@+id/done_imageView"
+                    android:id="@+id/add_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_done"/>
+                    android:src="@drawable/ic_add"/>
 
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>

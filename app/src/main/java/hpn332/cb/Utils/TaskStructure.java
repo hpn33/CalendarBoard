@@ -1,11 +1,11 @@
 package hpn332.cb.Utils;
 
-public class Structure {
+public class TaskStructure {
 
     private String title, desc, tag;
     private int step, rank;
 
-    public Structure(String title, String desc, String tag, int step, int rank) {
+    public TaskStructure(String title, String desc, String tag, int step, int rank) {
         this.title = title;
         this.desc = desc;
         this.tag = tag;

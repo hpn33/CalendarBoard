@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Main.MainActivity"
+            android:name=".Main.MainListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,12 +22,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddTask.AddTaskActivity"/>
-        <activity android:name=".AddTag.AddTagActivity"/>
+        <activity android:name=".Tag.AddTagActivity"/>
 
         <provider
             android:name=".Utils.Data.Provider"
             android:authorities="hpn332.cb"
             android:exported="false"/>
+
+        <activity android:name=".Tag.TagListActivity">
+        </activity>
     </application>
 
 </manifest>

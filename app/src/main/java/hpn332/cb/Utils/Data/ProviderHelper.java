@@ -8,13 +8,15 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import hpn332.cb.Utils.Structure;
+import hpn332.cb.Utils.TagStructure;
+import hpn332.cb.Utils.TaskStructure;
 
 public class ProviderHelper {
 
 	private static final String TAG = "ProviderHelper";
 
-	public static void queryListTask(Context context, int steP, ArrayList<Structure> arrayList) {
+	public static void queryListTask(
+			Context context, int steP, ArrayList<TaskStructure> arrayList) {
 		Log.d(TAG, "setupListTask: step : " + steP);
 
 		if (!arrayList.isEmpty()) arrayList.clear();
@@ -35,12 +37,35 @@ public class ProviderHelper {
 				int    step = cursor.getInt(cursor.getColumnIndex(Contract.TaskEntry.STEP));
 				int    rank = cursor.getInt(cursor.getColumnIndex(Contract.TaskEntry.RANK));
 
-				Structure structure = new Structure(title, desc, tag, step, rank);
+				TaskStructure structure = new TaskStructure(title, desc, tag, step, rank);
 				arrayList.add(structure);
 			}
 			cursor.close();
 		}
 	}
+
+	public static void queryListTag(Context context, ArrayList<TagStructure> arrayList) {
+		Log.d(TAG, "queryListTag: setup tags list");
+
+		if (!arrayList.isEmpty()) arrayList.clear();
+
+		Cursor cursor = context.getContentResolver()
+				.query(Contract.URI_TAG, null, null, null, null);
+
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				String title = cursor.getString(cursor.getColumnIndex(Contract.TagEntry.TITLE));
+				String desc  =
+						cursor.getString(cursor.getColumnIndex(Contract.TagEntry.DESCRIPTION));
+				int    color = cursor.getInt(cursor.getColumnIndex(Contract.TagEntry.COLOR));
+
+				TagStructure structure = new TagStructure(title, desc, color);
+				arrayList.add(structure);
+			}
+			cursor.close();
+		}
+	}
+
 
 	public static void insertNewTask(
 			Context context, String title, String desc, String tag, int step, int rank) {
@@ -58,7 +83,7 @@ public class ProviderHelper {
 	}
 
 	public static void insertNewTag(
-			Context context, String title, String desc, String color) {
+			Context context, String title, String desc, int color) {
 		ContentValues values = new ContentValues();
 
 		values.put(Contract.TagEntry.TITLE, title);
