@@ -3,6 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:layout_margin="10dp"
               android:background="@color/low_white"
               android:orientation="vertical">
 
@@ -10,25 +11,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:minHeight="50dp">
+        android:minHeight="50dp"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <TextView
+            android:id="@+id/rank_textView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            tools:text="1"/>
 
         <TextView
             android:id="@+id/title_textView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="6"
             android:gravity="start"
             android:padding="10dp"
             android:textColor="#fff"
             android:textSize="25sp"
             tools:text="Title"/>
+
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/show_tag_layout"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:orientation="horizontal"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/description_textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="start"
-        android:minHeight="20dp"
+        android:minHeight="150dp"
         android:padding="5dp"
         android:textSize="15sp"
         tools:text="description"/>

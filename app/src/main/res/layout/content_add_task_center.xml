@@ -8,9 +8,9 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <RadioGroup
@@ -23,6 +23,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:gravity="center"
                     android:text="backlog"
                     android:textSize="25sp"/>
@@ -37,20 +38,31 @@
                     android:textSize="25sp"/>
             </RadioGroup>
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/title_editText"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="title"/>
+                android:layout_marginTop="10dp">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/description_editText"
+                <EditText
+                    android:id="@+id/title_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="title"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:gravity="top"
-                android:layout_marginTop="10dp"
-                android:hint="Description"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/description_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="top"
+                    android:hint="Description"/>
+            </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,6 +71,7 @@
                 android:orientation="horizontal">
 
                 <Spinner
+                    android:id="@+id/tagList"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4">
@@ -66,6 +79,7 @@
                 </Spinner>
 
                 <Button
+                    android:id="@+id/addTag"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -84,6 +98,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:gravity="center"
                     android:text="1"
                     android:textSize="25sp"/>

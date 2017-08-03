@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hpn332.cb.AddMatter.AddMatterActivity">
+    tools:context="hpn332.cb.AddTag.AddTagActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/appBarLayout">
 
-            <include layout="@layout/content_add_matter_center"/>
+            <include layout="@layout/content_add_tag_center"/>
         </ScrollView>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
