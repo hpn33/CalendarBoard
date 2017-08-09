@@ -1,6 +1,7 @@
-package hpn332.cb.Tag;
+package hpn332.cb.utils.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +11,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
-import hpn332.cb.Utils.TagStructure;
+import hpn332.cb.ui.activity.EditTagActivity;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.database.Contract;
+import hpn332.cb.utils.model.TagStructure;
+import hpn332.cb.utils.Utils;
 
 
-class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHolder> {
+public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHolder> {
 
 	private LayoutInflater          inflater;
 	private ArrayList<TagStructure> arrayList;
 
-	AdapterTagList(
+	public AdapterTagList(
 			Context context, ArrayList<TagStructure> arrayList) {
 		this.arrayList = arrayList;
 		inflater = LayoutInflater.from(context);
@@ -39,10 +44,11 @@ class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHolder> {
 		return arrayList.size();
 	}
 
-	class ItemHolder extends RecyclerView.ViewHolder {
+	class ItemHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
 		private TextView title, description;
 		private View color_view;
+		private int  position;
 
 		ItemHolder(View view) {
 			super(view);
@@ -50,30 +56,28 @@ class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHolder> {
 			title = view.findViewById(R.id.title_textView);
 			description = view.findViewById(R.id.description_textView);
 			color_view = view.findViewById(R.id.color_view);
+
+			view.setOnLongClickListener(this);
 		}
 
 		void onBind(int position) {
 
+			this.position = position;
+
 			title.setText(arrayList.get(position).getTitle());
 			description.setText(arrayList.get(position).getDesc());
-			color_view.setBackgroundResource(getColor(arrayList.get(position).getColor()));
+			color_view.setBackgroundResource(Utils.getColor(arrayList.get(position).getColor()));
 		}
 
-		int getColor(int color) {
 
-			switch (color) {
-				case 1:
-					return R.color.green;
-				case 2:
-					return R.color.orange;
-				case 3:
-					return R.color.blue;
-				case 4:
-					return R.color.gold;
+		@Override
+		public boolean onLongClick(View view) {
 
-				default:
-					return R.color.green;
-			}
+			inflater.getContext().startActivity(
+					new Intent(inflater.getContext(), EditTagActivity.class)
+							.putExtra(Key.KEY_UPDATE, true)
+							.putExtra(Key.KEY_POSITION, position));
+			return true;
 		}
 	}
 }

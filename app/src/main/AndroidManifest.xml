@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Main.MainListActivity"
+            android:name=".ui.activity.StepListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,15 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AddTask.AddTaskActivity"/>
-        <activity android:name=".Tag.AddTagActivity"/>
+        <activity android:name=".ui.activity.EditTaskActivity"/>
+        <activity android:name=".ui.activity.EditTagActivity"/>
 
         <provider
-            android:name=".Utils.Data.Provider"
+            android:name=".utils.database.Provider"
             android:authorities="hpn332.cb"
             android:exported="false"/>
 
-        <activity android:name=".Tag.TagListActivity">
+        <activity android:name=".ui.activity.TagListActivity">
         </activity>
     </application>
 

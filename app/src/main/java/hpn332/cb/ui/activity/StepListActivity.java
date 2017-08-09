@@ -1,4 +1,4 @@
-package hpn332.cb.Main;
+package hpn332.cb.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,18 +10,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import hpn332.cb.AddTask.AddTaskActivity;
-import hpn332.cb.Tag.TagListActivity;
+import hpn332.cb.ui.fragment.StepFragment;
 import hpn332.cb.R;
-import hpn332.cb.Utils.Data.Contract;
-import hpn332.cb.Utils.Data.ProviderHelper;
-import hpn332.cb.Utils.SectionsPagerAdapter;
+import hpn332.cb.utils.database.Contract;
+import hpn332.cb.utils.database.ProviderHelper;
+import hpn332.cb.utils.SectionsPagerAdapter;
 
-public class MainListActivity extends AppCompatActivity {
+public class StepListActivity extends AppCompatActivity {
 
-	private static final String TAG = "MainListActivity";
+	private static final String TAG = "StepListActivity";
 
-	private ImageView menu;
+	private ImageView            menu;
+	private ViewPager            viewPager;
+	private SectionsPagerAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class MainListActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 
-				startActivity(new Intent(getApplicationContext(), AddTaskActivity.class));
+				startActivity(new Intent(getApplicationContext(), EditTaskActivity.class));
 
 				/*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 						.setAction("Action", null).show();*/
@@ -41,8 +42,6 @@ public class MainListActivity extends AppCompatActivity {
 		});
 
 		setup();
-
-		using();
 	}
 
 	private void setup() {
@@ -50,6 +49,8 @@ public class MainListActivity extends AppCompatActivity {
 		menu = (ImageView) findViewById(R.id.menu_imageView);
 
 		setupViewPager();
+
+		using();
 	}
 
 	private void using() {
@@ -65,21 +66,23 @@ public class MainListActivity extends AppCompatActivity {
 	protected void onResume() {
 		super.onResume();
 
-		ProviderHelper.queryListTask(getApplicationContext(), 1, Contract.L_STEP_1);
-		ProviderHelper.queryListTask(getApplicationContext(), 2, Contract.L_STEP_2);
-		ProviderHelper.queryListTask(getApplicationContext(), 3, Contract.L_STEP_3);
-		ProviderHelper.queryListTask(getApplicationContext(), 4, Contract.L_STEP_4);
+		ProviderHelper.queryStepListTask(getApplicationContext(), 1, Contract.L_STEP_1);
+		ProviderHelper.queryStepListTask(getApplicationContext(), 2, Contract.L_STEP_2);
+		ProviderHelper.queryStepListTask(getApplicationContext(), 3, Contract.L_STEP_3);
+		ProviderHelper.queryStepListTask(getApplicationContext(), 4, Contract.L_STEP_4);
+
+		viewPager.setAdapter(adapter);
 	}
 
 	private void setupViewPager() {
 		Log.d(TAG, "setupViewPager: ");
 
-		SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		adapter.addFragment(StepFragment.newInstance(0), "backlog"); //index 0
-		adapter.addFragment(StepFragment.newInstance(1), "to do"); //index 1
-		adapter.addFragment(StepFragment.newInstance(2), "doing"); //index 2
-		adapter.addFragment(StepFragment.newInstance(3), "done"); //index 3
-		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+		adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		adapter.addFragment(StepFragment.newInstance(0), "Backlog"); //index 0
+		adapter.addFragment(StepFragment.newInstance(1), "TODO"); //index 1
+		adapter.addFragment(StepFragment.newInstance(2), "Doing"); //index 2
+		adapter.addFragment(StepFragment.newInstance(3), "Done"); //index 3
+		viewPager = (ViewPager) findViewById(R.id.viewpager);
 		viewPager.setAdapter(adapter);
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

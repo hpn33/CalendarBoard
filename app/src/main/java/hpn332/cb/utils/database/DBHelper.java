@@ -1,4 +1,4 @@
-package hpn332.cb.Utils.Data;
+package hpn332.cb.utils.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,21 +19,9 @@ class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 
-		db.execSQL("CREATE TABLE " + Contract.TABLE_TAG + " ("
-				           + Contract.TagEntry.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-				           + Contract.TagEntry.TITLE + " TEXT,"
-				           + Contract.TagEntry.DESCRIPTION + " TEXT,"
-				           + Contract.TagEntry.COLOR + "  INTEGER "
-				           + ");");
+		db.execSQL(Contract.TaskEntry.CREATE_TABLE);
 
-		db.execSQL("CREATE TABLE " + Contract.TABLE_TASK + " ("
-				           + Contract.TaskEntry.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-				           + Contract.TaskEntry.TITLE + " TEXT,"
-				           + Contract.TaskEntry.DESCRIPTION + " TEXT,"
-				           + Contract.TaskEntry.TAGS + " TEXT,"
-				           + Contract.TaskEntry.STEP + " INTEGER,"
-				           + Contract.TaskEntry.RANK + " INTEGER"
-				           + ");");
+		db.execSQL(Contract.TagEntry.CREATE_TABLE);
 	}
 
 	@Override

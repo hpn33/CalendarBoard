@@ -1,4 +1,4 @@
-package hpn332.cb.Main;
+package hpn332.cb.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,18 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hpn332.cb.R;
-import hpn332.cb.Utils.Data.Contract;
+import hpn332.cb.utils.adapter.AdapterStepList;
+import hpn332.cb.utils.database.Contract;
+
+import static hpn332.cb.utils.Key.KEY_STEP;
 
 public class StepFragment extends Fragment {
 
 	private RecyclerView recyclerView;
-	public static final String KEY_INDEX = "KEY_INDEX";
 
 	public static StepFragment newInstance(int index) {
 
 		Bundle args = new Bundle();
 
-		args.putInt(KEY_INDEX, index);
+		args.putInt(KEY_STEP, index);
 		StepFragment fragment = new StepFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -36,16 +38,15 @@ public class StepFragment extends Fragment {
 
 		recyclerView = view.findViewById(R.id.recycler_view);
 
-		int index = getArguments().getInt(KEY_INDEX);
-
-		adapter(index);
+		adapter(getArguments().getInt(KEY_STEP));
 
 		return view;
 	}
 
 	private void adapter(int index) {
 
-		AdapterMainList adapter = new AdapterMainList(getContext(), Contract.listStep[index]);
+		AdapterStepList adapter =
+				new AdapterStepList(getContext(), Contract.listStep[index], index);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -1,4 +1,4 @@
-package hpn332.cb.Tag;
+package hpn332.cb.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +9,15 @@ import android.view.View;
 import android.widget.ImageView;
 
 import hpn332.cb.R;
-import hpn332.cb.Utils.Data.Contract;
-import hpn332.cb.Utils.Data.ProviderHelper;
+import hpn332.cb.utils.adapter.AdapterTagList;
+import hpn332.cb.utils.database.Contract;
+import hpn332.cb.utils.database.ProviderHelper;
 
 public class TagListActivity extends AppCompatActivity {
 
 	private RecyclerView recyclerView;
 	private ImageView    add, backArrow;
+	private AdapterTagList adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class TagListActivity extends AppCompatActivity {
 		super.onResume();
 
 		ProviderHelper.queryListTag(getApplicationContext(), Contract.L_TAGS);
+		recyclerView.setAdapter(adapter);
 	}
 
 	private void setup() {
@@ -48,7 +51,7 @@ public class TagListActivity extends AppCompatActivity {
 		add.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivity(new Intent(getApplicationContext(), AddTagActivity.class));
+				startActivity(new Intent(getApplicationContext(), EditTagActivity.class));
 			}
 		});
 
@@ -63,7 +66,7 @@ public class TagListActivity extends AppCompatActivity {
 
 	private void adapter() {
 
-		AdapterTagList adapter = new AdapterTagList(getApplicationContext(), Contract.L_TAGS);
+		adapter = new AdapterTagList(getApplicationContext(), Contract.L_TAGS);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
