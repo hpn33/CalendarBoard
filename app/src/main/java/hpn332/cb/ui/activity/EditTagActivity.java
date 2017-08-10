@@ -15,11 +15,9 @@ import hpn332.cb.utils.database.Contract;
 import hpn332.cb.utils.database.ProviderHelper;
 import hpn332.cb.utils.model.TagStructure;
 
-
 public class EditTagActivity extends AppCompatActivity {
 
-
-	private ImageView done, backArrow;
+	private ImageView done, delete;
 	private EditText title, description;
 	private RadioButton green, orange, blue, gold;
 
@@ -39,7 +37,8 @@ public class EditTagActivity extends AppCompatActivity {
 	private void setup() {
 
 		done = (ImageView) findViewById(R.id.done_imageView);
-		backArrow = (ImageView) findViewById(R.id.backArrow_imageView);
+		delete = (ImageView) findViewById(R.id.delete_imageView);
+		ImageView backArrow = (ImageView) findViewById(R.id.backArrow_imageView);
 
 		title = (EditText) findViewById(R.id.title_editText);
 		description = (EditText) findViewById(R.id.description_editText);
@@ -50,9 +49,44 @@ public class EditTagActivity extends AppCompatActivity {
 		gold = (RadioButton) findViewById(R.id.color_gold);
 
 		color_view = findViewById(R.id.color_view);
+
+		backArrow.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				finish();
+			}
+		});
+
+		green.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				color_view.setBackgroundResource(R.color.green);
+			}
+		});
+		orange.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				color_view.setBackgroundResource(R.color.orange);
+			}
+		});
+		blue.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				color_view.setBackgroundResource(R.color.blue);
+			}
+		});
+		gold.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				color_view.setBackgroundResource(R.color.gold);
+			}
+		});
+
 	}
 
-	// Add
+	// Add============================================
+	// Add============================================
+	// Add============================================
 
 	private void usingAdd() {
 
@@ -66,52 +100,11 @@ public class EditTagActivity extends AppCompatActivity {
 				finish();
 			}
 		});
-
-		backArrow.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				finish();
-			}
-		});
-
-		green.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.green);
-			}
-		});
-
-		orange.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.orange);
-			}
-		});
-
-		blue.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.blue);
-			}
-		});
-
-		gold.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.gold);
-			}
-		});
 	}
 
-	private int setColor() {
-		if (green.isChecked()) return 1;
-		if (orange.isChecked()) return 2;
-		if (blue.isChecked()) return 3;
-		if (gold.isChecked()) return 4;
-		return 1;
-	}
-
-	// update
+	// edit============================================
+	// edit============================================
+	// edit============================================
 
 	private void usingEdit() {
 
@@ -121,39 +114,17 @@ public class EditTagActivity extends AppCompatActivity {
 		title.setText(arrayList.get(position).getTitle());
 		description.setText(arrayList.get(position).getDesc());
 
-		backArrow.setOnClickListener(new View.OnClickListener() {
+		setCheckColor(arrayList, position);
+
+		delete.setVisibility(View.VISIBLE);
+		delete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				ProviderHelper.deleteOneTag(getApplicationContext(),
+				                            arrayList.get(position).getId());
 				finish();
 			}
 		});
-
-		green.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.green);
-			}
-		});
-		orange.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.orange);
-			}
-		});
-		blue.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.blue);
-			}
-		});
-		gold.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				color_view.setBackgroundResource(R.color.gold);
-			}
-		});
-
-		color_view.setBackgroundResource(showColor(arrayList.get(position).getColor()));
 
 		done.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -167,6 +138,25 @@ public class EditTagActivity extends AppCompatActivity {
 				finish();
 			}
 		});
+	}
+
+	private void setCheckColor(ArrayList<TagStructure> arrayList, int position) {
+		switch (arrayList.get(position).getColor()) {
+			case 1:
+				green.toggle();
+				break;
+			case 2:
+				orange.toggle();
+				break;
+			case 3:
+				blue.toggle();
+				break;
+			case 4:
+				gold.toggle();
+				break;
+		}
+
+		color_view.setBackgroundResource(showColor(arrayList.get(position).getColor()));
 	}
 
 	private int showColor(int index) {
@@ -183,6 +173,18 @@ public class EditTagActivity extends AppCompatActivity {
 			default:
 				return R.color.green;
 		}
+	}
+
+	// both============================================
+	// both============================================
+	// both============================================
+
+	private int setColor() {
+		if (green.isChecked()) return 1;
+		if (orange.isChecked()) return 2;
+		if (blue.isChecked()) return 3;
+		if (gold.isChecked()) return 4;
+		return 1;
 	}
 
 }

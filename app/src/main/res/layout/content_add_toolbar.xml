@@ -22,6 +22,15 @@
                     android:src="@drawable/ic_back_arrow"/>
 
                 <ImageView
+                    android:id="@+id/delete_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/done_imageView"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_delete"/>
+
+                <ImageView
                     android:id="@+id/done_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

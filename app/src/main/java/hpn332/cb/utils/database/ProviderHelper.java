@@ -16,7 +16,7 @@ public class ProviderHelper {
 	private static final String TAG = "ProviderHelper";
 
 
-	public static void queryStepListTask(
+	public static void queryListTaskByStep(
 			Context context, int steP, ArrayList<TaskStructure> arrayList) {
 		Log.d(TAG, "setupListTask: step : " + steP);
 
@@ -132,5 +132,22 @@ public class ProviderHelper {
 						values, null, null);
 
 		Log.d(TAG, "updateOneTag: update: " + update);
+	}
+
+	public static void deleteOneTask(Context context, int id) {
+
+		int delete = context.getContentResolver().
+				delete(Contract.buildUri(Contract.URI_TASK, String.valueOf(id)),
+				       null, null);
+
+		Log.d(TAG, "deleteOneTask: delete task id :: " + delete);
+	}
+
+	public static void deleteOneTag(Context context, int id) {
+		int delete = context.getContentResolver().
+				delete(Contract.buildUri(Contract.URI_TAG, String.valueOf(id)),
+				       null, null);
+
+		Log.d(TAG, "deleteOneTag: delete tag id :: " + delete);
 	}
 }

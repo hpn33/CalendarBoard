@@ -80,10 +80,10 @@ public class Contract {
 		return URI.buildUpon().appendEncodedPath(id).build();
 	}
 
-	static String getLastPathSegment(Uri uri) {return uri.getPathSegments().get(1);}
+	static String getId(Uri uri) {return uri.getPathSegments().get(1);}
 
 	static Boolean hasLastPathSegment(Uri uri) {
-		String s = getLastPathSegment(uri);
+		String s = getId(uri);
 		return !s.isEmpty();
 	}
 

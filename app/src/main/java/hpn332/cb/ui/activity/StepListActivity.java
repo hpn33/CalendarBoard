@@ -66,10 +66,10 @@ public class StepListActivity extends AppCompatActivity {
 	protected void onResume() {
 		super.onResume();
 
-		ProviderHelper.queryStepListTask(getApplicationContext(), 1, Contract.L_STEP_1);
-		ProviderHelper.queryStepListTask(getApplicationContext(), 2, Contract.L_STEP_2);
-		ProviderHelper.queryStepListTask(getApplicationContext(), 3, Contract.L_STEP_3);
-		ProviderHelper.queryStepListTask(getApplicationContext(), 4, Contract.L_STEP_4);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 1, Contract.L_STEP_1);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 2, Contract.L_STEP_2);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 3, Contract.L_STEP_3);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 4, Contract.L_STEP_4);
 
 		viewPager.setAdapter(adapter);
 	}

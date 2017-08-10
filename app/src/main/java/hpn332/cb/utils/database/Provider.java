@@ -89,12 +89,12 @@ public class Provider extends ContentProvider {
 				break;
 			case TASK_ID:
 				queryBuilder.setTables(Contract.TABLE_TASK);
-				id = Contract.getLastPathSegment(uri);
+				id = Contract.getId(uri);
 				queryBuilder.appendWhere(Contract.TaskEntry.ID + " = " + id);
 				break;
 			case TASK_STEP:
 				queryBuilder.setTables(Contract.TABLE_TASK);
-				String step = Contract.getLastPathSegment(uri);
+				String step = Contract.getId(uri);
 				queryBuilder.appendWhere(Contract.TaskEntry.STEP + " = " + step);
 				break;
 			case TAGs:
@@ -102,7 +102,7 @@ public class Provider extends ContentProvider {
 				break;
 			case TAG_ID:
 				queryBuilder.setTables(Contract.TABLE_TAG);
-				id = Contract.getLastPathSegment(uri);
+				id = Contract.getId(uri);
 				queryBuilder.appendWhere(Contract.TagEntry.ID + " = " + id);
 				break;
 
@@ -155,7 +155,7 @@ public class Provider extends ContentProvider {
 			case TASK:
 				return db.update(Contract.TABLE_TASK, contentValues, s, strings);
 			case TASK_ID:
-				id = Contract.getLastPathSegment(uri);
+				id = Contract.getId(uri);
 				selectionCriteria = Contract.TaskEntry.ID + " = " + id
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
 				return db.update(Contract.TABLE_TASK, contentValues, selectionCriteria, strings);
@@ -163,7 +163,7 @@ public class Provider extends ContentProvider {
 			case TAGs:
 				return db.update(Contract.TABLE_TAG, contentValues, s, strings);
 			case TAG_ID:
-				id = Contract.getLastPathSegment(uri);
+				id = Contract.getId(uri);
 				selectionCriteria = Contract.TagEntry.ID + " = " + id
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
 				return db.update(Contract.TABLE_TAG, contentValues, selectionCriteria, null);
@@ -184,7 +184,7 @@ public class Provider extends ContentProvider {
 
 		final SQLiteDatabase db    = dbHelper.getWritableDatabase();
 		final int            match = mUriMatcher.match(uri);
-		String               id    = Contract.getLastPathSegment(uri);
+		String               id    = Contract.getId(uri);
 		String               selectionCriteria;
 
 		switch (match) {
@@ -202,8 +202,4 @@ public class Provider extends ContentProvider {
 				throw new IllegalArgumentException("Unknown Uri: " + uri);
 		}
 	}
-//
-//	public static ProviderHelper Helper(Context context) {
-//		return ProviderHelper.newInstance(context);
-//	}
 }
