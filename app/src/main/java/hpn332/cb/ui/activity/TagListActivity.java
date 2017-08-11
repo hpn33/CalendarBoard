@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import hpn332.cb.R;
+import hpn332.cb.utils.AList;
 import hpn332.cb.utils.adapter.AdapterTagList;
-import hpn332.cb.utils.database.Contract;
 import hpn332.cb.utils.database.ProviderHelper;
 
 public class TagListActivity extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class TagListActivity extends AppCompatActivity {
 	protected void onResume() {
 		super.onResume();
 
-		ProviderHelper.queryListTag(getApplicationContext(), Contract.L_TAGS);
+		ProviderHelper.queryListTag(getApplicationContext(), AList.L_TAGS);
 		recyclerView.setAdapter(adapter);
 	}
 
@@ -66,7 +66,7 @@ public class TagListActivity extends AppCompatActivity {
 
 	private void adapter() {
 
-		adapter = new AdapterTagList(getApplicationContext(), Contract.L_TAGS);
+		adapter = new AdapterTagList(getApplicationContext(), AList.L_TAGS);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

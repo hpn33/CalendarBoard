@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import hpn332.cb.utils.model.TagStructure;
 import hpn332.cb.utils.model.TaskStructure;
 
-public class Contract {
+class DBContract {
+
+	interface ProjectColumns {
+		String ID          = "_id";
+		String TITLE       = "title";
+		String DESCRIPTION = "description";
+	}
 
 	interface TagColumns {
 		String ID          = "_id";
@@ -28,8 +34,13 @@ public class Contract {
 
 	static final String AUTHORITY  = "hpn332.cb";
 	static final Uri    BASE_URI   = Uri.parse("content://" + AUTHORITY);
+	static final String TABLE_PROJECT = "project";
 	static final String TABLE_TASK = "task";
 	static final String TABLE_TAG  = "tag";
+
+	static final Uri    URI_PROJECT   = BASE_URI.buildUpon()
+			.appendEncodedPath(TABLE_PROJECT).build();
+
 	static final Uri    URI_TASK   = BASE_URI.buildUpon()
 			.appendEncodedPath(TABLE_TASK).build();
 
@@ -38,6 +49,21 @@ public class Contract {
 
 	static final Uri URI_TAG = BASE_URI.buildUpon()
 			.appendEncodedPath(TABLE_TAG).build();
+
+	static class ProjectEntry implements ProjectColumns, BaseColumns {
+
+		static final String CREATE_TABLE =
+				"CREATE TABLE " + TABLE_TASK + " ("
+						+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+						+ TITLE + " TEXT,"
+						+ DESCRIPTION + " TEXT"
+						+ ");";
+
+		static final String CONTENT_TYPE      =
+				"vnd.android.cursor.dir/vnd." + AUTHORITY + ".project";
+		static final String CONTENT_ITEM_TYPE =
+				"vnd.android.cursor.item/vnd." + AUTHORITY + ".project";
+	}
 
 	static class TaskEntry implements TaskColumns, BaseColumns {
 
@@ -81,18 +107,4 @@ public class Contract {
 	}
 
 	static String getId(Uri uri) {return uri.getPathSegments().get(1);}
-
-	static Boolean hasLastPathSegment(Uri uri) {
-		String s = getId(uri);
-		return !s.isEmpty();
-	}
-
-	public static ArrayList<TaskStructure>
-			L_STEP_1 = new ArrayList<>(), L_STEP_2 = new ArrayList<>(),
-			L_STEP_3 = new ArrayList<>(), L_STEP_4 = new ArrayList<>();
-
-	public static ArrayList<TagStructure>
-			L_TAGS = new ArrayList<>();
-
-	public static final ArrayList[] listStep = {L_STEP_1, L_STEP_2, L_STEP_3, L_STEP_4};
 }

@@ -29,13 +29,13 @@ public class Provider extends ContentProvider {
 	private static UriMatcher buildUriMatcher() {
 
 		final UriMatcher matcher   = new UriMatcher(UriMatcher.NO_MATCH);
-		String           authority = Contract.AUTHORITY;
+		String           authority = DBContract.AUTHORITY;
 
-		matcher.addURI(authority, Contract.TABLE_TASK, TASK);
-		matcher.addURI(authority, Contract.TABLE_TASK + "/*", TASK_ID);
-		matcher.addURI(authority, Contract.TABLE_TASK + "step/*", TASK_STEP);
-		matcher.addURI(authority, Contract.TABLE_TAG, TAGs);
-		matcher.addURI(authority, Contract.TABLE_TAG + "/*", TAG_ID);
+		matcher.addURI(authority, DBContract.TABLE_TASK, TASK);
+		matcher.addURI(authority, DBContract.TABLE_TASK + "/*", TASK_ID);
+		matcher.addURI(authority, DBContract.TABLE_TASK + "step/*", TASK_STEP);
+		matcher.addURI(authority, DBContract.TABLE_TAG, TAGs);
+		matcher.addURI(authority, DBContract.TABLE_TAG + "/*", TAG_ID);
 
 		return matcher;
 	}
@@ -57,15 +57,15 @@ public class Provider extends ContentProvider {
 		final int match = mUriMatcher.match(uri);
 		switch (match) {
 			case TASK:
-				return Contract.TaskEntry.CONTENT_TYPE;
+				return DBContract.TaskEntry.CONTENT_TYPE;
 			case TASK_ID:
-				return Contract.TaskEntry.CONTENT_ITEM_TYPE;
+				return DBContract.TaskEntry.CONTENT_ITEM_TYPE;
 			case TASK_STEP:
-				return Contract.TaskEntry.CONTENT_ITEM_STEP;
+				return DBContract.TaskEntry.CONTENT_ITEM_STEP;
 			case TAGs:
-				return Contract.TagEntry.CONTENT_TYPE;
+				return DBContract.TagEntry.CONTENT_TYPE;
 			case TAG_ID:
-				return Contract.TagEntry.CONTENT_ITEM_TYPE;
+				return DBContract.TagEntry.CONTENT_ITEM_TYPE;
 
 			default:
 				throw new IllegalArgumentException("Unknown Uri: " + uri);
@@ -85,25 +85,25 @@ public class Provider extends ContentProvider {
 
 		switch (match) {
 			case TASK:
-				queryBuilder.setTables(Contract.TABLE_TASK);
+				queryBuilder.setTables(DBContract.TABLE_TASK);
 				break;
 			case TASK_ID:
-				queryBuilder.setTables(Contract.TABLE_TASK);
-				id = Contract.getId(uri);
-				queryBuilder.appendWhere(Contract.TaskEntry.ID + " = " + id);
+				queryBuilder.setTables(DBContract.TABLE_TASK);
+				id = DBContract.getId(uri);
+				queryBuilder.appendWhere(DBContract.TaskEntry.ID + " = " + id);
 				break;
 			case TASK_STEP:
-				queryBuilder.setTables(Contract.TABLE_TASK);
-				String step = Contract.getId(uri);
-				queryBuilder.appendWhere(Contract.TaskEntry.STEP + " = " + step);
+				queryBuilder.setTables(DBContract.TABLE_TASK);
+				String step = DBContract.getId(uri);
+				queryBuilder.appendWhere(DBContract.TaskEntry.STEP + " = " + step);
 				break;
 			case TAGs:
-				queryBuilder.setTables(Contract.TABLE_TAG);
+				queryBuilder.setTables(DBContract.TABLE_TAG);
 				break;
 			case TAG_ID:
-				queryBuilder.setTables(Contract.TABLE_TAG);
-				id = Contract.getId(uri);
-				queryBuilder.appendWhere(Contract.TagEntry.ID + " = " + id);
+				queryBuilder.setTables(DBContract.TABLE_TAG);
+				id = DBContract.getId(uri);
+				queryBuilder.appendWhere(DBContract.TagEntry.ID + " = " + id);
 				break;
 
 			default:
@@ -128,11 +128,11 @@ public class Provider extends ContentProvider {
 
 		switch (match) {
 			case TASK:
-				id = db.insertOrThrow(Contract.TABLE_TASK, null, contentValues);
-				return Contract.buildUri(Contract.URI_TASK, String.valueOf(id));
+				id = db.insertOrThrow(DBContract.TABLE_TASK, null, contentValues);
+				return DBContract.buildUri(DBContract.URI_TASK, String.valueOf(id));
 			case TAGs:
-				id = db.insertOrThrow(Contract.TABLE_TAG, null, contentValues);
-				return Contract.buildUri(Contract.URI_TAG, String.valueOf(id));
+				id = db.insertOrThrow(DBContract.TABLE_TAG, null, contentValues);
+				return DBContract.buildUri(DBContract.URI_TAG, String.valueOf(id));
 
 			default:
 				throw new IllegalArgumentException("Unknown Uri: " + uri);
@@ -153,20 +153,20 @@ public class Provider extends ContentProvider {
 
 		switch (match) {
 			case TASK:
-				return db.update(Contract.TABLE_TASK, contentValues, s, strings);
+				return db.update(DBContract.TABLE_TASK, contentValues, s, strings);
 			case TASK_ID:
-				id = Contract.getId(uri);
-				selectionCriteria = Contract.TaskEntry.ID + " = " + id
+				id = DBContract.getId(uri);
+				selectionCriteria = DBContract.TaskEntry.ID + " = " + id
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
-				return db.update(Contract.TABLE_TASK, contentValues, selectionCriteria, strings);
+				return db.update(DBContract.TABLE_TASK, contentValues, selectionCriteria, strings);
 
 			case TAGs:
-				return db.update(Contract.TABLE_TAG, contentValues, s, strings);
+				return db.update(DBContract.TABLE_TAG, contentValues, s, strings);
 			case TAG_ID:
-				id = Contract.getId(uri);
-				selectionCriteria = Contract.TagEntry.ID + " = " + id
+				id = DBContract.getId(uri);
+				selectionCriteria = DBContract.TagEntry.ID + " = " + id
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
-				return db.update(Contract.TABLE_TAG, contentValues, selectionCriteria, null);
+				return db.update(DBContract.TABLE_TAG, contentValues, selectionCriteria, null);
 
 			default:
 				throw new IllegalArgumentException("Unknown Uri: " + uri);
@@ -177,26 +177,26 @@ public class Provider extends ContentProvider {
 	public int delete(
 			@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
 
-		if (uri.equals(Contract.BASE_URI)) {
+		if (uri.equals(DBContract.BASE_URI)) {
 			deleteDatabase();
 			return 0;
 		}
 
 		final SQLiteDatabase db    = dbHelper.getWritableDatabase();
 		final int            match = mUriMatcher.match(uri);
-		String               id    = Contract.getId(uri);
+		String               id    = DBContract.getId(uri);
 		String               selectionCriteria;
 
 		switch (match) {
 			case TASK_ID:
-				selectionCriteria = Contract.TaskEntry.ID + " = " + id
+				selectionCriteria = DBContract.TaskEntry.ID + " = " + id
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
-				return db.delete(Contract.TABLE_TASK, selectionCriteria, strings);
+				return db.delete(DBContract.TABLE_TASK, selectionCriteria, strings);
 
 			case TAG_ID:
-				selectionCriteria = Contract.TagEntry.ID + " = " + id
+				selectionCriteria = DBContract.TagEntry.ID + " = " + id
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
-				return db.delete(Contract.TABLE_TAG, selectionCriteria, strings);
+				return db.delete(DBContract.TABLE_TAG, selectionCriteria, strings);
 
 			default:
 				throw new IllegalArgumentException("Unknown Uri: " + uri);

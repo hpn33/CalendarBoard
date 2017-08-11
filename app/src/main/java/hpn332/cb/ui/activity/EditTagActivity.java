@@ -10,8 +10,8 @@ import android.widget.RadioButton;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
+import hpn332.cb.utils.AList;
 import hpn332.cb.utils.Key;
-import hpn332.cb.utils.database.Contract;
 import hpn332.cb.utils.database.ProviderHelper;
 import hpn332.cb.utils.model.TagStructure;
 
@@ -32,6 +32,13 @@ public class EditTagActivity extends AppCompatActivity {
 
 		if (getIntent().getBooleanExtra(Key.KEY_UPDATE, false)) usingEdit();
 		else usingAdd();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+		AList.L_TAGS.clear();
 	}
 
 	private void setup() {
@@ -108,8 +115,8 @@ public class EditTagActivity extends AppCompatActivity {
 
 	private void usingEdit() {
 
-		final int                     position  = getIntent().getIntExtra(Key.KEY_POSITION, 0);
-		final ArrayList<TagStructure> arrayList = Contract.L_TAGS;
+		final int                 position  = getIntent().getIntExtra(Key.KEY_POSITION, 0);
+		final ArrayList<TagStructure> arrayList = AList.L_TAGS;
 
 		title.setText(arrayList.get(position).getTitle());
 		description.setText(arrayList.get(position).getDesc());

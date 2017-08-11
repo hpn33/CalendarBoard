@@ -12,11 +12,11 @@ import android.widget.ImageView;
 
 import hpn332.cb.ui.fragment.StepFragment;
 import hpn332.cb.R;
-import hpn332.cb.utils.database.Contract;
+import hpn332.cb.utils.AList;
 import hpn332.cb.utils.database.ProviderHelper;
 import hpn332.cb.utils.SectionsPagerAdapter;
 
-public class StepListActivity extends AppCompatActivity {
+public class StepListActivity extends AppCompatActivity implements StepFragment.OnStepFragment {
 
 	private static final String TAG = "StepListActivity";
 
@@ -66,10 +66,10 @@ public class StepListActivity extends AppCompatActivity {
 	protected void onResume() {
 		super.onResume();
 
-		ProviderHelper.queryListTaskByStep(getApplicationContext(), 1, Contract.L_STEP_1);
-		ProviderHelper.queryListTaskByStep(getApplicationContext(), 2, Contract.L_STEP_2);
-		ProviderHelper.queryListTaskByStep(getApplicationContext(), 3, Contract.L_STEP_3);
-		ProviderHelper.queryListTaskByStep(getApplicationContext(), 4, Contract.L_STEP_4);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 1, AList.L_STEP_1);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 2, AList.L_STEP_2);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 3, AList.L_STEP_3);
+		ProviderHelper.queryListTaskByStep(getApplicationContext(), 4, AList.L_STEP_4);
 
 		viewPager.setAdapter(adapter);
 	}
@@ -87,5 +87,11 @@ public class StepListActivity extends AppCompatActivity {
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 		tabLayout.setupWithViewPager(viewPager);
+	}
+
+	@Override
+	public void onClickNextStep() {
+		//adapter.notifyDataSetChanged();
+		//viewPager.setAdapter(adapter);
 	}
 }

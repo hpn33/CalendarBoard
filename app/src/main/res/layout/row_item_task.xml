@@ -30,12 +30,20 @@
             android:id="@+id/title_textView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:gravity="start"
             android:padding="10dp"
             android:textColor="#fff"
             android:textSize="25sp"
             tools:text="Title"/>
+
+        <ImageView
+            android:id="@+id/next_step_imageView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_next_step"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -53,6 +61,7 @@
         android:gravity="start"
         android:minHeight="150dp"
         android:padding="5dp"
+        android:textColor="@color/black"
         android:textSize="15sp"
         tools:text="description"/>
 </LinearLayout>

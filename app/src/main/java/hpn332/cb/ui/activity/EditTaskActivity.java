@@ -1,6 +1,7 @@
 package hpn332.cb.ui.activity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +17,13 @@ import android.widget.RadioButton;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
+import hpn332.cb.utils.AList;
 import hpn332.cb.utils.Key;
-import hpn332.cb.utils.model.TaskStructure;
+import hpn332.cb.utils.model.CheckTagStructure;
 import hpn332.cb.utils.Utils;
-import hpn332.cb.utils.database.Contract;
 import hpn332.cb.utils.database.ProviderHelper;
+import hpn332.cb.utils.model.TagStructure;
+import hpn332.cb.utils.model.TaskStructure;
 
 public class EditTaskActivity extends AppCompatActivity {
 
@@ -29,7 +32,6 @@ public class EditTaskActivity extends AppCompatActivity {
 	private ImageView done, delete;
 	private RadioButton backlog, todo, num1, num2, num3, num4, num5;
 	private EditText title, description;
-	private Button       addTag;
 	private LinearLayout tagLayout;
 	private CheckBox[]   tagBoxes;
 
@@ -39,6 +41,11 @@ public class EditTaskActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_add_task);
 
 		setup();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 
 		if (getIntent().getBooleanExtra(Key.KEY_UPDATE, false)) usingEdit();
 		else usingAdd();
@@ -48,7 +55,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
 		tagLayout = (LinearLayout) findViewById(R.id.layout_for_tags);
 
-		addTag = (Button) findViewById(R.id.addTag);
+		Button addTag = (Button) findViewById(R.id.addTag);
 
 		done = (ImageView) findViewById(R.id.done_imageView);
 		delete = (ImageView) findViewById(R.id.delete_imageView);
@@ -69,6 +76,13 @@ public class EditTaskActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				finish();
+			}
+		});
+
+		addTag.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(new Intent(getApplicationContext(), EditTagActivity.class));
 			}
 		});
 	}
@@ -96,12 +110,6 @@ public class EditTaskActivity extends AppCompatActivity {
 
 		setupTags();
 
-		addTag.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(new Intent(getApplicationContext(), EditTagActivity.class));
-			}
-		});
 	}
 
 	// edit=================================================
@@ -112,16 +120,16 @@ public class EditTaskActivity extends AppCompatActivity {
 
 		switch (getIntent().getIntExtra(Key.KEY_STEP, 0)) {
 			case 0:
-				makeReadyStep(Contract.L_STEP_1);
+				makeReadyStep(AList.L_STEP_1);
 				break;
 			case 1:
-				makeReadyStep(Contract.L_STEP_2);
+				makeReadyStep(AList.L_STEP_2);
 				break;
 			case 2:
-				makeReadyStep(Contract.L_STEP_3);
+				makeReadyStep(AList.L_STEP_3);
 				break;
 			case 3:
-				makeReadyStep(Contract.L_STEP_4);
+				makeReadyStep(AList.L_STEP_4);
 				break;
 		}
 	}
@@ -159,11 +167,12 @@ public class EditTaskActivity extends AppCompatActivity {
 				                             getTag(),
 				                             getStep(),
 				                             getRank());
-				Log.d(TAG, "onClick: update id ::" + arrayList.get(position).getId());
+				Log.d(TAG, "onClick: update id ::" + id);
 
 				finish();
 			}
 		});
+
 	}
 
 	private void setCheckStep(ArrayList<TaskStructure> arrayList, int position) {
@@ -178,15 +187,17 @@ public class EditTaskActivity extends AppCompatActivity {
 	}
 
 	private void setCheckTag(ArrayList<TaskStructure> arrayList, int position) {
+
 		setupTags();
 
 		String[] s = arrayList.get(position).getTag().split("`");
 
-		for (int i = 0; i < Contract.L_TAGS.size(); i++) {
+		for (int i = 0; i < AList.L_TAGS.size(); i++) {
 			for (String value : s) {
 				if (!value.equals("") &&
-						Contract.L_TAGS.get(i).getId() == Integer.valueOf(value)) {
+						AList.L_TAGS.get(i).getId() == Integer.valueOf(value)) {
 					tagBoxes[i].toggle();
+					AList.L_CHECK.get(i).setBool(true);
 				}
 			}
 		}
@@ -220,15 +231,24 @@ public class EditTaskActivity extends AppCompatActivity {
 	private void setupTags() {
 		Log.d(TAG, "setupTags: ");
 
-		ProviderHelper.queryListTag(getApplicationContext(), Contract.L_TAGS);
+		ProviderHelper.queryListTag(getApplicationContext(), AList.L_TAGS);
 
-		tagBoxes = new CheckBox[Contract.L_TAGS.size()];
+		for (TagStructure arrayList : AList.L_TAGS) {
+			AList.L_CHECK.add(
+					new CheckTagStructure(arrayList.getTitle(),
+					                      arrayList.getColor(),
+					                      false));
+			Log.d(TAG, "setupTags: color::" + arrayList.getColor());
+		}
 
-		for (int i = 0; i < Contract.L_TAGS.size(); i++) {
+		tagBoxes = new CheckBox[AList.L_CHECK.size()];
+
+		for (int i = 0; i < AList.L_CHECK.size(); i++) {
 			tagBoxes[i] = new CheckBox(getApplicationContext());
 			tagBoxes[i].setPadding(8, 12, 8, 12);
-			tagBoxes[i].setText(Contract.L_TAGS.get(i).getTitle());
-			tagBoxes[i].setBackgroundResource(Utils.getColor(Contract.L_TAGS.get(i).getColor()));
+
+			tagBoxes[i].setText(AList.L_CHECK.get(i).getTitle());
+			tagBoxes[i].setBackgroundResource(Utils.getColor(AList.L_CHECK.get(i).getColor()));
 
 			tagLayout.addView(tagBoxes[i]);
 		}
@@ -240,9 +260,9 @@ public class EditTaskActivity extends AppCompatActivity {
 
 		StringBuilder stringBuilder = new StringBuilder();
 
-		for (int i = 0; i < Contract.L_TAGS.size(); i++) {
+		for (int i = 0; i < AList.L_TAGS.size(); i++) {
 			if (tagBoxes[i].isChecked()) {
-				stringBuilder.append(Contract.L_TAGS.get(i).getId()).append("`");
+				stringBuilder.append(AList.L_TAGS.get(i).getId()).append("`");
 			}
 		}
 

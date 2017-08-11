@@ -19,9 +19,9 @@ class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 
-		db.execSQL(Contract.TaskEntry.CREATE_TABLE);
+		db.execSQL(DBContract.TaskEntry.CREATE_TABLE);
 
-		db.execSQL(Contract.TagEntry.CREATE_TABLE);
+		db.execSQL(DBContract.TagEntry.CREATE_TABLE);
 	}
 
 	@Override
@@ -31,8 +31,8 @@ class DBHelper extends SQLiteOpenHelper {
 				+ newVersion + ", which will destroy all old data");
 
 		if (oldVersion < newVersion) {
-			db.execSQL("DROP TABLE IF EXISTS " + Contract.TABLE_TASK);
-			db.execSQL("DROP TABLE IF EXISTS " + Contract.TABLE_TAG);
+			db.execSQL("DROP TABLE IF EXISTS " + DBContract.TABLE_TASK);
+			db.execSQL("DROP TABLE IF EXISTS " + DBContract.TABLE_TAG);
 
 			onCreate(db);
 		}

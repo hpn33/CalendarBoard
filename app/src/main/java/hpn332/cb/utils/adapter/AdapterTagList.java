@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import hpn332.cb.R;
 import hpn332.cb.ui.activity.EditTagActivity;
 import hpn332.cb.utils.Key;
-import hpn332.cb.utils.database.Contract;
 import hpn332.cb.utils.model.TagStructure;
 import hpn332.cb.utils.Utils;
 

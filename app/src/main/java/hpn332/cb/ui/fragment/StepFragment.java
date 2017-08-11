@@ -1,5 +1,6 @@
 package hpn332.cb.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,14 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hpn332.cb.R;
+import hpn332.cb.utils.AList;
 import hpn332.cb.utils.adapter.AdapterStepList;
-import hpn332.cb.utils.database.Contract;
-
 import static hpn332.cb.utils.Key.KEY_STEP;
 
 public class StepFragment extends Fragment {
 
+	public interface OnStepFragment {
+		void onClickNextStep();
+	}
+
 	private RecyclerView recyclerView;
+
+	private OnStepFragment onStepFragment;
 
 	public static StepFragment newInstance(int index) {
 
@@ -27,6 +33,13 @@ public class StepFragment extends Fragment {
 		StepFragment fragment = new StepFragment();
 		fragment.setArguments(args);
 		return fragment;
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+
+		onStepFragment = (OnStepFragment) context;
 	}
 
 	@Nullable
@@ -45,10 +58,10 @@ public class StepFragment extends Fragment {
 
 	private void adapter(int index) {
 
-		AdapterStepList adapter =
-				new AdapterStepList(getContext(), Contract.listStep[index], index);
+		recyclerView.setAdapter(
+				new AdapterStepList(getContext(), AList.listStep[index], index, onStepFragment));
 
-		recyclerView.setAdapter(adapter);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		recyclerView.setLayoutManager(
+				new LinearLayoutManager(getContext()));
 	}
 }
