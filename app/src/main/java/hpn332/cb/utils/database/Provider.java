@@ -20,17 +20,21 @@ public class Provider extends ContentProvider {
 
 	private static final UriMatcher mUriMatcher = buildUriMatcher();
 
-	private static final int TASK      = 100;
-	private static final int TASK_ID   = 101;
-	private static final int TASK_STEP = 110;
-	private static final int TAGs      = 200;
-	private static final int TAG_ID    = 201;
+	private static final int PROJECT    = 100;
+	private static final int PROJECT_ID = 101;
+	private static final int TASK       = 200;
+	private static final int TASK_ID    = 201;
+	private static final int TASK_STEP  = 210;
+	private static final int TAGs       = 300;
+	private static final int TAG_ID     = 301;
 
 	private static UriMatcher buildUriMatcher() {
 
 		final UriMatcher matcher   = new UriMatcher(UriMatcher.NO_MATCH);
 		String           authority = DBContract.AUTHORITY;
 
+		matcher.addURI(authority, DBContract.TABLE_PROJECT, PROJECT);
+		matcher.addURI(authority, DBContract.TABLE_PROJECT + "/*", PROJECT_ID);
 		matcher.addURI(authority, DBContract.TABLE_TASK, TASK);
 		matcher.addURI(authority, DBContract.TABLE_TASK + "/*", TASK_ID);
 		matcher.addURI(authority, DBContract.TABLE_TASK + "step/*", TASK_STEP);
@@ -56,6 +60,10 @@ public class Provider extends ContentProvider {
 	public String getType(@NonNull Uri uri) {
 		final int match = mUriMatcher.match(uri);
 		switch (match) {
+			case PROJECT:
+				return DBContract.ProjectEntry.CONTENT_TYPE;
+			case PROJECT_ID:
+				return DBContract.ProjectEntry.CONTENT_ITEM_TYPE;
 			case TASK:
 				return DBContract.TaskEntry.CONTENT_TYPE;
 			case TASK_ID:
@@ -81,37 +89,43 @@ public class Provider extends ContentProvider {
 		final SQLiteDatabase db           = dbHelper.getReadableDatabase();
 		final int            match        = mUriMatcher.match(uri);
 		SQLiteQueryBuilder   queryBuilder = new SQLiteQueryBuilder();
-		String               id;
 
 		switch (match) {
+			case PROJECT:
+				queryBuilder.setTables(DBContract.TABLE_PROJECT);
+				break;
+			case PROJECT_ID:
+				queryBuilder.setTables(DBContract.TABLE_PROJECT);
+				queryBuilder.appendWhere(DBContract.TaskEntry.ID + " = " + DBContract.getId(uri));
+				break;
 			case TASK:
 				queryBuilder.setTables(DBContract.TABLE_TASK);
 				break;
 			case TASK_ID:
 				queryBuilder.setTables(DBContract.TABLE_TASK);
-				id = DBContract.getId(uri);
-				queryBuilder.appendWhere(DBContract.TaskEntry.ID + " = " + id);
+				queryBuilder.appendWhere(DBContract.TaskEntry.ID + " = " + DBContract.getId(uri));
 				break;
 			case TASK_STEP:
 				queryBuilder.setTables(DBContract.TABLE_TASK);
-				String step = DBContract.getId(uri);
-				queryBuilder.appendWhere(DBContract.TaskEntry.STEP + " = " + step);
+				queryBuilder.appendWhere(
+						DBContract.TaskEntry.STEP + " = " + DBContract.getId(uri)
+								+ (!TextUtils.isEmpty(selection) ? " AND  " + selection + " "
+								                                 : ""));
 				break;
 			case TAGs:
 				queryBuilder.setTables(DBContract.TABLE_TAG);
 				break;
 			case TAG_ID:
 				queryBuilder.setTables(DBContract.TABLE_TAG);
-				id = DBContract.getId(uri);
-				queryBuilder.appendWhere(DBContract.TagEntry.ID + " = " + id);
+				queryBuilder.appendWhere(DBContract.TagEntry.ID + " = " + DBContract.getId(uri));
 				break;
 
 			default:
 				throw new IllegalArgumentException("Unknown Uri: " + uri);
 		}
 
-		Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null,
-		                                   sortOrder);
+		Cursor cursor = queryBuilder.query(
+				db, projection, selection, selectionArgs, null, null, sortOrder);
 
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 		return cursor;
@@ -119,14 +133,16 @@ public class Provider extends ContentProvider {
 
 	@Nullable
 	@Override
-	public Uri insert(
-			@NonNull Uri uri, @Nullable ContentValues contentValues) {
+	public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
 
 		final SQLiteDatabase db    = dbHelper.getWritableDatabase();
 		final int            match = mUriMatcher.match(uri);
 		long                 id;
 
 		switch (match) {
+			case PROJECT:
+				id = db.insertOrThrow(DBContract.TABLE_PROJECT, null, contentValues);
+				return DBContract.buildUri(DBContract.URI_PROJECT, String.valueOf(id));
 			case TASK:
 				id = db.insertOrThrow(DBContract.TABLE_TASK, null, contentValues);
 				return DBContract.buildUri(DBContract.URI_TASK, String.valueOf(id));
@@ -147,26 +163,31 @@ public class Provider extends ContentProvider {
 		final SQLiteDatabase db    = dbHelper.getWritableDatabase();
 		final int            match = mUriMatcher.match(uri);
 		String               selectionCriteria;
-		String               id;
 
 		Log.d(TAG, "update: " + match);
 
 		switch (match) {
+			case PROJECT:
+				return db.update(DBContract.TABLE_PROJECT, contentValues, s, strings);
+			case PROJECT_ID:
+				selectionCriteria = DBContract.TaskEntry.ID + " = " + DBContract.getId(uri)
+						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
+				return db.update(
+						DBContract.TABLE_PROJECT, contentValues, selectionCriteria, strings);
+
 			case TASK:
 				return db.update(DBContract.TABLE_TASK, contentValues, s, strings);
 			case TASK_ID:
-				id = DBContract.getId(uri);
-				selectionCriteria = DBContract.TaskEntry.ID + " = " + id
+				selectionCriteria = DBContract.TaskEntry.ID + " = " + DBContract.getId(uri)
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
 				return db.update(DBContract.TABLE_TASK, contentValues, selectionCriteria, strings);
 
 			case TAGs:
 				return db.update(DBContract.TABLE_TAG, contentValues, s, strings);
 			case TAG_ID:
-				id = DBContract.getId(uri);
-				selectionCriteria = DBContract.TagEntry.ID + " = " + id
+				selectionCriteria = DBContract.TagEntry.ID + " = " + DBContract.getId(uri)
 						+ (!TextUtils.isEmpty(s) ? " AND ( " + s + ")" : "");
-				return db.update(DBContract.TABLE_TAG, contentValues, selectionCriteria, null);
+				return db.update(DBContract.TABLE_TAG, contentValues, selectionCriteria, strings);
 
 			default:
 				throw new IllegalArgumentException("Unknown Uri: " + uri);
@@ -174,8 +195,7 @@ public class Provider extends ContentProvider {
 	}
 
 	@Override
-	public int delete(
-			@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
+	public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
 
 		if (uri.equals(DBContract.BASE_URI)) {
 			deleteDatabase();

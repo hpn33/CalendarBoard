@@ -35,10 +35,11 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 	public AdapterStepList(
 			Context context, ArrayList<TaskStructure> arrayList, int step,
 			StepFragment.OnStepFragment onStepFragment) {
+
+		this.onStepFragment = onStepFragment;
 		this.arrayList = arrayList;
 		inflater = LayoutInflater.from(context);
 		this.step = step;
-		this.onStepFragment = onStepFragment;
 
 		Log.d(TAG, "AdapterStepList: " + step);
 	}
@@ -104,7 +105,7 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 								(arrayList.get(position).getStep() + 1),
 								arrayList.get(position).getRank());
 
-						onStepFragment.onClickNextStep();
+						onStepFragment.onClickNext();
 					}
 
 				});
@@ -123,9 +124,6 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 			String[] tags = arrayList.get(position).getTag().split("`");
 
 			View[] view = new View[tags.length];
-
-
-//			for (int i = 0; i < tags.length; i++)
 
 			int j = 0;
 			for (String s : tags) {

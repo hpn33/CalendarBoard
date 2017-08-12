@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.StepListActivity"
-            android:label="@string/app_name"
+            android:name=".ui.activity.ListProjectActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.activity.ListTagActivity"/>
+        <activity android:name=".ui.activity.ListTaskActivity"/>
+
+        <activity android:name=".ui.activity.EditProjectActivity"/>
         <activity android:name=".ui.activity.EditTaskActivity"/>
         <activity android:name=".ui.activity.EditTagActivity"/>
 
@@ -29,8 +33,6 @@
             android:authorities="hpn332.cb"
             android:exported="false"/>
 
-        <activity android:name=".ui.activity.TagListActivity">
-        </activity>
     </application>
 
 </manifest>

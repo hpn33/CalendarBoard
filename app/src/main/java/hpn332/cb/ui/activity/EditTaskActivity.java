@@ -1,7 +1,6 @@
 package hpn332.cb.ui.activity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -34,11 +33,13 @@ public class EditTaskActivity extends AppCompatActivity {
 	private EditText title, description;
 	private LinearLayout tagLayout;
 	private CheckBox[]   tagBoxes;
+	private int          project_id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_task);
+		setContentView(R.layout.activity_edit_task);
+
 
 		setup();
 	}
@@ -51,7 +52,15 @@ public class EditTaskActivity extends AppCompatActivity {
 		else usingAdd();
 	}
 
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		finish();
+	}
+
 	private void setup() {
+
+		project_id = getIntent().getIntExtra(Key.KEY_PROJECT, 0);
 
 		tagLayout = (LinearLayout) findViewById(R.id.layout_for_tags);
 
@@ -99,6 +108,7 @@ public class EditTaskActivity extends AppCompatActivity {
 			public void onClick(View view) {
 
 				ProviderHelper.insertNewTask(getApplicationContext(),
+				                             project_id,
 				                             title.getText().toString(),
 				                             description.getText().toString(),
 				                             getTag(),
@@ -230,6 +240,9 @@ public class EditTaskActivity extends AppCompatActivity {
 
 	private void setupTags() {
 		Log.d(TAG, "setupTags: ");
+
+		AList.L_TAGS.clear();
+		AList.L_CHECK.clear();
 
 		ProviderHelper.queryListTag(getApplicationContext(), AList.L_TAGS);
 

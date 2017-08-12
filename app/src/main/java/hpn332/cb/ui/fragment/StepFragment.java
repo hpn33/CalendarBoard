@@ -17,13 +17,13 @@ import static hpn332.cb.utils.Key.KEY_STEP;
 
 public class StepFragment extends Fragment {
 
-	public interface OnStepFragment {
-		void onClickNextStep();
+	public interface OnStepFragment{
+		void onClickNext();
 	}
 
 	private RecyclerView recyclerView;
-
 	private OnStepFragment onStepFragment;
+
 
 	public static StepFragment newInstance(int index) {
 
@@ -39,7 +39,7 @@ public class StepFragment extends Fragment {
 	public void onAttach(Context context) {
 		super.onAttach(context);
 
-		onStepFragment = (OnStepFragment) context;
+		onStepFragment = (OnStepFragment) getActivity();
 	}
 
 	@Nullable

@@ -27,21 +27,22 @@ class DBContract {
 		String ID          = "_id";
 		String TITLE       = "title";
 		String DESCRIPTION = "description";
+		String PROJECT     = "project";
 		String TAGS        = "tags";
 		String STEP        = "step";
 		String RANK        = "rank";
 	}
 
-	static final String AUTHORITY  = "hpn332.cb";
-	static final Uri    BASE_URI   = Uri.parse("content://" + AUTHORITY);
+	static final String AUTHORITY     = "hpn332.cb";
+	static final Uri    BASE_URI      = Uri.parse("content://" + AUTHORITY);
 	static final String TABLE_PROJECT = "project";
-	static final String TABLE_TASK = "task";
-	static final String TABLE_TAG  = "tag";
+	static final String TABLE_TASK    = "task";
+	static final String TABLE_TAG     = "tag";
 
-	static final Uri    URI_PROJECT   = BASE_URI.buildUpon()
+	static final Uri URI_PROJECT = BASE_URI.buildUpon()
 			.appendEncodedPath(TABLE_PROJECT).build();
 
-	static final Uri    URI_TASK   = BASE_URI.buildUpon()
+	static final Uri URI_TASK = BASE_URI.buildUpon()
 			.appendEncodedPath(TABLE_TASK).build();
 
 	static final Uri URI_TASK_STEP = BASE_URI.buildUpon()
@@ -53,7 +54,7 @@ class DBContract {
 	static class ProjectEntry implements ProjectColumns, BaseColumns {
 
 		static final String CREATE_TABLE =
-				"CREATE TABLE " + TABLE_TASK + " ("
+				"CREATE TABLE " + TABLE_PROJECT + " ("
 						+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 						+ TITLE + " TEXT,"
 						+ DESCRIPTION + " TEXT"
@@ -72,6 +73,7 @@ class DBContract {
 						+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 						+ TITLE + " TEXT,"
 						+ DESCRIPTION + " TEXT,"
+						+ PROJECT + " INTEGER,"
 						+ TAGS + " TEXT,"
 						+ STEP + " INTEGER,"
 						+ RANK + " INTEGER"
@@ -102,9 +104,7 @@ class DBContract {
 	}
 
 
-	static Uri buildUri(Uri URI, String id) {
-		return URI.buildUpon().appendEncodedPath(id).build();
-	}
+	static Uri buildUri(Uri URI, String id) {return URI.buildUpon().appendEncodedPath(id).build();}
 
 	static String getId(Uri uri) {return uri.getPathSegments().get(1);}
 }

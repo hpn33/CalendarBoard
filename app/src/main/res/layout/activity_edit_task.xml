@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hpn332.cb.ui.activity.EditTagActivity">
+    tools:context="hpn332.cb.ui.activity.EditTaskActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/content_add_toolbar"/>
+        <include layout="@layout/content_edit_toolbar"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/appBarLayout">
 
-            <include layout="@layout/content_add_tag_center"/>
+            <include layout="@layout/content_edit_task_center"/>
         </ScrollView>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

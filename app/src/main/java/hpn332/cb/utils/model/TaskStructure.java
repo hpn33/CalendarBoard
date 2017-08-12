@@ -3,12 +3,15 @@ package hpn332.cb.utils.model;
 public class TaskStructure {
 
 	private String title, desc, tag;
-	private int id, step, rank;
+	private int id, step, rank, project;
 
-	public TaskStructure(int id, String title, String desc, String tag, int step, int rank) {
+	public TaskStructure(
+			int id, String title, String desc, int project, String tag, int step, int
+			rank) {
 		this.id = id;
 		this.title = title;
 		this.desc = desc;
+		this.project = project;
 		this.tag = tag;
 		this.step = step;
 		this.rank = rank;
@@ -23,6 +26,8 @@ public class TaskStructure {
 	public String getDesc() {
 		return desc;
 	}
+
+	public int getProject() {return project;}
 
 	public String getTag() {
 		return tag;

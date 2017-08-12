@@ -13,7 +13,7 @@ import hpn332.cb.utils.AList;
 import hpn332.cb.utils.adapter.AdapterTagList;
 import hpn332.cb.utils.database.ProviderHelper;
 
-public class TagListActivity extends AppCompatActivity {
+public class ListTagActivity extends AppCompatActivity {
 
 	private RecyclerView recyclerView;
 	private ImageView    add, backArrow;

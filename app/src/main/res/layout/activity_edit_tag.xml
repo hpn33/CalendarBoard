@@ -4,22 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hpn332.cb.ui.activity.ListTagActivity">
-
+    tools:context="hpn332.cb.ui.activity.EditTagActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/content_list_toolbar"/>
+        <include layout="@layout/content_edit_toolbar"/>
 
-        <RelativeLayout
-            android:id="@+id/relative_bottom"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/appBarLayout">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appBarLayout">
 
-            <include
-                layout="@layout/include_recycler_view"/>
-        </RelativeLayout>
+            <include layout="@layout/content_edit_tag_center"/>
+        </ScrollView>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
