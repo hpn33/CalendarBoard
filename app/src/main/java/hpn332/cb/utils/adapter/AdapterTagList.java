@@ -74,6 +74,7 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHold
 
 			inflater.getContext().startActivity(
 					new Intent(inflater.getContext(), EditTagActivity.class)
+							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 							.putExtra(Key.KEY_UPDATE, true)
 							.putExtra(Key.KEY_POSITION, position));
 			return true;

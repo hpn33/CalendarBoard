@@ -2,7 +2,6 @@ package hpn332.cb.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,8 +50,6 @@ public class ListProjectActivity extends AppCompatActivity {
 		toolbar.setTitle(TAG);
 
 		recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-
-		adapter();
 	}
 
 	@Override
@@ -61,10 +58,6 @@ public class ListProjectActivity extends AppCompatActivity {
 
 		ProviderHelper.queryListProject(getApplicationContext(), AList.L_PROJECT);
 		recyclerView.setAdapter(new AdapterProjectList(getApplicationContext(), AList.L_PROJECT));
-	}
-
-	private void adapter() {
-
 	}
 
 }

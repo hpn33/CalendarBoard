@@ -26,6 +26,7 @@
         android:layout_height="match_parent"
         android:gravity="start"
         android:minHeight="75dp"
+        android:textColor="#000"
         android:padding="5dp"
         android:textSize="15sp"
         tools:text="description"/>

@@ -152,6 +152,7 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 
 			inflater.getContext().startActivity(
 					new Intent(inflater.getContext(), EditTaskActivity.class)
+							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 							.putExtra(Key.KEY_POSITION, position)
 							.putExtra(Key.KEY_STEP, step)
 							.putExtra(Key.KEY_UPDATE, true));

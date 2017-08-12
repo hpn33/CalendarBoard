@@ -17,6 +17,7 @@ import hpn332.cb.utils.Key;
 import hpn332.cb.utils.model.ProjectStructure;
 
 
+
 public class AdapterProjectList extends RecyclerView.Adapter<AdapterProjectList.ItemHolder> {
 
 	private LayoutInflater              inflater;
@@ -40,8 +41,8 @@ public class AdapterProjectList extends RecyclerView.Adapter<AdapterProjectList.
 	@Override
 	public int getItemCount() {return arrayList.size();}
 
-	class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-			View.OnLongClickListener {
+	class ItemHolder extends RecyclerView.ViewHolder
+			implements View.OnClickListener, View.OnLongClickListener {
 
 		private TextView title, description;
 		private int position;
@@ -70,6 +71,7 @@ public class AdapterProjectList extends RecyclerView.Adapter<AdapterProjectList.
 
 			inflater.getContext().startActivity(
 					new Intent(inflater.getContext(), EditProjectActivity.class)
+							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 							.putExtra(Key.KEY_POSITION, position)
 							.putExtra(Key.KEY_UPDATE, true));
 
@@ -80,6 +82,7 @@ public class AdapterProjectList extends RecyclerView.Adapter<AdapterProjectList.
 		public void onClick(View view) {
 			inflater.getContext().startActivity(
 					new Intent(inflater.getContext(), ListTaskActivity.class)
+							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 							.putExtra(Key.KEY_PROJECT, arrayList.get(position).getId()));
 		}
 	}
