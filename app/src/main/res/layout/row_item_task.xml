@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:gravity="start"
+            android:gravity="start|center"
             android:padding="10dp"
             android:textColor="#fff"
             android:textSize="20sp"
@@ -60,10 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="start"
-        android:minHeight="150dp"
         android:padding="5dp"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:visibility="gone"
         tools:text="description"/>
 </LinearLayout>

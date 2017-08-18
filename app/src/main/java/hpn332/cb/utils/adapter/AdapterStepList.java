@@ -65,7 +65,6 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 		private LinearLayout tagLayout;
 		private ImageView    nextStep;
 		private int          position;
-		private String       setText;
 
 		ItemHolder(View view) {
 			super(view);
@@ -78,8 +77,6 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 
 			tagLayout = view.findViewById(R.id.show_tag_layout);
 
-			setText = arrayList.get(position).getDesc();
-
 			view.setOnLongClickListener(this);
 		}
 
@@ -88,11 +85,7 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 			this.position = position;
 
 			title.setText(arrayList.get(position).getTitle());
-
-			if (!setText.equals("") && !setText.isEmpty()) {
-				description.setVisibility(View.VISIBLE);
-				description.setText(setText);
-			}
+			description.setText(arrayList.get(position).getDesc());
 			rank.setText(String.valueOf(arrayList.get(position).getRank()));
 
 			if (arrayList.get(position).getStep() < 4) {
