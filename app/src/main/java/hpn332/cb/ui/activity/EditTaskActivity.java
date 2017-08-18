@@ -40,7 +40,6 @@ public class EditTaskActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_task);
 
-
 		setup();
 	}
 
@@ -64,11 +63,8 @@ public class EditTaskActivity extends AppCompatActivity {
 
 		tagLayout = (LinearLayout) findViewById(R.id.layout_for_tags);
 
-		Button addTag = (Button) findViewById(R.id.addTag);
-
 		done = (ImageView) findViewById(R.id.done_imageView);
 		delete = (ImageView) findViewById(R.id.delete_imageView);
-		ImageView backArrow = (ImageView) findViewById(R.id.backArrow_imageView);
 
 		title = (EditText) findViewById(R.id.title_editText);
 		description = (EditText) findViewById(R.id.description_editText);
@@ -81,14 +77,14 @@ public class EditTaskActivity extends AppCompatActivity {
 		num4 = (RadioButton) findViewById(R.id.num4);
 		num5 = (RadioButton) findViewById(R.id.num5);
 
-		backArrow.setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.backArrow_imageView).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				finish();
 			}
 		});
 
-		addTag.setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.addTag).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(getApplicationContext(), EditTagActivity.class));
@@ -148,14 +144,15 @@ public class EditTaskActivity extends AppCompatActivity {
 
 		final int position = getIntent().getIntExtra(Key.KEY_POSITION, 0);
 		final int id       = arrayList.get(position).getId();
+		int       step     = arrayList.get(position).getStep();
 		Log.d(TAG, "makeReadyStep: id :: " + id);
 
 
-		setCheckStep(arrayList, position);
+		setCheckStep(arrayList.get(position).getStep());
 		title.setText(arrayList.get(position).getTitle());
 		description.setText(arrayList.get(position).getDesc());
 		setCheckTag(arrayList, position);
-		setCheckRank(arrayList, position);
+		setCheckRank(arrayList.get(position).getRank());
 
 		delete.setVisibility(View.VISIBLE);
 		delete.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +163,10 @@ public class EditTaskActivity extends AppCompatActivity {
 			}
 		});
 
+		if (step == 1 || step == 2) step = getStep();
+		else findViewById(R.id.step_layout_radioGroup).setVisibility(View.GONE);
+
+		final int finalStep = step;
 		done.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -175,7 +176,7 @@ public class EditTaskActivity extends AppCompatActivity {
 				                             title.getText().toString(),
 				                             description.getText().toString(),
 				                             getTag(),
-				                             getStep(),
+				                             finalStep,
 				                             getRank());
 				Log.d(TAG, "onClick: update id ::" + id);
 
@@ -185,8 +186,8 @@ public class EditTaskActivity extends AppCompatActivity {
 
 	}
 
-	private void setCheckStep(ArrayList<TaskStructure> arrayList, int position) {
-		switch (arrayList.get(position).getStep()) {
+	private void setCheckStep(int step) {
+		switch (step) {
 			case 1:
 				backlog.toggle();
 				break;
@@ -213,8 +214,8 @@ public class EditTaskActivity extends AppCompatActivity {
 		}
 	}
 
-	private void setCheckRank(ArrayList<TaskStructure> arrayList, int position) {
-		switch (arrayList.get(position).getRank()) {
+	private void setCheckRank(int rank) {
+		switch (rank) {
 			case 1:
 				num1.toggle();
 				break;
@@ -294,6 +295,7 @@ public class EditTaskActivity extends AppCompatActivity {
 	private int getStep() {
 		if (backlog.isChecked()) return 1;
 		if (todo.isChecked()) return 2;
+
 		return 1;
 	}
 
