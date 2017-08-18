@@ -48,6 +48,7 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHold
 		private TextView title, description;
 		private View color_view;
 		private int  position;
+		private String setText;
 
 		ItemHolder(View view) {
 			super(view);
@@ -55,6 +56,9 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHold
 			title = view.findViewById(R.id.title_textView);
 			description = view.findViewById(R.id.description_textView);
 			color_view = view.findViewById(R.id.color_view);
+
+
+			setText = arrayList.get(position).getDesc();
 
 			view.setOnLongClickListener(this);
 		}
@@ -64,7 +68,12 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHold
 			this.position = position;
 
 			title.setText(arrayList.get(position).getTitle());
-			description.setText(arrayList.get(position).getDesc());
+
+			if (!setText.equals("") && !setText.isEmpty()) {
+				description.setVisibility(View.VISIBLE);
+				description.setText(setText);
+			}
+
 			color_view.setBackgroundResource(Utils.getColor(arrayList.get(position).getColor()));
 		}
 

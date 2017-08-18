@@ -17,7 +17,6 @@ import hpn332.cb.utils.Key;
 import hpn332.cb.utils.model.ProjectStructure;
 
 
-
 public class AdapterProjectList extends RecyclerView.Adapter<AdapterProjectList.ItemHolder> {
 
 	private LayoutInflater              inflater;
@@ -45,13 +44,16 @@ public class AdapterProjectList extends RecyclerView.Adapter<AdapterProjectList.
 			implements View.OnClickListener, View.OnLongClickListener {
 
 		private TextView title, description;
-		private int position;
+		private int    position;
+		private String setText;
 
 		ItemHolder(View view) {
 			super(view);
 
 			title = view.findViewById(R.id.title_textView);
 			description = view.findViewById(R.id.description_textView);
+
+			setText = arrayList.get(position).getDesc();
 
 			view.setOnClickListener(this);
 			view.setOnLongClickListener(this);
@@ -62,7 +64,10 @@ public class AdapterProjectList extends RecyclerView.Adapter<AdapterProjectList.
 			this.position = position;
 
 			title.setText(arrayList.get(position).getTitle());
-			description.setText(arrayList.get(position).getDesc());
+			if (!setText.equals("") && !setText.isEmpty()) {
+				description.setVisibility(View.VISIBLE);
+				description.setText(setText);
+			}
 		}
 
 
