@@ -15,8 +15,8 @@ import hpn332.cb.utils.database.ProviderHelper;
 
 public class ListTagActivity extends AppCompatActivity {
 
-	private RecyclerView recyclerView;
-	private ImageView    add, backArrow;
+	private RecyclerView   recyclerView;
+	private ImageView      backArrow;
 	private AdapterTagList adapter;
 
 	@Override
@@ -37,7 +37,6 @@ public class ListTagActivity extends AppCompatActivity {
 
 	private void setup() {
 
-		add = (ImageView) findViewById(R.id.add_imageView);
 		backArrow = (ImageView) findViewById(R.id.backArrow_imageView);
 
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -48,9 +47,10 @@ public class ListTagActivity extends AppCompatActivity {
 
 	private void using() {
 
-		add.setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+
 				startActivity(new Intent(getApplicationContext(), EditTagActivity.class));
 			}
 		});

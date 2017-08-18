@@ -2,6 +2,7 @@ package hpn332.cb.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +17,8 @@ import hpn332.cb.utils.database.ProviderHelper;
 import hpn332.cb.utils.model.TagStructure;
 
 public class EditTagActivity extends AppCompatActivity {
+
+	private static final String TAG = "EditTagActivity";
 
 	private ImageView done, delete;
 	private EditText title, description;
@@ -34,18 +37,10 @@ public class EditTagActivity extends AppCompatActivity {
 		else usingAdd();
 	}
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-
-		AList.L_TAGS.clear();
-	}
-
 	private void setup() {
 
 		done = (ImageView) findViewById(R.id.done_imageView);
 		delete = (ImageView) findViewById(R.id.delete_imageView);
-		ImageView backArrow = (ImageView) findViewById(R.id.backArrow_imageView);
 
 		title = (EditText) findViewById(R.id.title_editText);
 		description = (EditText) findViewById(R.id.description_editText);
@@ -57,7 +52,7 @@ public class EditTagActivity extends AppCompatActivity {
 
 		color_view = findViewById(R.id.color_view);
 
-		backArrow.setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.backArrow_imageView).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				finish();
@@ -115,8 +110,11 @@ public class EditTagActivity extends AppCompatActivity {
 
 	private void usingEdit() {
 
-		final int                 position  = getIntent().getIntExtra(Key.KEY_POSITION, 0);
+		final int                     position  = getIntent().getIntExtra(Key.KEY_POSITION, 0);
 		final ArrayList<TagStructure> arrayList = AList.L_TAGS;
+
+		Log.d(TAG, "usingEdit: update :: " + getIntent().getBooleanExtra(Key.KEY_UPDATE, false) +
+				" position :: " + position + " AND title :: " + arrayList.get(position).getTitle());
 
 		title.setText(arrayList.get(position).getTitle());
 		description.setText(arrayList.get(position).getDesc());
