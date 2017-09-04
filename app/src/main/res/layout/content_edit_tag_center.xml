@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:tools="http://schemas.android.com/tools"
-       tools:showIn="@layout/activity_edit_tag">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,57 +37,7 @@
                     android:hint="Description"/>
             </android.support.design.widget.TextInputLayout>
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/color_green"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="green"
-                    android:textColor="@color/green"
-                    android:textSize="15sp"/>
-
-                <RadioButton
-                    android:id="@+id/color_orange"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="orange"
-                    android:textColor="@color/orange"
-                    android:textSize="15sp"/>
-
-                <RadioButton
-                    android:id="@+id/color_blue"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="blue"
-                    android:textColor="@color/blue"
-                    android:textSize="15sp"/>
-
-                <RadioButton
-                    android:id="@+id/color_gold"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="gold"
-                    android:textColor="@color/gold"
-                    android:textSize="15sp"/>
-            </RadioGroup>
-
-            <View
-                android:id="@+id/color_view"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_margin="10dp"
-                android:layout_weight="4"
-                android:background="#000"/>
+            <include layout="@layout/content_color_picker"/>
         </LinearLayout>
-    </RelativeLayout>
+    </ScrollView>
 </merge>

@@ -27,7 +27,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/done_imageView"
                     android:layout_marginRight="10dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_delete"/>
 
                 <ImageView

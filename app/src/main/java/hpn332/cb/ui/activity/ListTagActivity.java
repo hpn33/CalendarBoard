@@ -5,70 +5,78 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.ImageView;
+import android.util.Log;
 
 import hpn332.cb.R;
 import hpn332.cb.utils.AList;
-import hpn332.cb.utils.adapter.AdapterTagList;
+import hpn332.cb.utils.adapter.AdapterListTag;
 import hpn332.cb.utils.database.ProviderHelper;
 
 public class ListTagActivity extends AppCompatActivity {
 
+	private static final String TAG = "ListTagActivity";
+
 	private RecyclerView   recyclerView;
-	private ImageView      backArrow;
-	private AdapterTagList adapter;
+	private AdapterListTag adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tag_list);
 
-		setup();
+		Log.d(TAG, "onCreate: start");
+
+		init();
+		using();
+
+		Log.d(TAG, "onCreate: end");
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 
+		Log.d(TAG, "onResume: start");
+
 		ProviderHelper.queryListTag(getApplicationContext(), AList.L_TAGS);
 		recyclerView.setAdapter(adapter);
+
+		Log.d(TAG, "onResume: end");
 	}
 
-	private void setup() {
+	private void init() {
 
-		backArrow = (ImageView) findViewById(R.id.backArrow_imageView);
+		Log.d(TAG, "init: start");
+
+		findViewById(R.id.backArrow_imageView).setOnClickListener(view -> finish());
 
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-		using();
 		adapter();
+
+		Log.d(TAG, "init: end");
 	}
 
 	private void using() {
 
-		findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
+		Log.d(TAG, "using: start");
 
-				startActivity(new Intent(getApplicationContext(), EditTagActivity.class));
-			}
-		});
+		findViewById(R.id.fab).setOnClickListener(
+				view -> startActivity(
+						new Intent(getApplicationContext(), AddTagActivity.class)));
 
-		backArrow.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				finish();
-			}
-		});
+		Log.d(TAG, "using: end");
 	}
-
 
 	private void adapter() {
 
-		adapter = new AdapterTagList(getApplicationContext(), AList.L_TAGS);
+		Log.d(TAG, "adapter: start");
+
+		adapter = new AdapterListTag(getApplicationContext(), AList.L_TAGS);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+		Log.d(TAG, "adapter: end");
 	}
 }

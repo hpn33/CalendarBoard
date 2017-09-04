@@ -22,6 +22,7 @@ class DBHelper extends SQLiteOpenHelper {
 		db.execSQL(DBContract.ProjectEntry.CREATE_TABLE);
 		db.execSQL(DBContract.TaskEntry.CREATE_TABLE);
 		db.execSQL(DBContract.TagEntry.CREATE_TABLE);
+		db.execSQL(DBContract.BackLogEntry.CREATE_TABLE);
 	}
 
 	@Override
@@ -34,6 +35,7 @@ class DBHelper extends SQLiteOpenHelper {
 			db.execSQL("DROP TABLE IF EXISTS " + DBContract.TABLE_PROJECT);
 			db.execSQL("DROP TABLE IF EXISTS " + DBContract.TABLE_TASK);
 			db.execSQL("DROP TABLE IF EXISTS " + DBContract.TABLE_TAG);
+			db.execSQL("DROP TABLE IF EXISTS " + DBContract.TABLE_BACKLOG);
 
 			onCreate(db);
 		}

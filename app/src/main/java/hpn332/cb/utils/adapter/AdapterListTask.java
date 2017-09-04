@@ -14,34 +14,33 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
-import hpn332.cb.ui.activity.EditTaskActivity;
-import hpn332.cb.ui.fragment.StepFragment;
+import hpn332.cb.ui.activity.EditActivity;
+import hpn332.cb.ui.fragment.TaskFragment;
 import hpn332.cb.utils.AList;
 import hpn332.cb.utils.Key;
-import hpn332.cb.utils.Utils;
 import hpn332.cb.utils.database.ProviderHelper;
 import hpn332.cb.utils.model.TaskStructure;
 
 
-public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHolder> {
+public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHolder> {
 
-	private static final String TAG = "AdapterStepList";
+	private static final String TAG = "AdapterListTask";
 
 	private LayoutInflater              inflater;
 	private ArrayList<TaskStructure>    arrayList;
 	private int                         step;
-	private StepFragment.OnStepFragment onStepFragment;
+	private TaskFragment.OnStepFragment onStepFragment;
 
-	public AdapterStepList(
+	public AdapterListTask(
 			Context context, ArrayList<TaskStructure> arrayList, int step,
-			StepFragment.OnStepFragment onStepFragment) {
+			TaskFragment.OnStepFragment onStepFragment) {
 
 		this.onStepFragment = onStepFragment;
 		this.arrayList = arrayList;
 		inflater = LayoutInflater.from(context);
 		this.step = step;
 
-		Log.d(TAG, "AdapterStepList: " + step);
+		Log.d(TAG, "AdapterListTask: " + step);
 	}
 
 	@Override
@@ -92,22 +91,18 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 
 				nextStep.setVisibility(View.VISIBLE);
 
-				nextStep.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
+				nextStep.setOnClickListener(view -> {
 
-						ProviderHelper.updateOneTask(
-								inflater.getContext(),
-								arrayList.get(position).getId(),
-								arrayList.get(position).getTitle(),
-								arrayList.get(position).getDesc(),
-								arrayList.get(position).getTag(),
-								(arrayList.get(position).getStep() + 1),
-								arrayList.get(position).getRank());
+					ProviderHelper.updateOneTask(
+							inflater.getContext(),
+							arrayList.get(position).getId(),
+							arrayList.get(position).getTitle(),
+							arrayList.get(position).getDesc(),
+							arrayList.get(position).getTag(),
+							(arrayList.get(position).getStep() + 1),
+							arrayList.get(position).getRank());
 
-						onStepFragment.onClickNext();
-					}
-
+					onStepFragment.onClickNext();
 				});
 			}
 
@@ -133,9 +128,7 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 					if (s.equals(String.valueOf(AList.L_TAGS.get(i).getId()))) {
 						view[j] = inflater.inflate(R.layout.view_tag_color, tagLayout, false);
 
-						view[j].findViewById(R.id.view_tag_color)
-								.setBackgroundResource(
-										Utils.getColor(AList.L_TAGS.get(i).getColor()));
+						//view[j].findViewById(R.id.view_tag_color).setBackgroundResource(Utils.getColor(AList.L_TAGS.get(i).getColor()));
 
 						tagLayout.addView(view[j]);
 					}
@@ -151,11 +144,11 @@ public class AdapterStepList extends RecyclerView.Adapter<AdapterStepList.ItemHo
 			Log.d(TAG, "onLongClick: position : " + position);
 
 			inflater.getContext().startActivity(
-					new Intent(inflater.getContext(), EditTaskActivity.class)
+					new Intent(inflater.getContext(), EditActivity.class)
 							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+							.putExtra(Key.KEY_TYPE, EditActivity.TASK)
 							.putExtra(Key.KEY_POSITION, position)
-							.putExtra(Key.KEY_STEP, step)
-							.putExtra(Key.KEY_UPDATE, true));
+							.putExtra(Key.KEY_STEP, step));
 
 			return true;
 		}

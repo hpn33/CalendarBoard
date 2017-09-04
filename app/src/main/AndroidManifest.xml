@@ -20,19 +20,20 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.activity.ListTagActivity"/>
         <activity android:name=".ui.activity.ListTaskActivity"/>
-
-        <activity android:name=".ui.activity.EditProjectActivity"/>
-        <activity android:name=".ui.activity.EditTaskActivity"/>
-        <activity android:name=".ui.activity.EditTagActivity"/>
+        <activity android:name=".ui.activity.AddProjectActivity"/>
+        <activity android:name=".ui.activity.AddTagActivity"/>
 
         <provider
             android:name=".utils.database.Provider"
             android:authorities="hpn332.cb"
             android:exported="false"/>
 
+        <activity android:name=".ui.activity.AddActivity">
+        </activity>
+        <activity android:name=".ui.activity.EditActivity">
+        </activity>
     </application>
 
 </manifest>

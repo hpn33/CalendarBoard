@@ -1,23 +1,35 @@
 package hpn332.cb.utils;
 
-import hpn332.cb.R;
+import android.util.Log;
+
+import hpn332.library.view.ColorPanelView;
+import hpn332.library.view.ColorPickerView;
 
 public class Utils {
 
-	public static int getColor(int color) {
+	private static final String TAG = "Utils";
 
-		switch (color) {
-			case 1:
-				return R.color.green;
-			case 2:
-				return R.color.orange;
-			case 3:
-				return R.color.blue;
-			case 4:
-				return R.color.gold;
+	public static final int NO_COLOR = -1;
 
-			default:
-				return R.color.green;
-		}
+	public static void setupColorPicker(
+			ColorPickerView colorPicker, final ColorPanelView newColorPanel,
+			ColorPanelView oldColorPanel, int initColor) {
+
+		if (initColor == NO_COLOR) initColor = -16777216;
+
+		colorPicker.setAlphaSliderVisible(false);
+		colorPicker.setColor(initColor, true);
+		oldColorPanel.setColor(initColor);
+		newColorPanel.setColor(initColor);
+
+		colorPicker.setOnColorChangedListener(newColor -> {
+			newColorPanel.setColor(newColor);
+			Log.d(TAG, "onColorChanged: color :: " + Integer.toOctalString(newColor));
+		});
+
+	}
+
+	public static String colorToHexString(int color) {
+		return String.format("#%06X", 0xFFFFFFFF & color);
 	}
 }

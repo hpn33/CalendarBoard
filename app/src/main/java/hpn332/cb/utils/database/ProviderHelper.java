@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import hpn332.cb.utils.model.BackLogStructure;
 import hpn332.cb.utils.model.ProjectStructure;
 import hpn332.cb.utils.model.TagStructure;
 import hpn332.cb.utils.model.TaskStructure;
@@ -19,16 +20,15 @@ public class ProviderHelper {
 
 	public static void queryListTaskByStep(
 			Context context, int steP, int project, ArrayList<TaskStructure> arrayList) {
-		Log.d(TAG, "setupListTask: step : " + steP + " AND Project :: " + project);
+		Log.d(TAG, "queryListTaskByStep: step : " + steP + " AND Project :: " + project);
 
 		if (!arrayList.isEmpty()) arrayList.clear();
 
 		Cursor cursor = context.getContentResolver()
 				.query(
-						DBContract.buildUri(
-								DBContract.URI_TASK_STEP, String.valueOf(steP)), null,
-						DBContract.TaskEntry.PROJECT + " = " + String.valueOf(project)
-						, null, null);
+						DBContract.buildUri(DBContract.URI_TASK_STEP, String.valueOf(steP)),
+						null, DBContract.TaskEntry.PROJECT + " = " + String.valueOf(project),
+						null, null);
 
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
@@ -41,6 +41,35 @@ public class ProviderHelper {
 				int    rank = cursor.getInt(cursor.getColumnIndex(DBContract.TaskEntry.RANK));
 
 				arrayList.add(new TaskStructure(id, title, desc, project, tag, step, rank));
+			}
+			cursor.close();
+		}
+	}
+
+	public static void queryListBacklogByProject(
+			Context context, int project, ArrayList<BackLogStructure> arrayList) {
+		Log.d(TAG, "queryListBacklogByProject: Project :: " + project);
+
+		if (!arrayList.isEmpty()) arrayList.clear();
+
+		Cursor cursor = context.getContentResolver()
+				.query(
+						DBContract.URI_BACKLOG, null,
+						DBContract.BackLogEntry.PROJECT + " = " + String.valueOf(project),
+						null, null);
+
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				int id = cursor.getInt(cursor.getColumnIndex(DBContract.BackLogEntry.ID));
+				String title =
+						cursor.getString(cursor.getColumnIndex(DBContract.BackLogEntry.TITLE));
+				String desc = cursor
+						.getString(cursor.getColumnIndex(DBContract.BackLogEntry.DESCRIPTION));
+				int color = cursor.getInt(cursor.getColumnIndex(DBContract.BackLogEntry.COLOR));
+
+				arrayList.add(new BackLogStructure(id, title, desc, project, color));
+
+				Log.d(TAG, "queryListBacklogByProject: title :: " + title + " di :: " + id);
 			}
 			cursor.close();
 		}
@@ -94,6 +123,8 @@ public class ProviderHelper {
 
 	public static void insertNewProject(
 			Context context, String title, String desc) {
+
+		Log.d(TAG, "insertNewProject: ");
 		ContentValues values = new ContentValues();
 
 		values.put(DBContract.TaskEntry.TITLE, title);
@@ -107,6 +138,8 @@ public class ProviderHelper {
 	public static void insertNewTask(
 			Context context, int project, String title,
 			String desc, String tag, int step, int rank) {
+
+		Log.d(TAG, "insertNewTask: ");
 
 		ContentValues values = new ContentValues();
 
@@ -124,6 +157,8 @@ public class ProviderHelper {
 
 	public static void insertNewTag(Context context, String title, String desc, int color) {
 
+		Log.d(TAG, "insertNewTag: ");
+
 		ContentValues values = new ContentValues();
 
 		values.put(DBContract.TagEntry.TITLE, title);
@@ -135,7 +170,26 @@ public class ProviderHelper {
 		if (uri != null) Log.d(TAG, "insertNewTask: uri: " + uri);
 	}
 
+	public static void insertNewBacklog(
+			Context context, int project, String title, String desc, int color) {
+
+		Log.d(TAG, "insertNewBacklog: pro :: " + project + " title :: " + title);
+
+		ContentValues values = new ContentValues();
+
+		values.put(DBContract.BackLogEntry.TITLE, title);
+		values.put(DBContract.BackLogEntry.DESCRIPTION, desc);
+		values.put(DBContract.BackLogEntry.PROJECT, project);
+		values.put(DBContract.BackLogEntry.COLOR, color);
+
+		Uri uri = context.getContentResolver().insert(DBContract.URI_BACKLOG, values);
+
+		if (uri != null) Log.d(TAG, "insertNewBacklog: uri: " + uri);
+	}
+
 	public static void updateOneProject(Context context, int id, String title, String desc) {
+
+		Log.d(TAG, "updateOneProject: ");
 
 		ContentValues values = new ContentValues();
 
@@ -150,8 +204,9 @@ public class ProviderHelper {
 	}
 
 	public static void updateOneTask(
-			Context context, int id, String title, String desc, String tag, int step,
-			int rank) {
+			Context context, int id, String title, String desc, String tag, int step, int rank) {
+
+		Log.d(TAG, "updateOneTask: ");
 
 		ContentValues values = new ContentValues();
 
@@ -171,6 +226,8 @@ public class ProviderHelper {
 	public static void updateOneTag(
 			Context context, int id, String title, String desc, int color) {
 
+		Log.d(TAG, "updateOneTag: ");
+
 		ContentValues values = new ContentValues();
 
 		values.put(DBContract.TagEntry.TITLE, title);
@@ -185,7 +242,28 @@ public class ProviderHelper {
 		Log.d(TAG, "updateOneTag: update: " + update);
 	}
 
+	public static void updateOneBacklog(
+			Context context, int id, String title, String desc, int color) {
+
+		Log.d(TAG, "updateOneTag: start");
+
+		ContentValues values = new ContentValues();
+
+		values.put(DBContract.BackLogEntry.TITLE, title);
+		values.put(DBContract.BackLogEntry.DESCRIPTION, desc);
+		values.put(DBContract.BackLogEntry.COLOR, color);
+
+		int update = context.getContentResolver()
+				.update(
+						DBContract.buildUri(DBContract.URI_BACKLOG, String.valueOf(id)),
+						values, null, null);
+
+		Log.d(TAG, "updateOneBacklog: end update: " + update);
+	}
+
 	public static void deleteOneProject(Context context, int id) {
+
+		Log.d(TAG, "deleteOneProject: ");
 
 		int delete = context.getContentResolver().
 				delete(DBContract.buildUri(DBContract.URI_PROJECT, String.valueOf(id)),
@@ -196,6 +274,8 @@ public class ProviderHelper {
 
 	public static void deleteOneTask(Context context, int id) {
 
+		Log.d(TAG, "deleteOneTask: ");
+
 		int delete = context.getContentResolver().
 				delete(DBContract.buildUri(DBContract.URI_TASK, String.valueOf(id)),
 				       null, null);
@@ -204,10 +284,24 @@ public class ProviderHelper {
 	}
 
 	public static void deleteOneTag(Context context, int id) {
+
+		Log.d(TAG, "deleteOneTag: ");
+
 		int delete = context.getContentResolver().
 				delete(DBContract.buildUri(DBContract.URI_TAG, String.valueOf(id)),
 				       null, null);
 
 		Log.d(TAG, "deleteOneTag: delete tag id :: " + delete);
+	}
+
+	public static void deleteOneBacklog(Context context, int id) {
+
+		Log.d(TAG, "deleteOneBacklog: ");
+
+		int delete = context.getContentResolver().
+				delete(DBContract.buildUri(DBContract.URI_BACKLOG, String.valueOf(id)),
+				       null, null);
+
+		Log.d(TAG, "deleteOneBacklog: delete backlog id :: " + delete);
 	}
 }

@@ -1,12 +1,6 @@
 package hpn332.cb.utils.database;
 
 import android.net.Uri;
-import android.provider.BaseColumns;
-
-import java.util.ArrayList;
-
-import hpn332.cb.utils.model.TagStructure;
-import hpn332.cb.utils.model.TaskStructure;
 
 class DBContract {
 
@@ -23,11 +17,20 @@ class DBContract {
 		String COLOR       = "color";
 	}
 
+	interface BackLogColumns {
+		String ID          = "_id";
+		String TITLE       = "title";
+		String DESCRIPTION = "description";
+		String PROJECT     = "project";
+		String COLOR       = "color";
+	}
+
 	interface TaskColumns {
 		String ID          = "_id";
 		String TITLE       = "title";
 		String DESCRIPTION = "description";
 		String PROJECT     = "project";
+		String BACKLOG     = "backlog";
 		String TAGS        = "tags";
 		String STEP        = "step";
 		String RANK        = "rank";
@@ -38,6 +41,7 @@ class DBContract {
 	static final String TABLE_PROJECT = "project";
 	static final String TABLE_TASK    = "task";
 	static final String TABLE_TAG     = "tag";
+	static final String TABLE_BACKLOG = "backlog";
 
 	static final Uri URI_PROJECT = BASE_URI.buildUpon()
 			.appendEncodedPath(TABLE_PROJECT).build();
@@ -51,7 +55,10 @@ class DBContract {
 	static final Uri URI_TAG = BASE_URI.buildUpon()
 			.appendEncodedPath(TABLE_TAG).build();
 
-	static class ProjectEntry implements ProjectColumns, BaseColumns {
+	static final Uri URI_BACKLOG = BASE_URI.buildUpon()
+			.appendEncodedPath(TABLE_BACKLOG).build();
+
+	static class ProjectEntry implements ProjectColumns {
 
 		static final String CREATE_TABLE =
 				"CREATE TABLE " + TABLE_PROJECT + " ("
@@ -66,7 +73,7 @@ class DBContract {
 				"vnd.android.cursor.item/vnd." + AUTHORITY + ".project";
 	}
 
-	static class TaskEntry implements TaskColumns, BaseColumns {
+	static class TaskEntry implements TaskColumns {
 
 		static final String CREATE_TABLE =
 				"CREATE TABLE " + TABLE_TASK + " ("
@@ -74,6 +81,7 @@ class DBContract {
 						+ TITLE + " TEXT,"
 						+ DESCRIPTION + " TEXT,"
 						+ PROJECT + " INTEGER,"
+						+ BACKLOG + " INTEGER,"
 						+ TAGS + " TEXT,"
 						+ STEP + " INTEGER,"
 						+ RANK + " INTEGER"
@@ -87,7 +95,7 @@ class DBContract {
 				"vnd.android.cursor.item/vnd." + AUTHORITY + ".task";
 	}
 
-	static class TagEntry implements TagColumns, BaseColumns {
+	static class TagEntry implements TagColumns {
 
 		static final String CREATE_TABLE =
 				"CREATE TABLE " + TABLE_TAG + " ("
@@ -103,8 +111,25 @@ class DBContract {
 				"vnd.android.cursor.item/vnd." + AUTHORITY + ".tag";
 	}
 
+	static class BackLogEntry implements BackLogColumns {
+
+		static final String CREATE_TABLE =
+				"CREATE TABLE " + TABLE_BACKLOG + " ("
+						+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+						+ TITLE + " TEXT,"
+						+ DESCRIPTION + " TEXT,"
+						+ PROJECT + " INTEGER,"
+						+ COLOR + "  INTEGER"
+						+ ");";
+
+		static final String CONTENT_TYPE      =
+				"vnd.android.cursor.dir/vnd." + AUTHORITY + ".backlog";
+		static final String CONTENT_ITEM_TYPE =
+				"vnd.android.cursor.item/vnd." + AUTHORITY + ".backlog";
+	}
+
 
 	static Uri buildUri(Uri URI, String id) {return URI.buildUpon().appendEncodedPath(id).build();}
 
-	static String getId(Uri uri) {return uri.getPathSegments().get(1);}
+	static String getPathSegments(Uri uri)  {return uri.getPathSegments().get(1);}
 }

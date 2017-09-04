@@ -1,7 +1,5 @@
 package hpn332.cb.utils.model;
 
-import android.graphics.Color;
-
 public class CheckTagStructure {
 
 	private String  title;

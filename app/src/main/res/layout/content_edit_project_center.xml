@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:tools="http://schemas.android.com/tools"
-       tools:showIn="@layout/activity_edit_tag">
+       xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/title_editText"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="title"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp">
+                    <EditText
+                        android:id="@+id/title_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="title"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/description_editText"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="top"
-                    android:hint="Description"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp">
 
-        </LinearLayout>
-    </RelativeLayout>
+                    <EditText
+                        android:id="@+id/description_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:hint="Description"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </merge>

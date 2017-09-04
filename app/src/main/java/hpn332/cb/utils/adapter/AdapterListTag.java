@@ -11,18 +11,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
-import hpn332.cb.ui.activity.EditTagActivity;
+import hpn332.cb.ui.activity.EditActivity;
 import hpn332.cb.utils.Key;
 import hpn332.cb.utils.model.TagStructure;
-import hpn332.cb.utils.Utils;
 
 
-public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHolder> {
+public class AdapterListTag extends RecyclerView.Adapter<AdapterListTag.ItemHolder> {
 
 	private LayoutInflater          inflater;
 	private ArrayList<TagStructure> arrayList;
 
-	public AdapterTagList(
+	public AdapterListTag(
 			Context context, ArrayList<TagStructure> arrayList) {
 		this.arrayList = arrayList;
 		inflater = LayoutInflater.from(context);
@@ -67,17 +66,16 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ItemHold
 			description.setText(arrayList.get(position).getDesc());
 
 
-			color_view.setBackgroundResource(Utils.getColor(arrayList.get(position).getColor()));
+			color_view.setBackgroundColor(arrayList.get(position).getColor());
 		}
-
 
 		@Override
 		public boolean onLongClick(View view) {
 
 			inflater.getContext().startActivity(
-					new Intent(inflater.getContext(), EditTagActivity.class)
+					new Intent(inflater.getContext(), EditActivity.class)
 							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-							.putExtra(Key.KEY_UPDATE, true)
+							.putExtra(Key.KEY_TYPE, EditActivity.TAGs)
 							.putExtra(Key.KEY_POSITION, position));
 			return true;
 		}

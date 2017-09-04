@@ -1,4 +1,4 @@
-package hpn332.cb.utils;
+package hpn332.cb.utils.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
