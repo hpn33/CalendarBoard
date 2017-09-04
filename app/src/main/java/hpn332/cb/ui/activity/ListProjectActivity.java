@@ -26,7 +26,31 @@ public class ListProjectActivity extends AppCompatActivity {
 		Log.d(TAG, "onCreate: start");
 
 		init();
+		using();
+
 		Log.d(TAG, "onCreate: end");
+	}
+
+	private void init() {
+		Log.d(TAG, "init: start");
+
+		((Toolbar) findViewById(R.id.toolbar)).setTitle(TAG);
+
+		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+		Log.d(TAG, "init: end");
+	}
+
+	private void using() {
+		Log.d(TAG, "using: start");
+
+		findViewById(R.id.fab).setOnClickListener(
+				view -> startActivity(
+						new Intent(getApplicationContext(), AddProjectActivity.class)));
+
+		recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+
+		Log.d(TAG, "using: end");
 	}
 
 	@Override
@@ -40,26 +64,6 @@ public class ListProjectActivity extends AppCompatActivity {
 		Log.d(TAG, "onResume: end");
 	}
 
-	private void init() {
-		Log.d(TAG, "init: start");
 
-		((Toolbar) findViewById(R.id.toolbar)).setTitle(TAG);
-
-		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-		using();
-
-		Log.d(TAG, "init: end");
-	}
-
-	private void using() {
-		Log.d(TAG, "using: start");
-
-		findViewById(R.id.fab).setOnClickListener(
-				view -> startActivity(new Intent(getApplicationContext(), AddProjectActivity.class)));
-
-		recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-
-		Log.d(TAG, "using: end");
-	}
 
 }

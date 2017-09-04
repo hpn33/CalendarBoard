@@ -26,7 +26,6 @@ public class EditBacklogFragment extends Fragment {
 
 	private ImageView done, delete;
 	private EditText title, description;
-	private int project_id;
 
 	private ColorPickerView colorPicker;
 	private ColorPanelView  oldColorPanel;
@@ -50,8 +49,6 @@ public class EditBacklogFragment extends Fragment {
 	private void init(View view) {
 
 		Log.d(TAG, "init: start");
-
-		project_id = getActivity().getIntent().getIntExtra(Key.KEY_PROJECT, 0);
 
 		done = view.findViewById(R.id.done_imageView);
 		delete = view.findViewById(R.id.delete_imageView);

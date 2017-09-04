@@ -3,13 +3,10 @@ package hpn332.cb.ui.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import hpn332.cb.R;
-import hpn332.cb.utils.AList;
-import hpn332.cb.utils.Key;
 import hpn332.cb.utils.database.ProviderHelper;
 
 public class AddProjectActivity extends AppCompatActivity {

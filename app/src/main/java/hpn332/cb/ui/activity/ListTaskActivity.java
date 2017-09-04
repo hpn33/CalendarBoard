@@ -52,8 +52,8 @@ public class ListTaskActivity extends AppCompatActivity implements TaskFragment.
 
 		project_id = getIntent().getIntExtra(Key.KEY_PROJECT, 0);
 
-		findViewById(R.id.menu_imageView).setOnClickListener(
-				view -> startActivity(new Intent(getApplicationContext(), ListTagActivity.class)));
+		/*findViewById(R.id.menu_imageView).setOnClickListener(
+				view -> startActivity(new Intent(getApplicationContext(), ListTagActivity.class)));*/
 
 		findViewById(R.id.fab).setOnClickListener(view -> {
 

@@ -35,7 +35,6 @@ public class EditTaskFragment extends Fragment {
 	private EditText title, description;
 	private LinearLayout tagLayout;
 	private CheckBox[]   tagBoxes;
-	private int          project_id;
 
 	@Override
 	public View onCreateView(
@@ -55,8 +54,6 @@ public class EditTaskFragment extends Fragment {
 	private void init(View view) {
 
 		Log.d(TAG, "init: start");
-
-		project_id = getActivity().getIntent().getIntExtra(Key.KEY_PROJECT, 0);
 
 		tagLayout = view.findViewById(R.id.layout_for_tags);
 
