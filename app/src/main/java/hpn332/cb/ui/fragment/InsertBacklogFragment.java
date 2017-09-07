@@ -22,11 +22,9 @@ public class InsertBacklogFragment extends Fragment {
 	private EditText title, description;
 
 	private ColorPickerView colorPicker;
-	private ColorPanelView  newColorPanel, oldColorPanel;
 
 	public static InsertBacklogFragment newInstance(int project_id) {
 		Log.d(TAG, "newInstance: start");
-
 
 		Log.d(TAG, "newInstance: project :: " + project_id);
 		Bundle args = new Bundle();
@@ -62,21 +60,24 @@ public class InsertBacklogFragment extends Fragment {
 		description = view.findViewById(R.id.description_editText);
 
 		colorPicker = view.findViewById(R.id.color_picker_view);
-		newColorPanel = view.findViewById(R.id.color_panel_new);
-		oldColorPanel = view.findViewById(R.id.color_panel_old);
 
 		view.findViewById(R.id.fab).setOnClickListener(
 				view1 -> {
 
 					ProviderHelper.insertNewBacklog(
-							getContext(), getArguments().getInt(Key.KEY_PROJECT),
-							title.getText().toString(), description.getText().toString(),
+							getContext(),
+							getArguments().getInt(Key.KEY_PROJECT),
+							title.getText().toString(),
+							description.getText().toString(),
 							colorPicker.getColor());
 
 					getActivity().finish();
 				});
 
-		Utils.setupColorPicker(colorPicker, newColorPanel, oldColorPanel, Utils.NO_COLOR);
+		Utils.setupColorPicker(colorPicker,
+		                       view.findViewById(R.id.color_panel_new),
+		                       view.findViewById(R.id.color_panel_old),
+		                       Utils.NO_COLOR);
 
 		Log.d(TAG, "init: end");
 	}

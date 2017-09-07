@@ -18,16 +18,20 @@ public class ProviderHelper {
 	private static final String TAG = "ProviderHelper";
 
 
-	public static void queryListTaskByStep(
-			Context context, int steP, int project, ArrayList<TaskStructure> arrayList) {
-		Log.d(TAG, "queryListTaskByStep: step : " + steP + " AND Project :: " + project);
+	public static void queryListTaskByBacklogAndStep(
+			Context context, int step, int project, int backlogId, ArrayList<TaskStructure>
+			arrayList) {
+		Log.d(TAG, "queryListTaskByStep: step : " + step + " AND Project :: " + project);
 
 		if (!arrayList.isEmpty()) arrayList.clear();
 
 		Cursor cursor = context.getContentResolver()
 				.query(
-						DBContract.buildUri(DBContract.URI_TASK_STEP, String.valueOf(steP)),
-						null, DBContract.TaskEntry.PROJECT + " = " + String.valueOf(project),
+						DBContract.buildUri(DBContract.URI_TASK_STEP, String.valueOf(step)),
+						null,
+						DBContract.TaskEntry.PROJECT + " = " + String.valueOf(project)
+								+ " AND " +
+								DBContract.TaskEntry.BACKLOG + " = " + String.valueOf(backlogId),
 						null, null);
 
 		if (cursor != null) {
@@ -37,7 +41,6 @@ public class ProviderHelper {
 				String desc = cursor
 						.getString(cursor.getColumnIndex(DBContract.TaskEntry.DESCRIPTION));
 				String tag  = cursor.getString(cursor.getColumnIndex(DBContract.TaskEntry.TAGS));
-				int    step = cursor.getInt(cursor.getColumnIndex(DBContract.TaskEntry.STEP));
 				int    rank = cursor.getInt(cursor.getColumnIndex(DBContract.TaskEntry.RANK));
 
 				arrayList.add(new TaskStructure(id, title, desc, project, tag, step, rank));
@@ -136,7 +139,7 @@ public class ProviderHelper {
 	}
 
 	public static void insertNewTask(
-			Context context, int project, String title,
+			Context context, int project, int backlog, String title,
 			String desc, String tag, int step, int rank) {
 
 		Log.d(TAG, "insertNewTask: ");
@@ -146,6 +149,7 @@ public class ProviderHelper {
 		values.put(DBContract.TaskEntry.TITLE, title);
 		values.put(DBContract.TaskEntry.DESCRIPTION, desc);
 		values.put(DBContract.TaskEntry.PROJECT, project);
+		values.put(DBContract.TaskEntry.BACKLOG, backlog);
 		values.put(DBContract.TaskEntry.TAGS, tag);
 		values.put(DBContract.TaskEntry.STEP, step);
 		values.put(DBContract.TaskEntry.RANK, rank);
@@ -221,6 +225,22 @@ public class ProviderHelper {
 				        values, null, null);
 
 		Log.d(TAG, "updateOneTask: update: " + update);
+	}
+
+	public static void updateOneTaskToNextStep(
+			Context context, int id, int step) {
+
+		Log.d(TAG, "updateOneTaskToNextStep: ");
+
+		ContentValues values = new ContentValues();
+
+		values.put(DBContract.TaskEntry.STEP, step);
+
+		int update = context.getContentResolver()
+				.update(DBContract.buildUri(DBContract.URI_TASK, String.valueOf(id)),
+				        values, null, null);
+
+		Log.d(TAG, "updateOneTaskToNextStep: update: " + update);
 	}
 
 	public static void updateOneTag(

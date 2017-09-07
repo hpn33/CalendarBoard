@@ -87,20 +87,15 @@ public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHo
 			description.setText(arrayList.get(position).getDesc());
 			rank.setText(String.valueOf(arrayList.get(position).getRank()));
 
-			if (arrayList.get(position).getStep() < 4) {
+			if (arrayList.get(position).getStep() < 3) {
 
 				nextStep.setVisibility(View.VISIBLE);
 
 				nextStep.setOnClickListener(view -> {
-
-					ProviderHelper.updateOneTask(
+					ProviderHelper.updateOneTaskToNextStep(
 							inflater.getContext(),
 							arrayList.get(position).getId(),
-							arrayList.get(position).getTitle(),
-							arrayList.get(position).getDesc(),
-							arrayList.get(position).getTag(),
-							(arrayList.get(position).getStep() + 1),
-							arrayList.get(position).getRank());
+							(arrayList.get(position).getStep() + 1));
 
 					onStepFragment.onClickNext();
 				});
@@ -128,14 +123,14 @@ public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHo
 					if (s.equals(String.valueOf(AList.L_TAGS.get(i).getId()))) {
 						view[j] = inflater.inflate(R.layout.view_tag_color, tagLayout, false);
 
-						//view[j].findViewById(R.id.view_tag_color).setBackgroundResource(Utils.getColor(AList.L_TAGS.get(i).getColor()));
+						view[j].findViewById(R.id.view_tag_color).setBackgroundColor(
+								AList.L_TAGS.get(i).getColor());
 
 						tagLayout.addView(view[j]);
 					}
 				}
 				j++;
 			}
-
 		}
 
 		@Override

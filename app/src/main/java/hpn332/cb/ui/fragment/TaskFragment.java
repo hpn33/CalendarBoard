@@ -28,7 +28,6 @@ public class TaskFragment extends Fragment {
 	private RecyclerView recyclerView;
 	private OnStepFragment onStepFragment;
 
-
 	public static TaskFragment newInstance(int index) {
 
 		Log.d(TAG, "newInstance: start");
@@ -60,12 +59,12 @@ public class TaskFragment extends Fragment {
 			@Nullable Bundle savedInstanceState) {
 
 		Log.d(TAG, "onCreateView: start");
+
 		View view = inflater.inflate(R.layout.include_recycler_view, container, false);
 
 		recyclerView = view.findViewById(R.id.recycler_view);
 
 		adapter(getArguments().getInt(KEY_STEP));
-
 
 		Log.d(TAG, "onCreateView: end");
 

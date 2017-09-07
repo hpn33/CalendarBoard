@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.activity.EditActivity;
+import hpn332.cb.ui.fragment.BacklogFragment;
 import hpn332.cb.utils.Key;
 import hpn332.cb.utils.model.BackLogStructure;
 
@@ -20,14 +21,17 @@ public class AdapterListBacklog extends RecyclerView.Adapter<AdapterListBacklog.
 
 	private static final String TAG = "AdapterListBacklog";
 
-	private LayoutInflater              inflater;
-	private ArrayList<BackLogStructure> arrayList;
+	private LayoutInflater                    inflater;
+	private ArrayList<BackLogStructure>       arrayList;
+	private BacklogFragment.OnBacklogFragment onBacklogFragment;
 
 	public AdapterListBacklog(
-			Context context, ArrayList<BackLogStructure> arrayList) {
+			Context context, ArrayList<BackLogStructure> arrayList,
+			BacklogFragment.OnBacklogFragment onBacklogFragment) {
 
 		this.arrayList = arrayList;
 		inflater = LayoutInflater.from(context);
+		this.onBacklogFragment = onBacklogFragment;
 	}
 
 	@Override
@@ -48,7 +52,9 @@ public class AdapterListBacklog extends RecyclerView.Adapter<AdapterListBacklog.
 		return arrayList.size();
 	}
 
-	class ItemHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+	class ItemHolder extends RecyclerView.ViewHolder
+			implements
+			View.OnLongClickListener, View.OnClickListener {
 
 		private TextView title, description;
 		private View colorView;
@@ -63,6 +69,7 @@ public class AdapterListBacklog extends RecyclerView.Adapter<AdapterListBacklog.
 			colorView = view.findViewById(R.id.color_view);
 
 			view.setOnLongClickListener(this);
+			view.setOnClickListener(this);
 		}
 
 		void onBind(final int position) {
@@ -84,10 +91,16 @@ public class AdapterListBacklog extends RecyclerView.Adapter<AdapterListBacklog.
 					new Intent(inflater.getContext(), EditActivity.class)
 							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 							.putExtra(Key.KEY_TYPE, EditActivity.BACKLOG)
-							.putExtra(Key.KEY_POSITION, position)
-							.putExtra(Key.KEY_UPDATE, true));
+							.putExtra(Key.KEY_POSITION, position));
 
 			return true;
+		}
+
+		@Override
+		public void onClick(View view) {
+			Log.d(TAG, "onClick: position : " + position);
+
+			onBacklogFragment.onClickBacklog(arrayList.get(position).getId());
 		}
 	}
 }

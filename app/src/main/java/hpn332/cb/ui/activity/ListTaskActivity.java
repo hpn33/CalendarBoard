@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import hpn332.cb.ui.fragment.BacklogFragment;
@@ -15,7 +16,9 @@ import hpn332.cb.utils.Key;
 import hpn332.cb.utils.database.ProviderHelper;
 import hpn332.cb.utils.adapter.SectionsPagerAdapter;
 
-public class ListTaskActivity extends AppCompatActivity implements TaskFragment.OnStepFragment {
+public class ListTaskActivity extends AppCompatActivity
+		implements
+		TaskFragment.OnStepFragment, BacklogFragment.OnBacklogFragment {
 
 	private static final String TAG = "ListTaskActivity";
 
@@ -64,16 +67,27 @@ public class ListTaskActivity extends AppCompatActivity implements TaskFragment.
 					.setAction("Action", null).show();*/
 		});
 
+		setupBacklogFragment();
 		setupViewPager();
 
 		Log.d(TAG, "init: end");
+	}
+
+	private void setupBacklogFragment() {
+		Log.d(TAG, "setupBacklogFragment: start");
+
+		getSupportFragmentManager()
+				.beginTransaction()
+				.add(R.id.frameLayout, new BacklogFragment())
+				.commit();
+
+		Log.d(TAG, "setupBacklogFragment: end");
 	}
 
 	private void setupViewPager() {
 		Log.d(TAG, "setupViewPager: start");
 
 		adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		adapter.addFragment(new BacklogFragment(), "BackLOG");
 		adapter.addFragment(TaskFragment.newInstance(0), "TODO"); //index 0
 		adapter.addFragment(TaskFragment.newInstance(1), "Doing"); //index 1
 		adapter.addFragment(TaskFragment.newInstance(2), "Done"); //index 2
@@ -91,13 +105,11 @@ public class ListTaskActivity extends AppCompatActivity implements TaskFragment.
 	private void refreshAdapter() {
 		Log.d(TAG, "refreshAdapter: start");
 
-		int selectedPosition = tabLayout.getSelectedTabPosition();
-
 		query();
 
 		viewPager.setAdapter(adapter);
 
-		tabLayout.getTabAt(selectedPosition).select();
+		tabLayout.getTabAt(tabLayout.getSelectedTabPosition()).select();
 
 		Log.d(TAG, "refreshAdapter: end");
 	}
@@ -107,10 +119,31 @@ public class ListTaskActivity extends AppCompatActivity implements TaskFragment.
 
 		ProviderHelper
 				.queryListBacklogByProject(getApplicationContext(), project_id, AList.L_BACKLOG);
-		ProviderHelper.queryListTaskByStep(getApplicationContext(), 1, project_id, AList.L_TODO);
-		ProviderHelper.queryListTaskByStep(getApplicationContext(), 2, project_id, AList.L_DOING);
-		ProviderHelper.queryListTaskByStep(getApplicationContext(), 3, project_id, AList.L_DONE);
+
+		queryOfTask(1);
 
 		Log.d(TAG, "query: end");
+	}
+
+	private void queryOfTask(int backlogdId) {
+		Log.d(TAG, "queryOfTask: start");
+
+		ProviderHelper.queryListTaskByBacklogAndStep(
+				getApplicationContext(), 1, project_id, backlogdId, AList.L_TODO);
+		ProviderHelper.queryListTaskByBacklogAndStep(
+				getApplicationContext(), 2, project_id, backlogdId, AList.L_DOING);
+		ProviderHelper.queryListTaskByBacklogAndStep(
+				getApplicationContext(), 3, project_id, backlogdId, AList.L_DONE);
+
+		Log.d(TAG, "queryOfTask: end");
+	}
+
+	@Override
+	public void onClickBacklog(int backlogId) {
+		Log.d(TAG, "onClickBacklog: backlog id :: " + backlogId);
+
+		queryOfTask(backlogId);
+
+		viewPager.setAdapter(adapter);
 	}
 }

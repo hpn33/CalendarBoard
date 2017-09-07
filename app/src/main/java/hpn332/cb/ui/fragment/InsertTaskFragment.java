@@ -81,13 +81,17 @@ public class InsertTaskFragment extends Fragment {
 		view.findViewById(R.id.addTag).setOnClickListener(
 				view12 -> startActivity(new Intent(getContext(), AddTagActivity.class)));
 
-
 		view.findViewById(R.id.fab).setOnClickListener(
 				view1 -> {
 					ProviderHelper.insertNewTask(
-							getContext(), getArguments().getInt(Key.KEY_PROJECT),
-							title.getText().toString(), description.getText().toString(),
-							"", 1, getRank());
+							getContext(),
+							getArguments().getInt(Key.KEY_PROJECT),
+							2,
+							title.getText().toString(),
+							description.getText().toString(),
+							"",
+							1,
+							getRank());
 					getActivity().finish();
 				});
 

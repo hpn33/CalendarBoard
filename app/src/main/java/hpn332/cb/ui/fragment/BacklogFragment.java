@@ -1,5 +1,6 @@
 package hpn332.cb.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,20 @@ import hpn332.cb.utils.adapter.AdapterListBacklog;
 
 public class BacklogFragment extends Fragment {
 
+	public interface OnBacklogFragment {
+		void onClickBacklog(int backlogId);
+	}
+
 	private static final String TAG = "BacklogFragment";
+
+	private OnBacklogFragment onBacklogFragment;
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+
+		onBacklogFragment = (OnBacklogFragment) getActivity();
+	}
 
 	@Nullable
 	@Override
@@ -30,10 +44,11 @@ public class BacklogFragment extends Fragment {
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 
 		recyclerView.setAdapter(
-				new AdapterListBacklog(getContext(), AList.L_BACKLOG));
+				new AdapterListBacklog(getContext(), AList.L_BACKLOG, onBacklogFragment));
 
 		recyclerView.setLayoutManager(
-				new LinearLayoutManager(getContext()));
+				new LinearLayoutManager(
+						getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
 		Log.d(TAG, "onCreateView: end");
 

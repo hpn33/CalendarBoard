@@ -13,7 +13,7 @@ public class AddProjectActivity extends AppCompatActivity {
 
 	private static final String TAG = "AddProjectActivity";
 
-	private ImageView done, delete;
+	private ImageView done;
 	private EditText title, description;
 
 	@Override
@@ -36,7 +36,6 @@ public class AddProjectActivity extends AppCompatActivity {
 	private void setup() {
 
 		done = (ImageView) findViewById(R.id.done_imageView);
-		delete = (ImageView) findViewById(R.id.delete_imageView);
 
 		title = (EditText) findViewById(R.id.title_editText);
 		description = (EditText) findViewById(R.id.description_editText);
