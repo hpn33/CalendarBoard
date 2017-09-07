@@ -17,6 +17,7 @@ public class ProviderHelper {
 
 	private static final String TAG = "ProviderHelper";
 
+	private static int lastUri;
 
 	public static void queryListTaskByBacklogAndStep(
 			Context context, int step, int project, int backlogId, ArrayList<TaskStructure>
@@ -135,7 +136,26 @@ public class ProviderHelper {
 
 		Uri uri = context.getContentResolver().insert(DBContract.URI_PROJECT, values);
 
+		lastUri = Integer.valueOf(uri != null ? uri.getPathSegments().get(1) : null);
+
 		if (uri != null) Log.d(TAG, "insertNewProject: uri: " + uri);
+	}
+
+	public static void insertNewBacklog(
+			Context context, int project, String title, String desc, int color) {
+
+		Log.d(TAG, "insertNewBacklog: pro :: " + project + " title :: " + title);
+
+		ContentValues values = new ContentValues();
+
+		values.put(DBContract.BackLogEntry.TITLE, title);
+		values.put(DBContract.BackLogEntry.DESCRIPTION, desc);
+		values.put(DBContract.BackLogEntry.PROJECT, project);
+		values.put(DBContract.BackLogEntry.COLOR, color);
+
+		Uri uri = context.getContentResolver().insert(DBContract.URI_BACKLOG, values);
+
+		if (uri != null) Log.d(TAG, "insertNewBacklog: uri: " + uri);
 	}
 
 	public static void insertNewTask(
@@ -172,23 +192,6 @@ public class ProviderHelper {
 		Uri uri = context.getContentResolver().insert(DBContract.URI_TAG, values);
 
 		if (uri != null) Log.d(TAG, "insertNewTask: uri: " + uri);
-	}
-
-	public static void insertNewBacklog(
-			Context context, int project, String title, String desc, int color) {
-
-		Log.d(TAG, "insertNewBacklog: pro :: " + project + " title :: " + title);
-
-		ContentValues values = new ContentValues();
-
-		values.put(DBContract.BackLogEntry.TITLE, title);
-		values.put(DBContract.BackLogEntry.DESCRIPTION, desc);
-		values.put(DBContract.BackLogEntry.PROJECT, project);
-		values.put(DBContract.BackLogEntry.COLOR, color);
-
-		Uri uri = context.getContentResolver().insert(DBContract.URI_BACKLOG, values);
-
-		if (uri != null) Log.d(TAG, "insertNewBacklog: uri: " + uri);
 	}
 
 	public static void updateOneProject(Context context, int id, String title, String desc) {
@@ -323,5 +326,18 @@ public class ProviderHelper {
 				       null, null);
 
 		Log.d(TAG, "deleteOneBacklog: delete backlog id :: " + delete);
+	}
+
+	///------------------------------------------------------
+	///------------------------------------------------------
+	///------------------------------------------------------
+
+	public static void insertNewProjectWithBacklog(Context context, String title, String desc) {
+
+		insertNewProject(context, title, desc);
+
+		insertNewBacklog(context, lastUri, "", "", -1);
+
+		Log.d(TAG, "insertNewProjectWithBacklog: done");
 	}
 }

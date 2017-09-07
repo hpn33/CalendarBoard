@@ -12,7 +12,6 @@ import hpn332.cb.R;
 import hpn332.cb.utils.Key;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.utils.database.ProviderHelper;
-import hpn332.library.view.ColorPanelView;
 import hpn332.library.view.ColorPickerView;
 
 public class InsertBacklogFragment extends Fragment {

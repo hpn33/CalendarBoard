@@ -14,7 +14,7 @@ public class AddProjectActivity extends AppCompatActivity {
 	private static final String TAG = "AddProjectActivity";
 
 	private ImageView done;
-	private EditText title, description;
+	private EditText  title, description;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class AddProjectActivity extends AppCompatActivity {
 
 		//if (getIntent().getBooleanExtra(Key.KEY_UPDATE, false)) usingEdit();
 		//else
-			usingAdd();
+		usingAdd();
 	}
 
 	private void setup() {
@@ -52,9 +52,9 @@ public class AddProjectActivity extends AppCompatActivity {
 
 		done.setOnClickListener(view -> {
 
-			ProviderHelper.insertNewProject(getApplicationContext(),
-			                                title.getText().toString(),
-			                                description.getText().toString());
+			ProviderHelper.insertNewProjectWithBacklog(getApplicationContext(),
+			                                           title.getText().toString(),
+			                                           description.getText().toString());
 			finish();
 		});
 
