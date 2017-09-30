@@ -2,9 +2,9 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView
-        android:layout_below="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +37,26 @@
                     android:hint="Description"/>
             </android.support.design.widget.TextInputLayout>
 
-            <include layout="@layout/content_color_picker"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <hpn332.cb.ButtonColor
+                    android:id="@+id/color_picker_view_dialog_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="color Picker"/>
+
+                <hpn332.library.view.ColorPanelView
+                    android:id="@+id/color_panel"
+                    android:layout_width="0dp"
+                    android:layout_margin="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </merge>

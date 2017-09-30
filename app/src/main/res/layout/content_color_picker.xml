@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
+        android:layout_marginBottom="25dp"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -49,6 +51,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/done_button"
+                style="@style/colorpickerview__PickerDialogButtonStyle"
+                android:layout_width="@dimen/colorpickerview__dialog_preview_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="OK"/>
         </LinearLayout>
     </LinearLayout>
-</merge>
+</RelativeLayout>

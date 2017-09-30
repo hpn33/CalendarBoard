@@ -1,6 +1,5 @@
 package hpn332.cb.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,14 +9,16 @@ import android.util.Log;
 
 import hpn332.cb.R;
 import hpn332.cb.utils.AList;
-import hpn332.cb.utils.adapter.AdapterListProject;
-import hpn332.cb.utils.database.ProviderHelper;
+import hpn332.cb.utils.Type;
+import hpn332.cb.utils.Utils;
+import hpn332.cb.model.adapter.AdapterListProject;
+import hpn332.cb.model.database.ProviderHelper;
 
 public class ListProjectActivity extends AppCompatActivity {
 
 	private static final String TAG = "ListProjectActivity";
 
-	private RecyclerView         recyclerView;
+	private RecyclerView recyclerView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,7 @@ public class ListProjectActivity extends AppCompatActivity {
 		Log.d(TAG, "using: start");
 
 		findViewById(R.id.fab).setOnClickListener(
-				view -> startActivity(
-						new Intent(getApplicationContext(), AddProjectActivity.class)));
+				view -> Utils.goToAdd(getApplicationContext(), Type.PROJECT, Utils.NULL));
 
 		recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
 
@@ -63,7 +63,6 @@ public class ListProjectActivity extends AppCompatActivity {
 
 		Log.d(TAG, "onResume: end");
 	}
-
 
 
 }

@@ -22,11 +22,9 @@
         </activity>
         <activity android:name=".ui.activity.ListTagActivity"/>
         <activity android:name=".ui.activity.ListTaskActivity"/>
-        <activity android:name=".ui.activity.AddProjectActivity"/>
-        <activity android:name=".ui.activity.AddTagActivity"/>
 
         <provider
-            android:name=".utils.database.Provider"
+            android:name=".model.database.Provider"
             android:authorities="hpn332.cb"
             android:exported="false"/>
 

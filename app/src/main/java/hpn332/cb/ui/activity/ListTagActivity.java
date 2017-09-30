@@ -8,9 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import hpn332.cb.R;
+import hpn332.cb.ui.fragment.AddFragmentTag;
 import hpn332.cb.utils.AList;
-import hpn332.cb.utils.adapter.AdapterListTag;
-import hpn332.cb.utils.database.ProviderHelper;
+import hpn332.cb.model.adapter.AdapterListTag;
+import hpn332.cb.model.database.ProviderHelper;
 
 public class ListTagActivity extends AppCompatActivity {
 
@@ -63,7 +64,7 @@ public class ListTagActivity extends AppCompatActivity {
 
 		findViewById(R.id.fab).setOnClickListener(
 				view -> startActivity(
-						new Intent(getApplicationContext(), AddTagActivity.class)));
+						new Intent(getApplicationContext(), AddFragmentTag.class)));
 
 		Log.d(TAG, "using: end");
 	}

@@ -1,23 +1,24 @@
 package hpn332.cb.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import hpn332.cb.ui.fragment.BacklogFragment;
-import hpn332.cb.ui.fragment.TaskFragment;
+import hpn332.cb.ui.fragment.ListFragmentBacklog;
+import hpn332.cb.ui.fragment.ListFragmentTask;
 import hpn332.cb.R;
 import hpn332.cb.utils.AList;
 import hpn332.cb.utils.Key;
-import hpn332.cb.utils.database.ProviderHelper;
-import hpn332.cb.utils.adapter.SectionsPagerAdapter;
+import hpn332.cb.utils.Type;
+import hpn332.cb.utils.Utils;
+import hpn332.cb.model.database.ProviderHelper;
+import hpn332.cb.model.adapter.SectionsPagerAdapter;
 
 public class ListTaskActivity extends AppCompatActivity
 		implements
-		TaskFragment.OnStepFragment, BacklogFragment.OnBacklogFragment {
+		ListFragmentTask.OnStepFragment, ListFragmentBacklog.OnBacklogFragment {
 
 	private static final String TAG = "ListTaskActivity";
 
@@ -52,18 +53,13 @@ public class ListTaskActivity extends AppCompatActivity
 	private void init() {
 		Log.d(TAG, "init: start");
 
-		project_id = getIntent().getIntExtra(Key.KEY_PROJECT, 0);
-
-		/*findViewById(R.id.menu_imageView).setOnClickListener(
-				view -> startActivity(new Intent(getApplicationContext(), ListTagActivity.class)));*/
+		project_id = getIntent().getIntExtra(Key.PROJECT, 0);
 
 		findViewById(R.id.fab).setOnClickListener(view -> {
 
-			startActivity(new Intent(getApplicationContext(), AddActivity.class)
-					              .putExtra(Key.KEY_PROJECT, project_id));
-
-			/*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-					.setAction("Action", null).show();*/
+			Utils.goToAdd(getApplicationContext(),
+			              Type.TASK,
+			              project_id);
 		});
 
 		setupBacklogFragment();
@@ -77,7 +73,7 @@ public class ListTaskActivity extends AppCompatActivity
 
 		getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.frameLayout, new BacklogFragment())
+				.add(R.id.frameLayout, new ListFragmentBacklog())
 				.commit();
 
 		Log.d(TAG, "setupBacklogFragment: end");
@@ -87,9 +83,9 @@ public class ListTaskActivity extends AppCompatActivity
 		Log.d(TAG, "setupViewPager: start");
 
 		adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		adapter.addFragment(TaskFragment.newInstance(0), "TODO"); //index 0
-		adapter.addFragment(TaskFragment.newInstance(1), "Doing"); //index 1
-		adapter.addFragment(TaskFragment.newInstance(2), "Done"); //index 2
+		adapter.addFragment(ListFragmentTask.newInstance(0), "TODO"); //index 0
+		adapter.addFragment(ListFragmentTask.newInstance(1), "Doing"); //index 1
+		adapter.addFragment(ListFragmentTask.newInstance(2), "Done"); //index 2
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
 
 		tabLayout = (TabLayout) findViewById(R.id.tabs);
