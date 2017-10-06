@@ -9,9 +9,9 @@ import android.util.Log;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.fragment.AddFragmentTag;
-import hpn332.cb.utils.AList;
 import hpn332.cb.model.adapter.AdapterListTag;
 import hpn332.cb.model.database.ProviderHelper;
+import hpn332.cb.utils.U.AList;
 
 public class ListTagActivity extends AppCompatActivity {
 

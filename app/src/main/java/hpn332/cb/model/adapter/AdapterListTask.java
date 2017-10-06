@@ -14,12 +14,11 @@ import java.util.ArrayList;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.fragment.ListFragmentTask;
-import hpn332.cb.utils.AList;
-import hpn332.cb.utils.Type;
+import hpn332.cb.utils.U;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.TaskStructure;
-
+import hpn332.cb.utils.U.AList;
 
 public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHolder> {
 
@@ -137,7 +136,7 @@ public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHo
 
 			Log.d(TAG, "onLongClick: position : " + position);
 
-			Utils.goToEdit(inflater.getContext(), Type.TASK, position, step);
+			Utils.goTo(inflater.getContext(), U.Type.ADD_TASK, position, step);
 
 			return true;
 		}

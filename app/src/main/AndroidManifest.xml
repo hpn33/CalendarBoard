@@ -28,8 +28,6 @@
             android:authorities="hpn332.cb"
             android:exported="false"/>
 
-        <activity android:name=".ui.activity.AddActivity">
-        </activity>
         <activity android:name=".ui.activity.EditActivity">
         </activity>
     </application>

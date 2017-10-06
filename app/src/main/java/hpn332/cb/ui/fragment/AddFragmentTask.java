@@ -14,11 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import hpn332.cb.R;
-import hpn332.cb.utils.AList;
-import hpn332.cb.utils.Key;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.CheckTagStructure;
 import hpn332.cb.model.stucture.TagStructure;
+import hpn332.cb.utils.U;
+import hpn332.cb.utils.U.AList;
 
 public class AddFragmentTask extends Fragment {
 
@@ -71,7 +71,7 @@ public class AddFragmentTask extends Fragment {
 				view1 -> {
 					ProviderHelper.insertNewTask(
 							getContext(),
-							getActivity().getIntent().getIntExtra(Key.PROJECT, 0),
+							getActivity().getIntent().getIntExtra(U.Key.PROJECT, 0),
 							2,
 							title.getText().toString(),
 							description.getText().toString(),

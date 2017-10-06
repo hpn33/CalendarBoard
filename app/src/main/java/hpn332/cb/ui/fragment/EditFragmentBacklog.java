@@ -12,11 +12,10 @@ import java.util.ArrayList;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.activity.EditActivity;
-import hpn332.cb.utils.AList;
 import hpn332.cb.ButtonColor;
-import hpn332.cb.utils.Key;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.BackLogStructure;
+import hpn332.cb.utils.U;
 
 public class EditFragmentBacklog extends Fragment {
 
@@ -40,9 +39,9 @@ public class EditFragmentBacklog extends Fragment {
 
 		Log.d(TAG, "init: start");
 
-		ArrayList<BackLogStructure> arrayList = AList.L_BACKLOG;
+		ArrayList<BackLogStructure> arrayList = U.AList.L_BACKLOG;
 
-		final int position  = getActivity().getIntent().getIntExtra(Key.POSITION, 0);
+		final int position  = getActivity().getIntent().getIntExtra(U.Key.POSITION, 0);
 		final int id        = arrayList.get(position).getId();
 		final int initColor = arrayList.get(position).getColor();
 

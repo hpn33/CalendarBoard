@@ -10,8 +10,8 @@ import android.widget.EditText;
 
 import hpn332.cb.ButtonColor;
 import hpn332.cb.R;
-import hpn332.cb.ui.activity.AddActivity;
-import hpn332.cb.utils.Key;
+import hpn332.cb.ui.activity.EditActivity;
+import hpn332.cb.utils.U;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.database.ProviderHelper;
 
@@ -20,19 +20,6 @@ public class AddFragmentBacklog extends Fragment {
 	private static final String TAG = "AddFragmentBacklog";
 
 	private EditText title, description;
-
-	public static AddFragmentBacklog newInstance(int project_id) {
-		Log.d(TAG, "newInstance: start");
-
-		Log.d(TAG, "newInstance: project :: " + project_id);
-		Bundle args = new Bundle();
-		args.putInt(Key.PROJECT, project_id);
-		AddFragmentBacklog fragment = new AddFragmentBacklog();
-		fragment.setArguments(args);
-
-		Log.d(TAG, "newInstance: end");
-		return fragment;
-	}
 
 	@Override
 	public View onCreateView(
@@ -57,17 +44,17 @@ public class AddFragmentBacklog extends Fragment {
 		title = view.findViewById(R.id.title_editText);
 		description = view.findViewById(R.id.description_editText);
 
-		AddActivity.color_panel = view.findViewById(R.id.color_panel);
+		EditActivity.color_panel = view.findViewById(R.id.color_panel);
 
 		view.findViewById(R.id.fab).setOnClickListener(
 				view1 -> {
 
 					ProviderHelper.insertNewBacklog(
 							getContext(),
-							getArguments().getInt(Key.PROJECT),
+							getActivity().getIntent().getIntExtra(U.Key.PROJECT, 0),
 							title.getText().toString(),
 							description.getText().toString(),
-							AddActivity.color_panel.getColor());
+							EditActivity.color_panel.getColor());
 
 					getActivity().finish();
 				});
@@ -75,7 +62,7 @@ public class AddFragmentBacklog extends Fragment {
 		((ButtonColor) view.findViewById(R.id.color_picker_view_dialog_button))
 				.setOnShowDialogListener(initColor1 -> {
 					DialogFragmentColorPicker dialog =
-							DialogFragmentColorPicker.newInstance(Utils.NULL);
+							DialogFragmentColorPicker.newInstance(Utils.ZERO);
 					dialog.show(getActivity().getFragmentManager(), "d");
 				});
 

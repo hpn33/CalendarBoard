@@ -11,9 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import hpn332.cb.R;
-import hpn332.cb.utils.AList;
-import hpn332.cb.utils.Key;
 import hpn332.cb.model.database.ProviderHelper;
+import hpn332.cb.utils.U;
+import hpn332.cb.utils.U.AList;
 
 public class EditFragmentProject extends Fragment {
 
@@ -54,7 +54,7 @@ public class EditFragmentProject extends Fragment {
 
 	private void using() {
 
-		final int position = getActivity().getIntent().getIntExtra(Key.POSITION, 0);
+		final int position = getActivity().getIntent().getIntExtra(U.Key.POSITION, 0);
 		final int id       = AList.L_PROJECT.get(position).getId();
 		Log.d(TAG, "makeReadyStep: id :: " + id);
 

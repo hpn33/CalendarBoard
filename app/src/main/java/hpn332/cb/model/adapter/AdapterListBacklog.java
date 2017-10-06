@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.fragment.ListFragmentBacklog;
-import hpn332.cb.utils.Type;
+import hpn332.cb.utils.U;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.stucture.BackLogStructure;
 
@@ -90,7 +90,7 @@ public class AdapterListBacklog extends RecyclerView.Adapter<AdapterListBacklog.
 			if (!arrayList.get(position).getTitle().equals("BASE")
 					&& !arrayList.get(position).getDesc().equals("BASE Backlog")
 					&& arrayList.get(position).getColor() != -1)
-				Utils.goToEdit(inflater.getContext(), Type.BACKLOG, position, Utils.NULL);
+				Utils.goTo(inflater.getContext(), U.Type.ADD_BACKLOG, position);
 
 			else Snackbar.make(view, "this not provider for Edit", Snackbar.LENGTH_SHORT).show();
 

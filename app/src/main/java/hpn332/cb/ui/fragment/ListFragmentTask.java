@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hpn332.cb.R;
-import hpn332.cb.utils.AList;
 import hpn332.cb.model.adapter.AdapterListTask;
+import hpn332.cb.utils.U;
 
-import static hpn332.cb.utils.Key.STEP;
+import static hpn332.cb.utils.U.Key.STEP;
 
 public class ListFragmentTask extends Fragment {
 
@@ -75,7 +75,7 @@ public class ListFragmentTask extends Fragment {
 		Log.d(TAG, "adapter: start");
 		
 		recyclerView.setAdapter(
-				new AdapterListTask(getContext(), AList.L_STEP[index], index, onStepFragment));
+				new AdapterListTask(getContext(), U.AList.L_STEP[index], index, onStepFragment));
 
 		recyclerView.setLayoutManager(
 				new LinearLayoutManager(getContext()));

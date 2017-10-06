@@ -1,4 +1,4 @@
-package hpn332.cb.model.database.Abstract;
+package hpn332.cb.model.Abstract;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,10 +7,10 @@ import android.util.Log;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.fragment.DialogFragmentColorPicker;
-import hpn332.cb.utils.Key;
+import hpn332.cb.utils.U;
 import hpn332.library.view.ColorPanelView;
 
-public abstract class Extends extends AppCompatActivity
+public abstract class EditView extends AppCompatActivity
 		implements DialogFragmentColorPicker.ColorPickerDialogListener {
 
 	protected String TAG = getClass().getSimpleName();
@@ -33,7 +33,7 @@ public abstract class Extends extends AppCompatActivity
 
 		setFragment(
 				checkTypeAndGetFragment(
-						getIntent().getIntExtra(Key.TYPE, 0)));
+						getIntent().getIntExtra(U.Key.TYPE, 0)));
 
 		Log.d(TAG, "init: end");
 	}
@@ -65,13 +65,13 @@ public abstract class Extends extends AppCompatActivity
 	 * sample  private Fragment checkTypeAndGetFragment(int type) {
 	 * Log.d(TAG, "checkTypeAndGetFragment: start type is :: " + type);
 	 * switch (type) {
-	 * case Type.PROJECT:
+	 * case Type.ADD_PROJECT:
 	 * return new AddFragmentProject();
-	 * case Type.BACKLOG:
+	 * case Type.ADD_BACKLOG:
 	 * return new AddFragmentBacklog();
-	 * case Type.TASK:
+	 * case Type.ADD_TASK:
 	 * return new AddFragmentTask();
-	 * case Type.TAGs:
+	 * case Type.ADD_TAG:
 	 * return new AddFragmentTag();
 	 * default:
 	 * throw new IllegalArgumentException("Unknown type");

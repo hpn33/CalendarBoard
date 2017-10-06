@@ -18,12 +18,13 @@ import android.widget.RadioButton;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
-import hpn332.cb.utils.AList;
-import hpn332.cb.utils.Key;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.CheckTagStructure;
 import hpn332.cb.model.stucture.TagStructure;
 import hpn332.cb.model.stucture.TaskStructure;
+import hpn332.cb.utils.U.Key;
+import hpn332.cb.utils.U.AList;
+
 
 public class EditFragmentTask extends Fragment {
 

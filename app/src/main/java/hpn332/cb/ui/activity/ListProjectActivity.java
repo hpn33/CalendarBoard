@@ -8,8 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import hpn332.cb.R;
-import hpn332.cb.utils.AList;
-import hpn332.cb.utils.Type;
+import hpn332.cb.utils.U;
+import hpn332.cb.utils.U.AList;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.adapter.AdapterListProject;
 import hpn332.cb.model.database.ProviderHelper;
@@ -46,7 +46,7 @@ public class ListProjectActivity extends AppCompatActivity {
 		Log.d(TAG, "using: start");
 
 		findViewById(R.id.fab).setOnClickListener(
-				view -> Utils.goToAdd(getApplicationContext(), Type.PROJECT, Utils.NULL));
+				view -> Utils.goTo(getApplicationContext(), U.Type.ADD_PROJECT, Utils.ZERO));
 
 		recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
 
