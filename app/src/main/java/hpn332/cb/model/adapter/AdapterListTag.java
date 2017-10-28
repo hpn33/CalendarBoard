@@ -10,9 +10,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
+import hpn332.cb.utils.Type;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.stucture.TagStructure;
-import hpn332.cb.utils.U.Type;
 
 public class AdapterListTag extends RecyclerView.Adapter<AdapterListTag.ItemHolder> {
 

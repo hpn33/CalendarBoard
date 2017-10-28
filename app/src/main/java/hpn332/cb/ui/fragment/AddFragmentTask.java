@@ -3,6 +3,7 @@ package hpn332.cb.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +18,9 @@ import hpn332.cb.R;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.CheckTagStructure;
 import hpn332.cb.model.stucture.TagStructure;
-import hpn332.cb.utils.U;
-import hpn332.cb.utils.U.AList;
+import hpn332.cb.ui.activity.EditActivity;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.List;
 
 public class AddFragmentTask extends Fragment {
 
@@ -27,6 +29,7 @@ public class AddFragmentTask extends Fragment {
 	private RadioButton num1, num2, num3, num4, num5;
 	private LinearLayout tagLayout;
 	private CheckBox[]   tagBoxes;
+
 
 	private EditText title, description;
 
@@ -67,21 +70,23 @@ public class AddFragmentTask extends Fragment {
 		view.findViewById(R.id.addTag).setOnClickListener(
 				view12 -> startActivity(new Intent(getContext(), AddFragmentTag.class)));
 
-		view.findViewById(R.id.fab).setOnClickListener(
-				view1 -> {
-					ProviderHelper.insertNewTask(
-							getContext(),
-							getActivity().getIntent().getIntExtra(U.Key.PROJECT, 0),
-							2,
-							title.getText().toString(),
-							description.getText().toString(),
-							"",
-							1,
-							getRank());
-					getActivity().finish();
-				});
+		if (EditActivity.backlogId == 0)
+			view.findViewById(R.id.fab).setOnClickListener(
+					view1 -> {
+						ProviderHelper.insertNewTask(
+								getContext(),
+								getActivity().getIntent().getIntExtra(Key.PROJECT, 0),
+								EditActivity.backlogId,
+								title.getText().toString(),
+								description.getText().toString(),
+								"",
+								getRank());
+						getActivity().finish();
+					});
+		else Snackbar.make(view, "select the backlog", Snackbar.LENGTH_SHORT).show();
 
 		setupTags();
+		setupBacklogFragment();
 
 		Log.d(TAG, "init: end");
 	}
@@ -90,31 +95,41 @@ public class AddFragmentTask extends Fragment {
 	// both===============================================
 	// both===============================================
 
+	private void setupBacklogFragment() {
+		Log.d(TAG, "setupBacklogFragment: start");
+
+		getActivity().getSupportFragmentManager()
+				.beginTransaction()
+				.add(R.id.frameLayout, new ListFragmentBacklog())
+				.commit();
+
+		Log.d(TAG, "setupBacklogFragment: end");
+	}
 
 	private void setupTags() {
 		Log.d(TAG, "setupTags: start");
 
-		AList.L_TAGS.clear();
-		AList.L_CHECK.clear();
+		List.L_TAGS.clear();
+		List.L_CHECK.clear();
 
-		ProviderHelper.queryListTag(getContext(), AList.L_TAGS);
+		ProviderHelper.queryListTag(getContext(), List.L_TAGS);
 
-		for (TagStructure arrayList : AList.L_TAGS) {
-			AList.L_CHECK.add(
+		for (TagStructure arrayList : List.L_TAGS) {
+			List.L_CHECK.add(
 					new CheckTagStructure(arrayList.getTitle(),
 					                      arrayList.getColor(),
 					                      false));
 			Log.d(TAG, "setupTags: color::" + arrayList.getColor());
 		}
 
-		tagBoxes = new CheckBox[AList.L_CHECK.size()];
+		tagBoxes = new CheckBox[List.L_CHECK.size()];
 
-		for (int i = 0; i < AList.L_CHECK.size(); i++) {
+		for (int i = 0; i < List.L_CHECK.size(); i++) {
 			tagBoxes[i] = new CheckBox(getContext());
 			tagBoxes[i].setPadding(8, 12, 8, 12);
 
-			tagBoxes[i].setText(AList.L_CHECK.get(i).getTitle());
-			//tagBoxes[i].setBackgroundResource(Utils.getColor(AList.L_CHECK.get(i).getColor()));
+			tagBoxes[i].setText(List.L_CHECK.get(i).getTitle());
+			//tagBoxes[i].setBackgroundResource(Utils.getColor(List.L_CHECK.get(i).getColor()));
 
 			tagLayout.addView(tagBoxes[i]);
 		}
@@ -128,9 +143,9 @@ public class AddFragmentTask extends Fragment {
 
 		StringBuilder stringBuilder = new StringBuilder();
 
-		for (int i = 0; i < AList.L_TAGS.size(); i++) {
+		for (int i = 0; i < List.L_TAGS.size(); i++) {
 			if (tagBoxes[i].isChecked()) {
-				stringBuilder.append(AList.L_TAGS.get(i).getId()).append("`");
+				stringBuilder.append(List.L_TAGS.get(i).getId()).append("`");
 			}
 		}
 

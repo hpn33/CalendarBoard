@@ -160,7 +160,7 @@ public class ProviderHelper {
 
 	public static void insertNewTask(
 			Context context, int project, int backlog, String title,
-			String desc, String tag, int step, int rank) {
+			String desc, String tag, int rank) {
 
 		Log.d(TAG, "insertNewTask: ");
 
@@ -171,7 +171,7 @@ public class ProviderHelper {
 		values.put(DBContract.TaskEntry.PROJECT, project);
 		values.put(DBContract.TaskEntry.BACKLOG, backlog);
 		values.put(DBContract.TaskEntry.TAGS, tag);
-		values.put(DBContract.TaskEntry.STEP, step);
+		values.put(DBContract.TaskEntry.STEP, 1);
 		values.put(DBContract.TaskEntry.RANK, rank);
 
 		Uri uri = context.getContentResolver().insert(DBContract.URI_TASK, values);

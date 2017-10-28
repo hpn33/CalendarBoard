@@ -11,7 +11,7 @@ import hpn332.cb.R;
 import hpn332.cb.ui.fragment.AddFragmentTag;
 import hpn332.cb.model.adapter.AdapterListTag;
 import hpn332.cb.model.database.ProviderHelper;
-import hpn332.cb.utils.U.AList;
+import hpn332.cb.utils.List;
 
 public class ListTagActivity extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class ListTagActivity extends AppCompatActivity {
 
 		Log.d(TAG, "onResume: start");
 
-		ProviderHelper.queryListTag(getApplicationContext(), AList.L_TAGS);
+		ProviderHelper.queryListTag(getApplicationContext(), List.L_TAGS);
 		recyclerView.setAdapter(adapter);
 
 		Log.d(TAG, "onResume: end");
@@ -73,7 +73,7 @@ public class ListTagActivity extends AppCompatActivity {
 
 		Log.d(TAG, "adapter: start");
 
-		adapter = new AdapterListTag(getApplicationContext(), AList.L_TAGS);
+		adapter = new AdapterListTag(getApplicationContext(), List.L_TAGS);
 
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.activity.ListTaskActivity;
-import hpn332.cb.utils.U;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.Type;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.stucture.ProjectStructure;
 
@@ -67,7 +68,7 @@ public class AdapterListProject extends RecyclerView.Adapter<AdapterListProject.
 		@Override
 		public boolean onLongClick(View view) {
 
-			Utils.goTo(inflater.getContext(), U.Type.EDIT_PROJECT, position);
+			Utils.goTo(inflater.getContext(), Type.EDIT_PROJECT, position);
 
 			return true;
 		}
@@ -77,7 +78,7 @@ public class AdapterListProject extends RecyclerView.Adapter<AdapterListProject.
 			inflater.getContext().startActivity(
 					new Intent(inflater.getContext(), ListTaskActivity.class)
 							.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-							.putExtra(U.Key.PROJECT, arrayList.get(position).getId()));
+							.putExtra(Key.PROJECT, arrayList.get(position).getId()));
 		}
 	}
 }

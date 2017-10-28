@@ -22,8 +22,8 @@ import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.CheckTagStructure;
 import hpn332.cb.model.stucture.TagStructure;
 import hpn332.cb.model.stucture.TaskStructure;
-import hpn332.cb.utils.U.Key;
-import hpn332.cb.utils.U.AList;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.List;
 
 
 public class EditFragmentTask extends Fragment {
@@ -85,13 +85,13 @@ public class EditFragmentTask extends Fragment {
 
 		switch (getActivity().getIntent().getIntExtra(Key.STEP, 0)) {
 			case 0:
-				arrayList = AList.L_TODO;
+				arrayList = List.L_TODO;
 				break;
 			case 1:
-				arrayList = AList.L_DOING;
+				arrayList = List.L_DOING;
 				break;
 			case 2:
-				arrayList = AList.L_DONE;
+				arrayList = List.L_DONE;
 				break;
 		}
 
@@ -148,12 +148,12 @@ public class EditFragmentTask extends Fragment {
 
 		String[] s = arrayList.get(position).getTag().split("`");
 
-		for (int i = 0; i < AList.L_TAGS.size(); i++) {
+		for (int i = 0; i < List.L_TAGS.size(); i++) {
 			for (String value : s) {
 				if (!value.equals("") &&
-						AList.L_TAGS.get(i).getId() == Integer.valueOf(value)) {
+						List.L_TAGS.get(i).getId() == Integer.valueOf(value)) {
 					tagBoxes[i].toggle();
-					AList.L_CHECK.get(i).setBool(true);
+					List.L_CHECK.get(i).setBool(true);
 				}
 			}
 		}
@@ -187,27 +187,27 @@ public class EditFragmentTask extends Fragment {
 	private void setupTags() {
 		Log.d(TAG, "setupTags: ");
 
-		AList.L_TAGS.clear();
-		AList.L_CHECK.clear();
+		List.L_TAGS.clear();
+		List.L_CHECK.clear();
 
-		ProviderHelper.queryListTag(getContext(), AList.L_TAGS);
+		ProviderHelper.queryListTag(getContext(), List.L_TAGS);
 
-		for (TagStructure arrayList : AList.L_TAGS) {
-			AList.L_CHECK.add(
+		for (TagStructure arrayList : List.L_TAGS) {
+			List.L_CHECK.add(
 					new CheckTagStructure(arrayList.getTitle(),
 					                      arrayList.getColor(),
 					                      false));
 			Log.d(TAG, "setupTags: color::" + arrayList.getColor());
 		}
 
-		tagBoxes = new CheckBox[AList.L_CHECK.size()];
+		tagBoxes = new CheckBox[List.L_CHECK.size()];
 
-		for (int i = 0; i < AList.L_CHECK.size(); i++) {
+		for (int i = 0; i < List.L_CHECK.size(); i++) {
 			tagBoxes[i] = new CheckBox(getContext());
 			tagBoxes[i].setPadding(8, 12, 8, 12);
 
-			tagBoxes[i].setText(AList.L_CHECK.get(i).getTitle());
-			//tagBoxes[i].setBackgroundResource(Utils.getColor(AList.L_CHECK.get(i).getColor()));
+			tagBoxes[i].setText(List.L_CHECK.get(i).getTitle());
+			//tagBoxes[i].setBackgroundResource(Utils.getColor(List.L_CHECK.get(i).getColor()));
 
 			tagLayout.addView(tagBoxes[i]);
 		}
@@ -219,9 +219,9 @@ public class EditFragmentTask extends Fragment {
 
 		StringBuilder stringBuilder = new StringBuilder();
 
-		for (int i = 0; i < AList.L_TAGS.size(); i++) {
+		for (int i = 0; i < List.L_TAGS.size(); i++) {
 			if (tagBoxes[i].isChecked()) {
-				stringBuilder.append(AList.L_TAGS.get(i).getId()).append("`");
+				stringBuilder.append(List.L_TAGS.get(i).getId()).append("`");
 			}
 		}
 

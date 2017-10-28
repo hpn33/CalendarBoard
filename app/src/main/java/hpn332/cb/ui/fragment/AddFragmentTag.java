@@ -56,7 +56,7 @@ public class AddFragmentTag extends Fragment {
 		Utils.setupColorPicker(colorPicker,
 		                       view.findViewById(R.id.color_panel_new),
 		                       view.findViewById(R.id.color_panel_old),
-		                       Utils.ZERO);
+		                       Utils.NULL);
 
 		Log.d(TAG, "init: end");
 	}

@@ -9,16 +9,15 @@ import android.util.Log;
 import hpn332.cb.ui.fragment.ListFragmentBacklog;
 import hpn332.cb.ui.fragment.ListFragmentTask;
 import hpn332.cb.R;
-import hpn332.cb.utils.U;
-import hpn332.cb.utils.U.Type;
-import hpn332.cb.utils.U.AList;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.List;
+import hpn332.cb.utils.Type;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.adapter.SectionsPagerAdapter;
 
 public class ListTaskActivity extends AppCompatActivity
-		implements
-		ListFragmentTask.OnStepFragment, ListFragmentBacklog.OnBacklogFragment {
+		implements ListFragmentTask.OnStepFragment, ListFragmentBacklog.OnBacklogFragment {
 
 	private static final String TAG = "ListTaskActivity";
 
@@ -53,17 +52,15 @@ public class ListTaskActivity extends AppCompatActivity
 	private void init() {
 		Log.d(TAG, "init: start");
 
-		project_id = getIntent().getIntExtra(U.Key.PROJECT, 0);
-
-		findViewById(R.id.fab)
-				.setOnClickListener(view -> Utils.goTo(getApplicationContext(),
-				                                          Type.ADD_TASK,
-				                                          project_id));
+		project_id = getIntent().getIntExtra(Key.PROJECT, 0);
 
 		findViewById(R.id.fab_backlog_plus)
-				.setOnClickListener(view -> Utils.goTo(getApplicationContext(),
-				                                          Type.ADD_BACKLOG,
-				                                          project_id));
+				.setOnClickListener(view -> Utils.goToP(getApplicationContext(),
+				                                        Type.ADD_BACKLOG, project_id));
+
+		findViewById(R.id.fab_task_plus)
+				.setOnClickListener(view -> Utils.goToP(getApplicationContext(),
+				                                        Type.ADD_TASK, project_id));
 
 		setupBacklogFragment();
 		setupViewPager();
@@ -116,7 +113,7 @@ public class ListTaskActivity extends AppCompatActivity
 		Log.d(TAG, "query: start");
 
 		ProviderHelper
-				.queryListBacklogByProject(getApplicationContext(), project_id, AList.L_BACKLOG);
+				.queryListBacklogByProject(getApplicationContext(), project_id, List.L_BACKLOG);
 
 		queryOfTask(1);
 
@@ -127,11 +124,11 @@ public class ListTaskActivity extends AppCompatActivity
 		Log.d(TAG, "queryOfTask: start");
 
 		ProviderHelper.queryListTaskByBacklogAndStep(
-				getApplicationContext(), 1, project_id, backlogId, AList.L_TODO);
+				getApplicationContext(), 1, project_id, backlogId, List.L_TODO);
 		ProviderHelper.queryListTaskByBacklogAndStep(
-				getApplicationContext(), 2, project_id, backlogId, AList.L_DOING);
+				getApplicationContext(), 2, project_id, backlogId, List.L_DOING);
 		ProviderHelper.queryListTaskByBacklogAndStep(
-				getApplicationContext(), 3, project_id, backlogId, AList.L_DONE);
+				getApplicationContext(), 3, project_id, backlogId, List.L_DONE);
 
 		Log.d(TAG, "queryOfTask: end");
 	}

@@ -14,11 +14,11 @@ import java.util.ArrayList;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.fragment.ListFragmentTask;
-import hpn332.cb.utils.U;
+import hpn332.cb.utils.List;
+import hpn332.cb.utils.Type;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.TaskStructure;
-import hpn332.cb.utils.U.AList;
 
 public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHolder> {
 
@@ -107,7 +107,7 @@ public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHo
 
 			tagLayout.setVisibility(View.VISIBLE);
 
-			ProviderHelper.queryListTag(inflater.getContext(), AList.L_TAGS);
+			ProviderHelper.queryListTag(inflater.getContext(), List.L_TAGS);
 
 			String[] tags = arrayList.get(position).getTag().split("`");
 
@@ -116,13 +116,13 @@ public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHo
 			int j = 0;
 			for (String s : tags) {
 
-				for (int i = 0; i < AList.L_TAGS.size(); i++) {
+				for (int i = 0; i < List.L_TAGS.size(); i++) {
 
-					if (s.equals(String.valueOf(AList.L_TAGS.get(i).getId()))) {
+					if (s.equals(String.valueOf(List.L_TAGS.get(i).getId()))) {
 						view[j] = inflater.inflate(R.layout.view_tag_color, tagLayout, false);
 
 						view[j].findViewById(R.id.view_tag_color).setBackgroundColor(
-								AList.L_TAGS.get(i).getColor());
+								List.L_TAGS.get(i).getColor());
 
 						tagLayout.addView(view[j]);
 					}
@@ -136,7 +136,7 @@ public class AdapterListTask extends RecyclerView.Adapter<AdapterListTask.ItemHo
 
 			Log.d(TAG, "onLongClick: position : " + position);
 
-			Utils.goTo(inflater.getContext(), U.Type.ADD_TASK, position, step);
+			Utils.goTo(inflater.getContext(), Type.EDIT_TASK, position, step);
 
 			return true;
 		}

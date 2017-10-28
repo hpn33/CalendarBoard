@@ -6,23 +6,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import hpn332.cb.R;
+import hpn332.cb.ui.fragment.AddFragmentBacklog;
 import hpn332.cb.ui.fragment.AddFragmentProject;
 import hpn332.cb.ui.fragment.AddFragmentTag;
 import hpn332.cb.ui.fragment.AddFragmentTask;
 import hpn332.cb.ui.fragment.DialogFragmentColorPicker;
+import hpn332.cb.ui.fragment.EditFragmentBacklog;
 import hpn332.cb.ui.fragment.EditFragmentProject;
 import hpn332.cb.ui.fragment.EditFragmentTag;
 import hpn332.cb.ui.fragment.EditFragmentTask;
-import hpn332.cb.utils.U;
-import hpn332.cb.utils.U.Type;
+import hpn332.cb.ui.fragment.ListFragmentBacklog;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.Type;
 import hpn332.library.view.ColorPanelView;
 
 public class EditActivity extends AppCompatActivity
-		implements DialogFragmentColorPicker.ColorPickerDialogListener {
+		implements DialogFragmentColorPicker.ColorPickerDialogListener,
+		ListFragmentBacklog.OnBacklogFragment {
 
 	private static final String TAG = "EditActivity";
 
 	public static ColorPanelView color_panel;
+
+	public static int backlogId = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,7 @@ public class EditActivity extends AppCompatActivity
 	private void init() {
 		Log.d(TAG, "init: start");
 
-		setFragment(
-				checkTypeAndGetFragment());
+		setFragment(checkTypeAndGetFragment());
 
 		Log.d(TAG, "init: end");
 	}
@@ -70,11 +75,11 @@ public class EditActivity extends AppCompatActivity
 	protected Fragment checkTypeAndGetFragment() {
 		Log.d(TAG, "checkTypeAndGetFragment: start type is :: ");
 
-		switch (getIntent().getIntExtra(U.Key.TYPE, 0)) {
+		switch (getIntent().getIntExtra(Key.TYPE, 0)) {
 			case Type.ADD_PROJECT:
 				return new AddFragmentProject();
 			case Type.ADD_BACKLOG:
-				return new AddFragmentProject();
+				return new AddFragmentBacklog();
 			case Type.ADD_TASK:
 				return new AddFragmentTask();
 			case Type.ADD_TAG:
@@ -82,7 +87,7 @@ public class EditActivity extends AppCompatActivity
 			case Type.EDIT_PROJECT:
 				return new EditFragmentProject();
 			case Type.EDIT_BACKLOG:
-				return new EditFragmentProject();
+				return new EditFragmentBacklog();
 			case Type.EDIT_TASK:
 				return new EditFragmentTask();
 			case Type.EDIT_TAG:
@@ -90,5 +95,12 @@ public class EditActivity extends AppCompatActivity
 		}
 
 		throw new IllegalArgumentException("Unknown type");
+	}
+
+	@Override
+	public void onClickBacklog(int backlogId) {
+		Log.d(TAG, "onClickBacklog: backlog id :: " + backlogId);
+
+		EditActivity.backlogId = backlogId;
 	}
 }

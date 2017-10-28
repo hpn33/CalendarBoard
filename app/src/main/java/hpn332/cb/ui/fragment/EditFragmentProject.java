@@ -1,6 +1,5 @@
 package hpn332.cb.ui.fragment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,8 +11,8 @@ import android.widget.ImageView;
 
 import hpn332.cb.R;
 import hpn332.cb.model.database.ProviderHelper;
-import hpn332.cb.utils.U;
-import hpn332.cb.utils.U.AList;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.List;
 
 public class EditFragmentProject extends Fragment {
 
@@ -54,12 +53,12 @@ public class EditFragmentProject extends Fragment {
 
 	private void using() {
 
-		final int position = getActivity().getIntent().getIntExtra(U.Key.POSITION, 0);
-		final int id       = AList.L_PROJECT.get(position).getId();
+		final int position = getActivity().getIntent().getIntExtra(Key.POSITION, 0);
+		final int id       = List.L_PROJECT.get(position).getId();
 		Log.d(TAG, "makeReadyStep: id :: " + id);
 
-		title.setText(AList.L_PROJECT.get(position).getTitle());
-		description.setText(AList.L_PROJECT.get(position).getDesc());
+		title.setText(List.L_PROJECT.get(position).getTitle());
+		description.setText(List.L_PROJECT.get(position).getDesc());
 
 		delete.setVisibility(View.VISIBLE);
 		delete.setOnClickListener(view -> {

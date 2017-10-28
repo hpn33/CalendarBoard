@@ -13,7 +13,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import hpn332.cb.R;
-import hpn332.cb.utils.U;
+import hpn332.cb.utils.Key;
+import hpn332.cb.utils.List;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.database.ProviderHelper;
 import hpn332.cb.model.stucture.TagStructure;
@@ -71,8 +72,8 @@ public class EditFragmentTag extends Fragment {
 		Log.d(TAG, "using: start");
 
 		final int                     position  =
-				getActivity().getIntent().getIntExtra(U.Key.POSITION, 0);
-		final ArrayList<TagStructure> arrayList = U.AList.L_TAGS;
+				getActivity().getIntent().getIntExtra(Key.POSITION, 0);
+		final ArrayList<TagStructure> arrayList = List.L_TAGS;
 
 		title.setText(arrayList.get(position).getTitle());
 		description.setText(arrayList.get(position).getDesc());

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import hpn332.cb.R;
 import hpn332.cb.model.adapter.AdapterListBacklog;
-import hpn332.cb.utils.U;
+import hpn332.cb.utils.List;
 
 public class ListFragmentBacklog extends Fragment {
 
@@ -57,6 +57,6 @@ public class ListFragmentBacklog extends Fragment {
 		super.onResume();
 
 		recyclerView.setAdapter(
-				new AdapterListBacklog(getContext(), U.AList.L_BACKLOG, onBacklogFragment));
+				new AdapterListBacklog(getContext(), List.L_BACKLOG, onBacklogFragment));
 	}
 }

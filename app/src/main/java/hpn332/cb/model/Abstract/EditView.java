@@ -7,7 +7,7 @@ import android.util.Log;
 
 import hpn332.cb.R;
 import hpn332.cb.ui.fragment.DialogFragmentColorPicker;
-import hpn332.cb.utils.U;
+import hpn332.cb.utils.Key;
 import hpn332.library.view.ColorPanelView;
 
 public abstract class EditView extends AppCompatActivity
@@ -33,7 +33,7 @@ public abstract class EditView extends AppCompatActivity
 
 		setFragment(
 				checkTypeAndGetFragment(
-						getIntent().getIntExtra(U.Key.TYPE, 0)));
+						getIntent().getIntExtra(Key.TYPE, 0)));
 
 		Log.d(TAG, "init: end");
 	}

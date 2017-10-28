@@ -11,7 +11,7 @@ import android.widget.EditText;
 import hpn332.cb.ButtonColor;
 import hpn332.cb.R;
 import hpn332.cb.ui.activity.EditActivity;
-import hpn332.cb.utils.U;
+import hpn332.cb.utils.Key;
 import hpn332.cb.utils.Utils;
 import hpn332.cb.model.database.ProviderHelper;
 
@@ -51,7 +51,7 @@ public class AddFragmentBacklog extends Fragment {
 
 					ProviderHelper.insertNewBacklog(
 							getContext(),
-							getActivity().getIntent().getIntExtra(U.Key.PROJECT, 0),
+							getActivity().getIntent().getIntExtra(Key.PROJECT, 0),
 							title.getText().toString(),
 							description.getText().toString(),
 							EditActivity.color_panel.getColor());
@@ -62,7 +62,7 @@ public class AddFragmentBacklog extends Fragment {
 		((ButtonColor) view.findViewById(R.id.color_picker_view_dialog_button))
 				.setOnShowDialogListener(initColor1 -> {
 					DialogFragmentColorPicker dialog =
-							DialogFragmentColorPicker.newInstance(Utils.ZERO);
+							DialogFragmentColorPicker.newInstance(Utils.NULL);
 					dialog.show(getActivity().getFragmentManager(), "d");
 				});
 

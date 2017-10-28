@@ -12,13 +12,13 @@ public class Utils {
 
 	private static final String TAG = "Utils";
 
-	public static final int ZERO = 0;
+	public static final int NULL = -1;
 
 	public static void setupColorPicker(
 			ColorPickerView colorPicker, final ColorPanelView newColorPanel,
 			ColorPanelView oldColorPanel, int initColor) {
 
-		if (initColor == ZERO) initColor = -16777216;
+		if (initColor == NULL) initColor = -16777216;
 
 		colorPicker.setAlphaSliderVisible(false);
 		colorPicker.setColor(initColor, true);
@@ -31,21 +31,33 @@ public class Utils {
 		});
 	}
 
-	public static void goTo(Context context, int type, int position, int step) {
-		goTo(context, type, position, step, ZERO);
+	public static void goTo(Context context, int type) {
+		goTo(context, type, NULL);
+	}
+
+	public static void goToP(Context context, int type, int project) {
+		goTo(context, type, NULL, NULL, project);
 	}
 
 	public static void goTo(Context context, int type, int position) {
-		goTo(context, type, position, ZERO);
+		goTo(context, type, position, NULL, NULL);
+	}
+
+	public static void goTo(Context context, int type, int position, int step) {
+		goTo(context, type, position, step, NULL);
 	}
 
 	private static void goTo(
 			Context context, int type, int position, int step, int project) {
-		context.startActivity(new Intent(context.getApplicationContext(), EditActivity.class)
-				                      .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-				                      .putExtra(U.Key.TYPE, type)
-				                      .putExtra(U.Key.POSITION, position)
-				                      .putExtra(U.Key.PROJECT, project)
-				                      .putExtra(U.Key.STEP, step));
+
+		Intent intent = new Intent(context.getApplicationContext(), EditActivity.class)
+				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+				.putExtra(Key.TYPE, type);
+
+		if (position != NULL) intent.putExtra(Key.POSITION, position);
+		if (project != NULL) intent.putExtra(Key.PROJECT, project);
+		if (step != NULL) intent.putExtra(Key.STEP, step);
+
+		context.startActivity(intent);
 	}
 }
