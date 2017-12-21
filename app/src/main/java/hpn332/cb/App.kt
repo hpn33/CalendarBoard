@@ -1,6 +1,7 @@
 package hpn332.cb
 
 import android.app.Application
+import hpn332.cb.model.data.room.RoomDB
 import hpn332.cb.utils.helper.ProviderHelper
 
 /**
@@ -8,8 +9,15 @@ import hpn332.cb.utils.helper.ProviderHelper
  */
 class App : Application() {
 
+    companion object {
+        lateinit var db: RoomDB
+    }
+
     override fun onCreate() {
         super.onCreate()
+
+        db = RoomDB.build(this)
+
         ProviderHelper(applicationContext)
     }
 

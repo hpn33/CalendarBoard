@@ -10,14 +10,13 @@ import android.widget.TextView
 import java.util.ArrayList
 
 import hpn332.cb.R
-import hpn332.cb.R.id.color_view
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.model.stucture.TagStructure
+import hpn332.cb.model.stucture.Tag
 import kotlinx.android.synthetic.main.row_item_tag.view.*
 
 class AdapterListTag(
-    context: Context, private val arrayList: ArrayList<TagStructure>) : RecyclerView.Adapter<AdapterListTag.ItemHolder>() {
+    context: Context, private val arrayList: ArrayList<Tag>) : RecyclerView.Adapter<AdapterListTag.ItemHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 

@@ -1,6 +1,11 @@
 package hpn332.cb.model.stucture
 
-class TaskStructure(
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity
+class Task(
+    @PrimaryKey
     val id: Int,
     val title: String,
     val desc: String,

@@ -2,23 +2,23 @@ package hpn332.cb.utils
 
 import java.util.ArrayList
 
-import hpn332.cb.model.stucture.BackLogStructure
+import hpn332.cb.model.stucture.BackLog
 import hpn332.cb.model.stucture.CheckTagStructure
-import hpn332.cb.model.stucture.ProjectStructure
-import hpn332.cb.model.stucture.TagStructure
-import hpn332.cb.model.stucture.TaskStructure
+import hpn332.cb.model.stucture.Project
+import hpn332.cb.model.stucture.Tag
+import hpn332.cb.model.stucture.Task
 
 object List {
 
-	var L_PROJECT = ArrayList<ProjectStructure>()
+	var L_PROJECT = ArrayList<Project>()
 
-	var L_TAGS = ArrayList<TagStructure>()
+	var L_TAGS = ArrayList<Tag>()
 
-	var L_BACKLOG = ArrayList<BackLogStructure>()
+	var L_BACKLOG = ArrayList<BackLog>()
 
-	var L_TODO = ArrayList<TaskStructure>()
-	var L_DOING = ArrayList<TaskStructure>()
-	var L_DONE = ArrayList<TaskStructure>()
+	var L_TODO = ArrayList<Task>()
+	var L_DOING = ArrayList<Task>()
+	var L_DONE = ArrayList<Task>()
 
 	var L_CHECK = ArrayList<CheckTagStructure>()
 

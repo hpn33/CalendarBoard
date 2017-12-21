@@ -16,23 +16,23 @@ import hpn332.cb.utils.presenter.Backlog
 import hpn332.cb.view.activity.ListTaskActivity
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.model.stucture.BackLogStructure
+import hpn332.cb.model.stucture.BackLog
 
 class AdapterListBacklog : RecyclerView.Adapter<AdapterListBacklog.ItemHolder> {
 
 	private var inflater: LayoutInflater? = null
-	private var arrayList: ArrayList<BackLogStructure>? = null
+	private var arrayList: ArrayList<BackLog>? = null
 	private var backlog: Backlog? = null
 
 	constructor(
-			context: Context, arrayList: ArrayList<BackLogStructure>) {
+			context: Context, arrayList: ArrayList<BackLog>) {
 
 		this.arrayList = arrayList
 		inflater = LayoutInflater.from(context)
 	}
 
 	constructor(
-			context: Context, arrayList: ArrayList<BackLogStructure>, backlog: Backlog) {
+        context: Context, arrayList: ArrayList<BackLog>, backlog: Backlog) {
 
 		this.arrayList = arrayList
 		inflater = LayoutInflater.from(context)

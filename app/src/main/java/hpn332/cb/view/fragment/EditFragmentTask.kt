@@ -17,7 +17,7 @@ import java.util.ArrayList
 import hpn332.cb.R
 import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.model.stucture.CheckTagStructure
-import hpn332.cb.model.stucture.TaskStructure
+import hpn332.cb.model.stucture.Task
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
 import kotlinx.android.synthetic.main.content_edit_task_center.view.*
@@ -41,7 +41,7 @@ class EditFragmentTask : Fragment() {
      *
      * @return arrayList
      */
-    private val arrayOfStep: ArrayList<TaskStructure>
+    private val arrayOfStep: ArrayList<Task>
         get() {
 
             when (activity.intent.getIntExtra(Key.STEP, 0)) {
@@ -140,7 +140,7 @@ class EditFragmentTask : Fragment() {
         Log.d(TAG, "init: end")
     }
 
-    private fun setCheckTag(arrayList: ArrayList<TaskStructure>, position: Int) {
+    private fun setCheckTag(arrayList: ArrayList<Task>, position: Int) {
 
         setupTags()
 

@@ -18,14 +18,14 @@ import hpn332.cb.utils.List
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
 import hpn332.cb.utils.helper.ProviderHelper
-import hpn332.cb.model.stucture.TaskStructure
+import hpn332.cb.model.stucture.Task
 import kotlinx.android.synthetic.main.row_item_task.view.*
 
 class AdapterListTask(
-		context: Context,
-        private val arrayList: ArrayList<TaskStructure>,
-        private val step: Int,
-		private val onStepFragment: ListFragmentTask.OnStepFragment) : RecyclerView.Adapter<AdapterListTask.ItemHolder>() {
+    context: Context,
+    private val arrayList: ArrayList<Task>,
+    private val step: Int,
+    private val onStepFragment: ListFragmentTask.OnStepFragment) : RecyclerView.Adapter<AdapterListTask.ItemHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
 

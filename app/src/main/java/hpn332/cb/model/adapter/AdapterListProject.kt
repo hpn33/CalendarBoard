@@ -15,9 +15,9 @@ import hpn332.cb.view.activity.ListTaskActivity
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.model.stucture.ProjectStructure
+import hpn332.cb.model.stucture.Project
 
-class AdapterListProject(context: Context, private val arrayList: ArrayList<ProjectStructure>) : RecyclerView.Adapter<AdapterListProject.ItemHolder>() {
+class AdapterListProject(context: Context, private val arrayList: ArrayList<Project>) : RecyclerView.Adapter<AdapterListProject.ItemHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
 

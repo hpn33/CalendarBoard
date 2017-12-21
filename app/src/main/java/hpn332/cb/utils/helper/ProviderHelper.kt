@@ -3,23 +3,17 @@ package hpn332.cb.utils.helper
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
-import android.net.Uri
 import android.util.Log
 
 import java.util.ArrayList
 
 import hpn332.cb.model.data.DBContract
-import hpn332.cb.model.stucture.BackLogStructure
-import hpn332.cb.model.stucture.ProjectStructure
-import hpn332.cb.model.stucture.TagStructure
-import hpn332.cb.model.stucture.TaskStructure
+import hpn332.cb.model.stucture.BackLog
+import hpn332.cb.model.stucture.Project
+import hpn332.cb.model.stucture.Tag
+import hpn332.cb.model.stucture.Task
 
-class ProviderHelper(context: Context) {
-
-    init {
-        ProviderHelper.context = context
-    }
+class ProviderHelper(val context: Context) {
 
     companion object {
 
@@ -31,7 +25,7 @@ class ProviderHelper(context: Context) {
         private var context: Context? = null
 
         fun queryListTaskByBacklogAndStep(step: Int, project: Int, backlogId: Int,
-                                          arrayList: ArrayList<TaskStructure>) {
+                                          arrayList: ArrayList<Task>) {
             Log.d(TAG, "queryListTaskByStep: step : $step AND Project :: $project")
 
             if (!arrayList.isEmpty()) arrayList.clear()
@@ -52,14 +46,14 @@ class ProviderHelper(context: Context) {
                     val tag = cursor.getString(cursor.getColumnIndex(DBContract.TaskEntry.TAGS))
                     val rank = cursor.getInt(cursor.getColumnIndex(DBContract.TaskEntry.RANK))
 
-                    arrayList.add(TaskStructure(id, title, desc, project, tag, step, rank))
+                    arrayList.add(Task(id, title, desc, project, tag, step, rank))
                 }
                 cursor.close()
             }
         }
 
         fun queryListBacklogByProject(project: Int,
-                                      arrayList: ArrayList<BackLogStructure>) {
+                                      arrayList: ArrayList<BackLog>) {
             Log.d(TAG, "queryListBacklogByProject: Project :: " + project)
 
             if (!arrayList.isEmpty()) arrayList.clear()
@@ -77,7 +71,7 @@ class ProviderHelper(context: Context) {
                         .getString(cursor.getColumnIndex(DBContract.BackLogEntry.DESCRIPTION))
                     val color = cursor.getInt(cursor.getColumnIndex(DBContract.BackLogEntry.COLOR))
 
-                    arrayList.add(BackLogStructure(id, title, desc, project, color))
+                    arrayList.add(BackLog(id, title, desc, project, color))
 
                     Log.d(TAG, "queryListBacklogByProject: title :: $title di :: $id")
                 }
@@ -85,7 +79,7 @@ class ProviderHelper(context: Context) {
             }
         }
 
-        fun queryListTag(arrayList: ArrayList<TagStructure>) {
+        fun queryListTag(arrayList: ArrayList<Tag>) {
             Log.d(TAG, "queryListTag: setup tags list")
 
             if (!arrayList.isEmpty()) arrayList.clear()
@@ -100,13 +94,13 @@ class ProviderHelper(context: Context) {
                     val desc = cursor.getString(cursor.getColumnIndex(DBContract.TagEntry.DESCRIPTION))
                     val color = cursor.getInt(cursor.getColumnIndex(DBContract.TagEntry.COLOR))
 
-                    arrayList.add(TagStructure(id, title, desc, color))
+                    arrayList.add(Tag(id, title, desc, color))
                 }
                 cursor.close()
             }
         }
 
-        fun queryListProject(arrayList: ArrayList<ProjectStructure>) {
+        fun queryListProject(arrayList: ArrayList<Project>) {
             Log.d(TAG, "queryListProject: setup tags list")
 
             if (!arrayList.isEmpty()) arrayList.clear()
@@ -120,7 +114,7 @@ class ProviderHelper(context: Context) {
                     val title = cursor.getString(cursor.getColumnIndex(DBContract.ProjectEntry.TITLE))
                     val desc = cursor.getString(cursor.getColumnIndex(DBContract.ProjectEntry.DESCRIPTION))
 
-                    arrayList.add(ProjectStructure(id, title, desc))
+                    arrayList.add(Project(id, title, desc))
                 }
                 cursor.close()
             }

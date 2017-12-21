@@ -1,6 +1,11 @@
 package hpn332.cb.model.stucture
 
-class BackLogStructure(
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity
+class BackLog(
+    @PrimaryKey
     val id: Int,
     val title: String,
     val desc: String,
