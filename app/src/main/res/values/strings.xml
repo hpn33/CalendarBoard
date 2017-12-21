@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Calendar Board</string>
     <string name="action_settings">Settings</string>
-
+    <string name="title">title</string>
+    <string name="desc">Description</string>
+    <string name="delete_icon">delete_icon</string>
+    <string name="back_arrow_icon">back_arrow_icon</string>
 </resources>

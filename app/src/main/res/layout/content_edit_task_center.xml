@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:tools="http://schemas.android.com/tools"
-       tools:showIn="@layout/activity_edit_task">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appBarLayout">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -15,34 +12,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="100dp"
                 android:orientation="vertical">
 
-                <RadioGroup
-                    android:id="@+id/step_layout_radioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/backlog_radio"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="backlog"
-                        android:textSize="25sp"/>
-
-                    <RadioButton
-                        android:id="@+id/todo_radio"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="TODO"
-                        android:textSize="25sp"/>
-                </RadioGroup>
+                <include layout="@layout/include_backlog_list" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -53,7 +26,7 @@
                         android:id="@+id/title_editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="title"/>
+                        android:hint="@string/title" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -67,7 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:gravity="top"
-                        android:hint="Description"/>
+                        android:hint="@string/desc" />
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
@@ -81,7 +54,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:orientation="vertical"/>
+                        android:orientation="vertical" />
 
                     <Button
                         android:id="@+id/addTag"
@@ -89,12 +62,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="+"
-                        android:textSize="25sp"/>
+                        android:textSize="25sp" />
                 </LinearLayout>
 
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="55dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -106,7 +80,7 @@
                         android:checked="true"
                         android:gravity="center"
                         android:text="1"
-                        android:textSize="25sp"/>
+                        android:textSize="25sp" />
 
                     <RadioButton
                         android:id="@+id/num2"
@@ -115,7 +89,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="2"
-                        android:textSize="25sp"/>
+                        android:textSize="25sp" />
 
                     <RadioButton
                         android:id="@+id/num3"
@@ -124,7 +98,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="3"
-                        android:textSize="25sp"/>
+                        android:textSize="25sp" />
 
                     <RadioButton
                         android:id="@+id/num4"
@@ -133,7 +107,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="4"
-                        android:textSize="25sp"/>
+                        android:textSize="25sp" />
 
                     <RadioButton
                         android:id="@+id/num5"
@@ -142,13 +116,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="5"
-                        android:textSize="25sp"/>
+                        android:textSize="25sp" />
                 </RadioGroup>
-
-                <hpn332.library.view.ColorPickerView
-                    android:id="@id/colorpickerview__color_picker_view"
-                    style="@style/colorpickerview__ColorPickerViewStyle"
-                    android:padding="16dp"/>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

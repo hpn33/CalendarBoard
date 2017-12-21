@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hpn332.cb.ui.activity.ListProjectActivity">
+    tools:context="hpn332.cb.view.activity.ListProjectActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,8 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/relative">
 
-            <include
-                layout="@layout/include_recycler_view"/>
+            <include layout="@layout/include_recycler_view"/>
         </RelativeLayout>
     </RelativeLayout>
 

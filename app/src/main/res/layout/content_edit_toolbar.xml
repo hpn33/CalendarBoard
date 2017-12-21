@@ -4,7 +4,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -19,24 +19,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/ic_back_arrow"/>
+                    android:src="@drawable/ic_back_arrow"
+                    android:contentDescription="@string/back_arrow_icon" />
 
                 <ImageView
                     android:id="@+id/delete_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/done_imageView"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_delete"/>
-
-                <ImageView
-                    android:id="@+id/done_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_done"/>
-
+                    android:src="@drawable/ic_delete"
+                    android:contentDescription="@string/delete_icon" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
