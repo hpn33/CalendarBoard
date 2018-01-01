@@ -13,7 +13,7 @@ import hpn332.cb.model.stucture.Task
  * Created by hpn332 on 21/12/2017.
  */
 @Database(entities = [Project::class, Task::class, Tag::class, BackLog::class],
-    version = 1, exportSchema = false)
+    version = 1)
 abstract class RoomDB : RoomDatabase() {
 
     abstract fun projectDao(): ProjectDao
@@ -24,16 +24,16 @@ abstract class RoomDB : RoomDatabase() {
 
     companion object {
 
-
         private var INSTANCE: RoomDB? = null
 
-        private val db_name = "cb.db"
-        fun build(context: Context) =
+        fun build(context: Context): RoomDB {
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?:
-                    Room.databaseBuilder(context, RoomDB::class.java, db_name)
+                INSTANCE =
+                    Room.databaseBuilder(context, RoomDB::class.java, "cb.db")
                         .build()
-                        .also { INSTANCE = it }
             }
+
+            return INSTANCE!!
+        }
     }
 }

@@ -12,8 +12,8 @@ import android.widget.TextView
 import java.util.ArrayList
 
 import hpn332.cb.R
-import hpn332.cb.utils.presenter.Backlog
-import hpn332.cb.view.activity.ListTaskActivity
+import hpn332.cb.view.edit.Backlog
+import hpn332.cb.view.task.AListTask
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
 import hpn332.cb.model.stucture.BackLog
@@ -90,7 +90,7 @@ class AdapterListBacklog : RecyclerView.Adapter<AdapterListBacklog.ItemHolder> {
 			Log.d(TAG, "onClick: position : " + position)
 
 			if (backlog == null)
-				ListTaskActivity.onClickBacklog(arrayList!![position].id)
+				AListTask.onClickBacklog(arrayList!![position].id)
 			else
 				backlog?.onClickBacklog(arrayList!![position].id)
 		}

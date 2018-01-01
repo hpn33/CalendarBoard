@@ -1,8 +1,7 @@
 package hpn332.cb.model.data.room
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import hpn332.cb.model.stucture.Project
 
 /**
@@ -12,5 +11,14 @@ import hpn332.cb.model.stucture.Project
 interface ProjectDao {
 
     @Query("SELECT * FROM project")
-    fun allProject(): LiveData<List<Project>>
+    fun all(): LiveData<List<Project>>
+
+    @Insert
+    fun insert(item: List<Project>)
+
+    @Update
+    fun update(item: List<Project>)
+
+    @Delete
+    fun delete(item: List<Project>)
 }

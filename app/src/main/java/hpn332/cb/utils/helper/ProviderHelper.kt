@@ -2,6 +2,7 @@ package hpn332.cb.utils.helper
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 
@@ -13,16 +14,19 @@ import hpn332.cb.model.stucture.Project
 import hpn332.cb.model.stucture.Tag
 import hpn332.cb.model.stucture.Task
 
-class ProviderHelper(val context: Context) {
+class ProviderHelper {
 
     companion object {
 
         private val TAG = "ProviderHelper"
 
         private var lastUri: Int = 0
-
         @SuppressLint("StaticFieldLeak")
-        private var context: Context? = null
+        private lateinit var context: Context
+
+        fun init(context: Context) {
+            this.context = context
+        }
 
         fun queryListTaskByBacklogAndStep(step: Int, project: Int, backlogId: Int,
                                           arrayList: ArrayList<Task>) {
@@ -30,7 +34,7 @@ class ProviderHelper(val context: Context) {
 
             if (!arrayList.isEmpty()) arrayList.clear()
 
-            val cursor = context!!.contentResolver
+            val cursor = context.contentResolver
                 .query(
                     DBContract.buildUri(DBContract.URI_TASK_STEP, step.toString()), null,
                     DBContract.TaskEntry.PROJECT + " = " + project.toString()
@@ -58,7 +62,7 @@ class ProviderHelper(val context: Context) {
 
             if (!arrayList.isEmpty()) arrayList.clear()
 
-            val cursor = context!!.contentResolver
+            val cursor = context.contentResolver
                 .query(
                     DBContract.URI_BACKLOG, null,
                     DBContract.BackLogEntry.PROJECT + " = " + project.toString(), null, null)
@@ -84,7 +88,7 @@ class ProviderHelper(val context: Context) {
 
             if (!arrayList.isEmpty()) arrayList.clear()
 
-            val cursor = context!!.contentResolver
+            val cursor = context.contentResolver
                 .query(DBContract.URI_TAG, null, null, null, null)
 
             if (cursor != null) {
@@ -105,7 +109,7 @@ class ProviderHelper(val context: Context) {
 
             if (!arrayList.isEmpty()) arrayList.clear()
 
-            val cursor = context!!.contentResolver
+            val cursor = context.contentResolver
                 .query(DBContract.URI_PROJECT, null, null, null, null)
 
             if (cursor != null) {
@@ -131,9 +135,9 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.TaskEntry.DESCRIPTION, desc)
             }
 
-            val uri = context!!.contentResolver.insert(DBContract.URI_PROJECT, values)
+            val uri = context.contentResolver.insert(DBContract.URI_PROJECT, values)
 
-            lastUri = Integer.valueOf(if (uri != null) uri.pathSegments[1] else null)!!
+            lastUri = Integer.valueOf(if (uri != null) uri.pathSegments[1] else null)
 
             if (uri != null) Log.d(TAG, "insertNewProject: uri: " + uri)
         }
@@ -152,7 +156,7 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.BackLogEntry.COLOR, color)
             }
 
-            val uri = context!!.contentResolver.insert(DBContract.URI_BACKLOG, values)
+            val uri = context.contentResolver.insert(DBContract.URI_BACKLOG, values)
 
             if (uri != null) Log.d(TAG, "insertNewBacklog: uri: " + uri)
         }
@@ -174,7 +178,7 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.TaskEntry.STEP, 1)
                 put(DBContract.TaskEntry.RANK, rank)
             }
-            val uri = context!!.contentResolver.insert(DBContract.URI_TASK, values)
+            val uri = context.contentResolver.insert(DBContract.URI_TASK, values)
 
             if (uri != null) Log.d(TAG, "insertNewTask: uri: " + uri)
         }
@@ -191,7 +195,7 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.TagEntry.COLOR, color)
             }
 
-            val uri = context!!.contentResolver.insert(DBContract.URI_TAG, values)
+            val uri = context.contentResolver.insert(DBContract.URI_TAG, values)
 
             if (uri != null) Log.d(TAG, "insertNewTask: uri: " + uri)
         }
@@ -208,7 +212,7 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.TaskEntry.DESCRIPTION, desc)
             }
 
-            val update = context!!.contentResolver
+            val update = context.contentResolver
                 .update(DBContract.buildUri(DBContract.URI_PROJECT, id.toString()),
                     values, null, null)
 
@@ -229,7 +233,7 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.TaskEntry.STEP, step)
                 put(DBContract.TaskEntry.RANK, rank)
             }
-            val update = context!!.contentResolver
+            val update = context.contentResolver
                 .update(DBContract.buildUri(DBContract.URI_TASK, id.toString()),
                     values, null, null)
 
@@ -245,7 +249,7 @@ class ProviderHelper(val context: Context) {
 
             values.put(DBContract.TaskEntry.STEP, step)
 
-            val update = context!!.contentResolver
+            val update = context.contentResolver
                 .update(DBContract.buildUri(DBContract.URI_TASK, id.toString()),
                     values, null, null)
 
@@ -264,7 +268,7 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.TagEntry.DESCRIPTION, desc)
                 put(DBContract.TagEntry.COLOR, color)
             }
-            val update = context!!.contentResolver
+            val update = context.contentResolver
                 .update(
                     DBContract.buildUri(DBContract.URI_TAG, id.toString()),
                     values, null, null)
@@ -285,7 +289,7 @@ class ProviderHelper(val context: Context) {
                 put(DBContract.BackLogEntry.COLOR, color)
             }
 
-            val update = context!!.contentResolver
+            val update = context.contentResolver
                 .update(
                     DBContract.buildUri(DBContract.URI_BACKLOG, id.toString()),
                     values, null, null)
@@ -298,16 +302,16 @@ class ProviderHelper(val context: Context) {
 
             Log.d(TAG, "deleteOneProject: ")
 
-            val delete = context!!.contentResolver.delete(DBContract.buildUri(DBContract.URI_PROJECT, id.toString()), null, null)
+            val delete = context.contentResolver.delete(DBContract.buildUri(DBContract.URI_PROJECT, id.toString()), null, null)
 
-            Log.d(TAG, "deleteOneProject: delete project id :: " + delete)
+            Log.d(TAG, "deleteOneProject: delete project_id id :: " + delete)
         }
 
         fun deleteOneTask(id: Int) {
 
             Log.d(TAG, "deleteOneTask: ")
 
-            val delete = context!!.contentResolver.delete(DBContract.buildUri(DBContract.URI_TASK, id.toString()), null, null)
+            val delete = context.contentResolver.delete(DBContract.buildUri(DBContract.URI_TASK, id.toString()), null, null)
 
             Log.d(TAG, "deleteOneTask: delete task id :: " + delete)
         }
@@ -316,16 +320,16 @@ class ProviderHelper(val context: Context) {
 
             Log.d(TAG, "deleteOneTag: ")
 
-            val delete = context!!.contentResolver.delete(DBContract.buildUri(DBContract.URI_TAG, id.toString()), null, null)
+            val delete = context.contentResolver.delete(DBContract.buildUri(DBContract.URI_TAG, id.toString()), null, null)
 
-            Log.d(TAG, "deleteOneTag: delete tag id :: " + delete)
+            Log.d(TAG, "deleteOneTag: delete tag_id id :: " + delete)
         }
 
         fun deleteOneBacklog(id: Int) {
 
             Log.d(TAG, "deleteOneBacklog: ")
 
-            val delete = context!!.contentResolver.delete(DBContract.buildUri(DBContract.URI_BACKLOG, id.toString()), null, null)
+            val delete = context.contentResolver.delete(DBContract.buildUri(DBContract.URI_BACKLOG, id.toString()), null, null)
 
             Log.d(TAG, "deleteOneBacklog: delete backlog id :: " + delete)
         }

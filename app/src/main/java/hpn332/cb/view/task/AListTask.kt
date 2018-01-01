@@ -1,4 +1,4 @@
-package hpn332.cb.view.activity
+package hpn332.cb.view.task
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.util.Log
 
 import hpn332.cb.model.adapter.AdapterListBacklog
 import hpn332.cb.utils.helper.ProviderHelper
-import hpn332.cb.view.fragment.ListFragmentTask
+import hpn332.cb.view.fragment.FListTask
 import hpn332.cb.R
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.include_backlog_list.*
 
-class ListTaskActivity : AppCompatActivity(), ListFragmentTask.OnStepFragment {
+class AListTask : AppCompatActivity(), FListTask.OnStepFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,9 +84,9 @@ class ListTaskActivity : AppCompatActivity(), ListFragmentTask.OnStepFragment {
         adapter = SectionsPagerAdapter(supportFragmentManager)
 
         with(adapter!!) {
-            addFragment(ListFragmentTask.newInstance(0), "TODO") //index 0
-            addFragment(ListFragmentTask.newInstance(1), "Doing") //index 1
-            addFragment(ListFragmentTask.newInstance(2), "Done") //index 2
+            addFragment(FListTask.newInstance(0), "TODO") //index 0
+            addFragment(FListTask.newInstance(1), "Doing") //index 1
+            addFragment(FListTask.newInstance(2), "Done") //index 2
         }
         viewPager = findViewById(R.id.viewpager)
 
@@ -123,7 +123,7 @@ class ListTaskActivity : AppCompatActivity(), ListFragmentTask.OnStepFragment {
 
     companion object {
 
-        private val TAG = "ListTaskActivity"
+        private val TAG = "AListTask"
 
         @SuppressLint("StaticFieldLeak")
         private var viewPager: ViewPager? = null

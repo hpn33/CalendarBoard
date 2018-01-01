@@ -1,32 +1,24 @@
-package hpn332.cb.view.activity
+package hpn332.cb.view.edit
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 
 import hpn332.cb.R
-import hpn332.cb.model.data.room.RoomDB
-import hpn332.cb.utils.presenter.Backlog
-import hpn332.cb.view.fragment.AddFragmentBacklog
-import hpn332.cb.view.fragment.AddFragmentProject
-import hpn332.cb.view.fragment.AddFragmentTag
-import hpn332.cb.view.fragment.AddFragmentTask
 import hpn332.cb.view.fragment.DialogFragmentColorPicker
-import hpn332.cb.view.fragment.EditFragmentBacklog
-import hpn332.cb.view.fragment.EditFragmentProject
-import hpn332.cb.view.fragment.EditFragmentTag
-import hpn332.cb.view.fragment.EditFragmentTask
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.Type
-import hpn332.library.view.ColorPanelView
 
-class EditActivity : AppCompatActivity(), DialogFragmentColorPicker.ColorPickerDialogListener, Backlog {
+class AEdit : AppCompatActivity(), DialogFragmentColorPicker.ColorPickerDialogListener, Backlog {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
         Log.d(TAG, "onCreate: start")
+
+        vm = ViewModelProviders.of(this).get(VMEdit::class.java)
 
         init()
 
@@ -53,12 +45,12 @@ class EditActivity : AppCompatActivity(), DialogFragmentColorPicker.ColorPickerD
     }
 
     override fun onColorSelected(color: Int) {
-        color_panel!!.color = color
+        vm.color_panel?.color = color
         Log.d(TAG, "onColorSelected: color " + color)
     }
 
     override fun onDialogDismissed(color: Int) {
-        color_panel!!.color = color
+        vm.color_panel?.color = color
         Log.d(TAG, "onDialogDismissed: color " + color)
     }
 
@@ -66,14 +58,14 @@ class EditActivity : AppCompatActivity(), DialogFragmentColorPicker.ColorPickerD
         Log.d(TAG, "checkTypeAndGetFragment: start type is :: ")
 
         when (intent.getIntExtra(Key.TYPE, 0)) {
-            Type.ADD_PROJECT  -> return AddFragmentProject()
-            Type.ADD_BACKLOG  -> return AddFragmentBacklog()
-            Type.ADD_TASK     -> return AddFragmentTask()
-            Type.ADD_TAG      -> return AddFragmentTag()
-            Type.EDIT_PROJECT -> return EditFragmentProject()
-            Type.EDIT_BACKLOG -> return EditFragmentBacklog()
-            Type.EDIT_TASK    -> return EditFragmentTask()
-            Type.EDIT_TAG     -> return EditFragmentTag()
+            Type.ADD_PROJECT  -> return FAddProject()
+            Type.ADD_BACKLOG  -> return FAddBacklog()
+            Type.ADD_TASK     -> return FAddTask()
+            Type.ADD_TAG      -> return FAddTag()
+            Type.EDIT_PROJECT -> return FEditProject()
+            Type.EDIT_BACKLOG -> return FEditBacklog()
+            Type.EDIT_TASK    -> return FEditTask()
+            Type.EDIT_TAG     -> return FEditTag()
         }
 
         throw IllegalArgumentException("Unknown type")
@@ -82,15 +74,14 @@ class EditActivity : AppCompatActivity(), DialogFragmentColorPicker.ColorPickerD
     override fun onClickBacklog(backlogId: Int) {
         Log.d(TAG, "onClickBacklog: backlog id :: " + backlogId)
 
-        EditActivity.backlogId = backlogId
+        vm.backlogId = backlogId
     }
 
     companion object {
 
-        private val TAG = "EditActivity"
+        private val TAG = "AEdit"
 
-        var color_panel: ColorPanelView? = null
+        lateinit var vm: VMEdit
 
-        var backlogId = 0
     }
 }

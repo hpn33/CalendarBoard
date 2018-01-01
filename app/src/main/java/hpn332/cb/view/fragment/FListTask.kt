@@ -16,7 +16,7 @@ import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
 import kotlinx.android.synthetic.main.include_recycler_view.view.*
 
-class ListFragmentTask : Fragment() {
+class FListTask : Fragment() {
 
 	private var onStepFragment: OnStepFragment? = null
 	private lateinit var recyclerView: RecyclerView
@@ -63,16 +63,16 @@ class ListFragmentTask : Fragment() {
 
 	companion object {
 
-		private val TAG = "ListFragmentTask"
+		private val TAG = "FListTask"
 
-		fun newInstance(index: Int): ListFragmentTask {
+		fun newInstance(index: Int): FListTask {
 
 			Log.d(TAG, "newInstance: start")
 
 			val args = Bundle()
 
 			args.putInt(Key.STEP, index)
-			val fragment = ListFragmentTask()
+			val fragment = FListTask()
 			fragment.arguments = args
 
 			Log.d(TAG, "newInstance: end")

@@ -1,21 +1,22 @@
-package hpn332.cb.view.fragment
+package hpn332.cb.view.edit
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 
 import hpn332.cb.R
+import hpn332.cb.model.stucture.Project
 import hpn332.cb.utils.helper.ProviderHelper
-import hpn332.cb.utils.Key
-import hpn332.cb.utils.List
 import kotlinx.android.synthetic.main.content_edit_project_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*
 import kotlinx.android.synthetic.main.fragment_edit_project.view.*
 
-class EditFragmentProject : Fragment() {
+class FAddProject : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater?, container: ViewGroup?,
@@ -34,39 +35,31 @@ class EditFragmentProject : Fragment() {
 
         Log.d(TAG, "init: start")
 
-        val title = view.title_editText
-        val description = view.description_editText
+        val title: EditText = view.title_editText
+        val description: EditText = view.description_editText
 
-        val position = activity.intent.getIntExtra(Key.POSITION, 0)
-        val id = List.L_PROJECT[position].id
-
-        Log.d(TAG, "makeReadyStep: id :: " + id)
-
-        title.setText(List.L_PROJECT[position].title)
-        description.setText(List.L_PROJECT[position].desc)
+        view.delete_imageView.visibility = View.GONE
 
         view.fab.setOnClickListener {
-            ProviderHelper.updateOneProject(
-                id,
-                title.text.toString(),
-                description.text.toString())
-
-            Log.d(TAG, "onClick: update id ::" + id)
-
-            activity.finish()
-        }
-
-        view.delete_imageView.setOnClickListener {
-            ProviderHelper.deleteOneProject(id)
+            //            ProviderHelper.insertNewProjectWithBacklog(
+            //					title.text.toString(),
+            //					description.text.toString())
+            AEdit.vm.insertProjects(
+                listOf(
+                    Project(
+                        title = title.text.toString(),
+                        desc = description.text.toString())))
             activity.finish()
         }
 
         view.backArrow_imageView.setOnClickListener { activity.finish() }
+
         Log.d(TAG, "init: end")
     }
 
     companion object {
 
-        private val TAG = "EditFragmentProject"
+        private val TAG = "FAddProject"
     }
+
 }

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.activity.ListProjectActivity"
+            android:name=".view.project.AListProject"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,15 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ListTagActivity" />
-        <activity android:name=".view.activity.ListTaskActivity" />
+        <activity android:name=".view.tag.AListTag" />
+        <activity android:name=".view.task.AListTask" />
 
-        <provider
+        <!--<provider
             android:name=".model.data.Provider"
             android:authorities="hpn332.cb"
-            android:exported="false" />
+            android:exported="false" />-->
 
-        <activity android:name=".view.activity.EditActivity" />
+        <activity android:name=".view.edit.AEdit" />
     </application>
 
 </manifest>

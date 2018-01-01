@@ -13,7 +13,7 @@ import android.widget.TextView
 import java.util.ArrayList
 
 import hpn332.cb.R
-import hpn332.cb.view.fragment.ListFragmentTask
+import hpn332.cb.view.fragment.FListTask
 import hpn332.cb.utils.List
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
@@ -25,7 +25,7 @@ class AdapterListTask(
     context: Context,
     private val arrayList: ArrayList<Task>,
     private val step: Int,
-    private val onStepFragment: ListFragmentTask.OnStepFragment) : RecyclerView.Adapter<AdapterListTask.ItemHolder>() {
+    private val onStepFragment: FListTask.OnStepFragment) : RecyclerView.Adapter<AdapterListTask.ItemHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -75,7 +75,7 @@ class AdapterListTask(
 				}
 			}
 
-			if (!arrayList[position].tag.isEmpty()) addTagColor()
+			if (!arrayList[position].tag_id.isEmpty()) addTagColor()
 		}
 
 		private fun addTagColor() {
@@ -84,7 +84,7 @@ class AdapterListTask(
 
 			ProviderHelper.queryListTag(List.L_TAGS)
 
-			val tags = arrayList[position].tag.split("`".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+			val tags = arrayList[position].tag_id.split("`".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
 			val view = arrayOfNulls<View>(tags.size)
 

@@ -1,4 +1,4 @@
-package hpn332.cb.view.fragment
+package hpn332.cb.view.edit
 
 import android.content.Intent
 import android.os.Bundle
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.content_edit_task_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*
 import kotlinx.android.synthetic.main.fragment_edit_task.view.*
 
-class EditFragmentTask : Fragment() {
+class FEditTask : Fragment() {
 
     private var num1: RadioButton? = null
     private var num2: RadioButton? = null
@@ -117,7 +117,7 @@ class EditFragmentTask : Fragment() {
 
         view.backArrow_imageView.setOnClickListener { activity.finish() }
 
-        view.addTag.setOnClickListener { startActivity(Intent(context, AddFragmentTag::class.java)) }
+        view.addTag.setOnClickListener { startActivity(Intent(context, FAddTag::class.java)) }
 
         view.fab.setOnClickListener {
             ProviderHelper.updateOneTask(
@@ -144,7 +144,7 @@ class EditFragmentTask : Fragment() {
 
         setupTags()
 
-        val s = arrayList[position].tag.split("`".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val s = arrayList[position].tag_id.split("`".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
         for (i in 0 until List.L_TAGS.size) {
             for (value in s) {
@@ -202,7 +202,7 @@ class EditFragmentTask : Fragment() {
 
     companion object {
 
-        private val TAG = "EditFragmentTask"
+        private val TAG = "FEditTask"
     }
 
 }

@@ -1,4 +1,4 @@
-package hpn332.cb.view.fragment
+package hpn332.cb.view.edit
 
 import android.content.Context
 import android.content.Intent
@@ -20,15 +20,14 @@ import hpn332.cb.R
 import hpn332.cb.model.adapter.AdapterListBacklog
 import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.model.stucture.CheckTagStructure
-import hpn332.cb.utils.presenter.Backlog
-import hpn332.cb.view.activity.EditActivity
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
+import hpn332.cb.view.edit.AEdit.Companion.vm
 import kotlinx.android.synthetic.main.content_edit_task_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*
 import kotlinx.android.synthetic.main.fragment_edit_task.view.*
 
-class AddFragmentTask : Fragment() {
+class FAddTask : Fragment() {
 
 	private var num1: RadioButton? = null
 	private var num2: RadioButton? = null
@@ -70,7 +69,7 @@ class AddFragmentTask : Fragment() {
 
 	override fun onAttach(context: Context?) {
 		super.onAttach(context)
-		backlog = context as EditActivity?
+		backlog = context as AEdit?
 	}
 
 	override fun onCreateView(
@@ -107,14 +106,14 @@ class AddFragmentTask : Fragment() {
 
 		view.backArrow_imageView.setOnClickListener { activity.finish() }
 
-		view.addTag.setOnClickListener { startActivity(Intent(context, AddFragmentTag::class.java)) }
+		view.addTag.setOnClickListener { startActivity(Intent(context, FAddTag::class.java)) }
 
 		view.fab.setOnClickListener { v ->
 
-			if (EditActivity.backlogId != 0) {
+			if (vm.backlogId != 0) {
 				ProviderHelper.insertNewTask(
 						activity.intent.getIntExtra(Key.PROJECT, 0),
-						EditActivity.backlogId,
+						vm.backlogId,
 						title!!.text.toString(),
 						description!!.text.toString(),
 						"",
@@ -180,6 +179,6 @@ class AddFragmentTask : Fragment() {
 
 	companion object {
 
-		private val TAG = "AddFragmentTask"
+		private val TAG = "FAddTask"
 	}
 }

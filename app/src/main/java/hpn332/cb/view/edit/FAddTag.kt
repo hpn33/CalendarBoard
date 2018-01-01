@@ -1,4 +1,4 @@
-package hpn332.cb.view.fragment
+package hpn332.cb.view.edit
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.content_edit_tag_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*
 import kotlinx.android.synthetic.main.fragment_edit_tag.view.*
 
-class AddFragmentTag : Fragment() {
+class FAddTag : Fragment() {
 
 	private var title: EditText? = null
 	private var description: EditText? = null
@@ -65,6 +65,6 @@ class AddFragmentTag : Fragment() {
 
 	companion object {
 
-		private val TAG = "AddFragmentTag"
+		private val TAG = "FAddTag"
 	}
 }

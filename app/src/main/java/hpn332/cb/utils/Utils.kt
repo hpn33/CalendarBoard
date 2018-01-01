@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 
-import hpn332.cb.view.activity.EditActivity
+import hpn332.cb.view.edit.AEdit
 import hpn332.library.view.ColorPanelView
 import hpn332.library.view.ColorPickerView
 
@@ -36,6 +36,7 @@ object Utils {
         })
     }
 
+
     fun goToP(context: Context, type: Int, project: Int) =
         goTo(context, type, NULL, NULL, project)
 
@@ -49,7 +50,7 @@ object Utils {
     private fun goTo(
         context: Context, type: Int, position: Int, step: Int, project: Int) {
 
-        val intent = Intent(context.applicationContext, EditActivity::class.java)
+        val intent = Intent(context.applicationContext, AEdit::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             .putExtra(Key.TYPE, type)
 

@@ -1,8 +1,7 @@
 package hpn332.cb.model.data.room
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import hpn332.cb.model.stucture.Project
 import hpn332.cb.model.stucture.Task
 
@@ -13,5 +12,14 @@ import hpn332.cb.model.stucture.Task
 interface TaskDao {
 
     @Query("SELECT * FROM task")
-    fun allTask(): LiveData<List<Task>>
+    fun all(): LiveData<List<Task>>
+
+    @Insert
+    fun insert(item: List<Task>)
+
+    @Update
+    fun update(item: List<Task>)
+
+    @Delete
+    fun delete(item: List<Task>)
 }

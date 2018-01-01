@@ -18,7 +18,7 @@ class App : Application() {
 
         db = RoomDB.build(this)
 
-        ProviderHelper(applicationContext)
+//        ProviderHelper.init(this)
     }
 
 }

@@ -1,14 +1,13 @@
-package hpn332.cb.view.activity
+package hpn332.cb.view.tag
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.View
 
 import hpn332.cb.R
-import hpn332.cb.view.fragment.AddFragmentTag
+import hpn332.cb.view.edit.FAddTag
 import hpn332.cb.model.adapter.AdapterListTag
 import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.utils.List
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_tag_list.*
 import kotlinx.android.synthetic.main.content_list_toolbar.*
 import kotlinx.android.synthetic.main.include_recycler_view.*
 
-class ListTagActivity : AppCompatActivity() {
+class AListTag : AppCompatActivity() {
 
     private var adapter: AdapterListTag? = null
 
@@ -60,7 +59,7 @@ class ListTagActivity : AppCompatActivity() {
 
         fab.setOnClickListener(
             {
-                startActivity(Intent(applicationContext, AddFragmentTag::class.java))
+                startActivity(Intent(applicationContext, FAddTag::class.java))
             })
 
         Log.d(TAG, "using: end")
@@ -80,6 +79,6 @@ class ListTagActivity : AppCompatActivity() {
 
     companion object {
 
-        private val TAG = "ListTagActivity"
+        private val TAG = "AListTag"
     }
 }

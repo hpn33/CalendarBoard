@@ -1,4 +1,4 @@
-package hpn332.cb.model.Abstract
+package hpn332.cb.model.abstrac
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -57,14 +57,14 @@ abstract class EditView : AppCompatActivity(), DialogFragmentColorPicker.ColorPi
 
 	/**
 	 * sample  private Fragment checkTypeAndGetFragment(int type) {
-	 * Log.d(tag, "checkTypeAndGetFragment: start type is :: " + type);
+	 * Log.d(tag_id, "checkTypeAndGetFragment: start type is :: " + type);
 	 * switch (type) {
 	 * case Type.ADD_PROJECT:
 	 * return new AddFragmentProject();
 	 * case Type.ADD_BACKLOG:
 	 * return new AddFragmentBacklog();
 	 * case Type.ADD_TASK:
-	 * return new AddFragmentTask();
+	 * return new AddFTask();
 	 * case Type.ADD_TAG:
 	 * return new AddFragmentTag();
 	 * default:

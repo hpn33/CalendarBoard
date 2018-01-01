@@ -1,4 +1,4 @@
-package hpn332.cb.utils.presenter
+package hpn332.cb.view.edit
 
 /**
  * Created by hpn332 on 14/11/2017.

@@ -6,9 +6,9 @@ object DBContract {
 
     internal val AUTHORITY = "hpn332.cb"
     internal val BASE_URI = Uri.parse("content://" + AUTHORITY)
-    internal val TABLE_PROJECT = "project"
+    internal val TABLE_PROJECT = "project_id"
     internal val TABLE_TASK = "task"
-    internal val TABLE_TAG = "tag"
+    internal val TABLE_TAG = "tag_id"
     internal val TABLE_BACKLOG = "backlog"
 
     val URI_PROJECT = buildUri(BASE_URI, TABLE_PROJECT)
@@ -36,9 +36,9 @@ object DBContract {
                     + ");")
 
             internal val CONTENT_TYPE =
-                "vnd.android.cursor.dir/vnd.$AUTHORITY.project"
+                "vnd.android.cursor.dir/vnd.$AUTHORITY.project_id"
             internal val CONTENT_ITEM_TYPE =
-                "vnd.android.cursor.item/vnd.$AUTHORITY.project"
+                "vnd.android.cursor.item/vnd.$AUTHORITY.project_id"
         }
     }
 
@@ -48,7 +48,7 @@ object DBContract {
             val ID = "_id"
             val TITLE = "title"
             val DESCRIPTION = "description"
-            val PROJECT = "project"
+            val PROJECT = "project_id"
             val BACKLOG = "backlog"
             val TAGS = "tags"
             val STEP = "step"
@@ -92,9 +92,9 @@ object DBContract {
                     + ");")
 
             internal val CONTENT_TYPE =
-                "vnd.android.cursor.dir/vnd.$AUTHORITY.tag"
+                "vnd.android.cursor.dir/vnd.$AUTHORITY.tag_id"
             internal val CONTENT_ITEM_TYPE =
-                "vnd.android.cursor.item/vnd.$AUTHORITY.tag"
+                "vnd.android.cursor.item/vnd.$AUTHORITY.tag_id"
         }
     }
 
@@ -104,7 +104,7 @@ object DBContract {
             val ID = "_id"
             val TITLE = "title"
             val DESCRIPTION = "description"
-            val PROJECT = "project"
+            val PROJECT = "project_id"
             val COLOR = "color"
 
             internal val CREATE_TABLE = (
