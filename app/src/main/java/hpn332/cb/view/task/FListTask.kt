@@ -1,6 +1,5 @@
-package hpn332.cb.view.fragment
+package hpn332.cb.view.task
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -11,28 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 
 import hpn332.cb.R
-import hpn332.cb.model.adapter.AdapterListTask
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
 import kotlinx.android.synthetic.main.include_recycler_view.view.*
 
 class FListTask : Fragment() {
 
-	private var onStepFragment: OnStepFragment? = null
 	private lateinit var recyclerView: RecyclerView
-
-	interface OnStepFragment {
-		fun onClickNext()
-	}
-
-	override fun onAttach(context: Context?) {
-		super.onAttach(context)
-		Log.d(TAG, "onAttach: start")
-
-		onStepFragment = activity as OnStepFragment
-
-		Log.d(TAG, "onAttach: end")
-	}
 
 	override fun onCreateView(
 			inflater: LayoutInflater?, container: ViewGroup?,
@@ -54,7 +38,7 @@ class FListTask : Fragment() {
 	private fun adapter(index: Int) {
 		Log.d(TAG, "adapter: start")
 
-        recyclerView.adapter = AdapterListTask(context, List.L_STEP[index], index, onStepFragment!!)
+        recyclerView.adapter = AdapterListTask(context, List.L_STEP[index], index)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 

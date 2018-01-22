@@ -12,6 +12,7 @@ import android.widget.EditText
 import hpn332.cb.R
 import hpn332.cb.model.stucture.Project
 import hpn332.cb.utils.helper.ProviderHelper
+import hpn332.cb.view.edit.AEdit.Companion.vm
 import kotlinx.android.synthetic.main.content_edit_project_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*
 import kotlinx.android.synthetic.main.fragment_edit_project.view.*
@@ -41,10 +42,7 @@ class FAddProject : Fragment() {
         view.delete_imageView.visibility = View.GONE
 
         view.fab.setOnClickListener {
-            //            ProviderHelper.insertNewProjectWithBacklog(
-            //					title.text.toString(),
-            //					description.text.toString())
-            AEdit.vm.insertProjects(
+            vm.insertProjects(
                 listOf(
                     Project(
                         title = title.text.toString(),

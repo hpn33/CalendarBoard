@@ -14,11 +14,15 @@ class VMEdit : ViewModel() {
     private val repository = DataRepository()
 
     @SuppressLint("StaticFieldLeak")
-    var color_panel: ColorPanelView? = null
+    var colorPanelView: ColorPanelView? = null
 
     var backlogId = 0
 
+//    fun getProjectById(id: Int) = repository.getProjectById(id)
 
     fun insertProjects(items: List<Project>) = repository.insertProject(items)
 
+    fun updateProjects(items: List<Project>) = repository.updateProject(items)
+
+    fun deleteProjects(items: List<Project>) = repository.deleteProject(items)
 }

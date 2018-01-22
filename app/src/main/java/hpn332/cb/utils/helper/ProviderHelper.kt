@@ -14,6 +14,7 @@ import hpn332.cb.model.stucture.Project
 import hpn332.cb.model.stucture.Tag
 import hpn332.cb.model.stucture.Task
 
+@Deprecated("hey")
 class ProviderHelper {
 
     companion object {

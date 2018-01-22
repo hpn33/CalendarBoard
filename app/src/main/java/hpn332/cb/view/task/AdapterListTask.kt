@@ -1,4 +1,4 @@
-package hpn332.cb.model.adapter
+package hpn332.cb.view.task
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -13,21 +13,22 @@ import android.widget.TextView
 import java.util.ArrayList
 
 import hpn332.cb.R
-import hpn332.cb.view.fragment.FListTask
 import hpn332.cb.utils.List
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
 import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.model.stucture.Task
+import hpn332.cb.view.task.AListTask.Companion.vm
 import kotlinx.android.synthetic.main.row_item_task.view.*
 
 class AdapterListTask(
     context: Context,
     private val arrayList: ArrayList<Task>,
-    private val step: Int,
-    private val onStepFragment: FListTask.OnStepFragment) : RecyclerView.Adapter<AdapterListTask.ItemHolder>() {
+    private val step: Int) : RecyclerView.Adapter<AdapterListTask.ItemHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
+
+    private val TAG = "AdapterListTask"
 
     init {
         Log.d(TAG, "AdapterListTask: " + step)
@@ -71,7 +72,7 @@ class AdapterListTask(
 							arrayList[position].id,
 							arrayList[position].step + 1)
 
-					onStepFragment.onClickNext()
+					vm.onClickNext()
 				}
 			}
 
@@ -84,7 +85,7 @@ class AdapterListTask(
 
 			ProviderHelper.queryListTag(List.L_TAGS)
 
-			val tags = arrayList[position].tag_id.split("`".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+			val tags = arrayList[adapterPosition].tag_id.split("`".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
 			val view = arrayOfNulls<View>(tags.size)
 
@@ -124,16 +125,12 @@ class AdapterListTask(
 
 		override fun onLongClick(view: View): Boolean {
 
-			Log.d(TAG, "onLongClick: position : " + position)
+			Log.d(TAG, "onLongClick: position : " + adapterPosition)
 
-			Utils.goTo(inflater.context, Type.EDIT_TASK, position, step)
+			Utils.goTo(inflater.context, Type.EDIT_TASK, adapterPosition, step)
 
 			return true
 		}
 	}
 
-	companion object {
-
-		private val TAG = "AdapterListTask"
-	}
 }

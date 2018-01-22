@@ -1,5 +1,7 @@
 package hpn332.cb.view.edit
 
+import android.arch.lifecycle.Observer
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -8,16 +10,20 @@ import android.view.View
 import android.view.ViewGroup
 
 import hpn332.cb.R
+import hpn332.cb.model.stucture.Project
 import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
+import hpn332.cb.view.edit.AEdit.Companion.vm
 import kotlinx.android.synthetic.main.content_edit_project_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*
 import kotlinx.android.synthetic.main.fragment_edit_project.view.*
+import hpn332.cb.utils.Utils.onClick
 
 class FEditProject : Fragment() {
 
 
+    private val TAG = "FEditProject"
 
     override fun onCreateView(
         inflater: LayoutInflater?, container: ViewGroup?,
@@ -34,41 +40,35 @@ class FEditProject : Fragment() {
 
     private fun init(view: View) {
 
-        Log.d(TAG, "init: start")
-
         val title = view.title_editText
         val description = view.description_editText
 
-        val position = activity.intent.getIntExtra(Key.POSITION, 0)
-        val id = List.L_PROJECT[position].id
+        val id = activity.intent.getIntExtra(Key.ID, 0)
 
-        Log.d(TAG, "makeReadyStep: id :: " + id)
+//        vm.getProjectById(id).observe(this,
+//            Observer {
+//                it!!
+//                title.setText(it.title)
+//                description.setText(it.desc)
+//            })
 
-        title.setText(List.L_PROJECT[position].title)
-        description.setText(List.L_PROJECT[position].desc)
 
-        view.fab.setOnClickListener {
-            ProviderHelper.updateOneProject(
-                id,
-                title.text.toString(),
-                description.text.toString())
 
-            Log.d(TAG, "onClick: update id ::" + id)
+        with(view) {
 
-            activity.finish()
+            fab.onClick(activity) {
+                vm.updateProjects(listOf(Project(
+                    id,
+                    title.text.toString(),
+                    description.text.toString())
+                ))
+            }
+
+            delete_imageView.onClick(activity) {
+                vm.deleteProjects(listOf(Project()))
+            }
+
+            backArrow_imageView.onClick(activity)
         }
-
-        view.delete_imageView.setOnClickListener {
-            ProviderHelper.deleteOneProject(id)
-            activity.finish()
-        }
-
-        view.backArrow_imageView.setOnClickListener { activity.finish() }
-        Log.d(TAG, "init: end")
-    }
-
-    companion object {
-
-        private val TAG = "FEditProject"
     }
 }

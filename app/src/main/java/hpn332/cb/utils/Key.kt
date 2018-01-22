@@ -2,13 +2,14 @@ package hpn332.cb.utils
 
 object Key {
 
-    val PROJECT = "ADD_PROJECT"
-    val POSITION = "POSITION"
-    val STEP = "STEP"
-    val UPDATE = "UPDATE"
-    val TYPE = "TYPE"
-    val KIND = "KIND"
+    const val PROJECT = "ADD_PROJECT"
+    const val POSITION = "POSITION"
+    const val ID = "ID"
+    const val STEP = "STEP"
+    const val UPDATE = "UPDATE"
+    const val TYPE = "TYPE"
+    const val KIND = "KIND"
 
 
-    val BASE_COLOR = -16777216
+    const val BASE_COLOR = -16777216
 }

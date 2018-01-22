@@ -24,10 +24,10 @@
         <activity android:name=".view.tag.AListTag" />
         <activity android:name=".view.task.AListTask" />
 
-        <!--<provider
+        <provider
             android:name=".model.data.Provider"
             android:authorities="hpn332.cb"
-            android:exported="false" />-->
+            android:exported="false" />
 
         <activity android:name=".view.edit.AEdit" />
     </application>

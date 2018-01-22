@@ -43,7 +43,7 @@ class FAddBacklog : Fragment() {
         val title: EditText = view.title_editText
         val description: EditText = view.description_editText
 
-        vm.color_panel = view.color_panel
+        vm.colorPanelView = view.color_panel
 
         view.delete_imageView.visibility = View.GONE
 
@@ -65,7 +65,7 @@ class FAddBacklog : Fragment() {
                 activity.intent.getIntExtra(Key.PROJECT, 0),
                 title.text.toString(),
                 description.text.toString(),
-                vm.color_panel!!.color)
+                vm.colorPanelView!!.color)
 
             activity.finish()
         }

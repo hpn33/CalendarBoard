@@ -7,30 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import java.util.ArrayList
-
 import hpn332.cb.R
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
 import hpn332.cb.model.stucture.Tag
 import kotlinx.android.synthetic.main.row_item_tag.view.*
 
-class AdapterListTag(
-    context: Context, private val arrayList: ArrayList<Tag>) : RecyclerView.Adapter<AdapterListTag.ItemHolder>() {
+class AdapterListTag(context: Context) : RecyclerView.Adapter<AdapterListTag.ItemHolder>() {
+
+    private var list: List<Tag> = listOf()
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        val view = inflater.inflate(R.layout.row_item_tag, parent, false)
 
-        return ItemHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder =
+        ItemHolder(inflater.inflate(R.layout.row_item_tag, parent, false))
+
+    override fun onBindViewHolder(holder: ItemHolder, position: Int) = holder.onBind()
+
+    override fun getItemCount(): Int = list.size
+
+
+    fun setData(list: List<Tag>) {
+        this.list = list
+        notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.onBind(position)
-    }
-
-    override fun getItemCount(): Int = arrayList.size
 
     inner class ItemHolder(view: View) : RecyclerView.ViewHolder(view), View.OnLongClickListener {
 
@@ -43,18 +45,20 @@ class AdapterListTag(
             view.setOnLongClickListener(this)
         }
 
-        fun onBind(position: Int) {
+        fun onBind() {
 
-            title.text = arrayList[position].title
-            description.text = arrayList[position].desc
+            val list = list[adapterPosition]
+
+            title.text = list.title
+            description.text = list.desc
 
 
-            color_view.setBackgroundColor(arrayList[position].color)
+            color_view.setBackgroundColor(list.color)
         }
 
         override fun onLongClick(view: View): Boolean {
 
-            Utils.goTo(inflater.context, Type.EDIT_TAG, position)
+            Utils.goTo(inflater.context, Type.EDIT_TAG, adapterPosition)
 
             return true
         }

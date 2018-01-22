@@ -47,8 +47,8 @@ class FEditBacklog : Fragment() {
         val title: EditText = view.title_editText
         val description: EditText = view.description_editText
 
-        vm.color_panel = view.color_panel
-        vm.color_panel!!.color = initColor
+        vm.colorPanelView = view.color_panel
+        vm.colorPanelView!!.color = initColor
 
         title.setText(arrayList[position].title)
         description.setText(arrayList[position].desc)
@@ -58,7 +58,7 @@ class FEditBacklog : Fragment() {
                 id,
                 title.text.toString(),
                 description.text.toString(),
-                vm.color_panel!!.color)
+                vm.colorPanelView!!.color)
 
             activity.finish()
             Log.d(TAG, "init: update id ::" + id)

@@ -41,7 +41,7 @@ class FAddTask : Fragment() {
 	private var title: EditText? = null
 	private var description: EditText? = null
 
-	private var backlog: Backlog? = null
+//	private var backlog: Backlog? = null
 
 	private val tags: String
 		get() {
@@ -67,10 +67,6 @@ class FAddTask : Fragment() {
 			return if (num5!!.isChecked) 5 else 1
 		}
 
-	override fun onAttach(context: Context?) {
-		super.onAttach(context)
-		backlog = context as AEdit?
-	}
 
 	override fun onCreateView(
 			inflater: LayoutInflater?, container: ViewGroup?,
@@ -141,7 +137,7 @@ class FAddTask : Fragment() {
 		recyclerView!!.layoutManager = LinearLayoutManager(
 				context, LinearLayoutManager.HORIZONTAL, false)
 
-		recyclerView!!.adapter = AdapterListBacklog(context, List.L_BACKLOG, backlog!!)
+		recyclerView!!.adapter = AdapterListBacklog(context, List.L_BACKLOG)
 
 		Log.d(TAG, "setupBacklogFragment: end")
 	}

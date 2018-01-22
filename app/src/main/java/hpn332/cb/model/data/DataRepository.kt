@@ -18,10 +18,12 @@ class DataRepository {
     private val tag = db.tagDao()
     private val backlog = db.backlogDao()
 
-    fun allProject()/*: LiveData<List<Project>>*/ = project.all()
+    fun allProject(): LiveData<List<Project>> = project.all()
     fun insertProject(items: List<Project>) = dickIO.execute { project.insert(items) }
     fun updateProject(items: List<Project>) = dickIO.execute { project.update(items) }
     fun deleteProject(items: List<Project>) = dickIO.execute { project.delete(items) }
+
+//    fun getProjectById(id: Int): LiveData<Project> = project.one(id)
 
 
     fun allTask(): LiveData<List<Task>> = task.all()

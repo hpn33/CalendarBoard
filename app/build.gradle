@@ -19,6 +19,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -37,10 +41,8 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$arch"
     implementation "android.arch.persistence.room:runtime:$arch"
     kapt "android.arch.persistence.room:compiler:$arch"
-
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$k"
-
     //other
     implementation project(':colorPicker')
 }
