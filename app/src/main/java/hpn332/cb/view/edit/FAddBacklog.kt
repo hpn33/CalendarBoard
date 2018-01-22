@@ -12,7 +12,6 @@ import hpn332.cb.ButtonColor
 import hpn332.cb.R
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.Utils
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.view.edit.AEdit.Companion.vm
 import hpn332.cb.view.fragment.DialogFragmentColorPicker
 import kotlinx.android.synthetic.main.content_edit_backlog_center.view.*
@@ -61,11 +60,11 @@ class FAddBacklog : Fragment() {
             })
 
         view.fab.setOnClickListener {
-            ProviderHelper.insertNewBacklog(
-                activity.intent.getIntExtra(Key.PROJECT, 0),
-                title.text.toString(),
-                description.text.toString(),
-                vm.colorPanelView!!.color)
+//            ProviderHelper.insertNewBacklog(
+//                activity.intent.getIntExtra(Key.PROJECT, 0),
+//                title.text.toString(),
+//                description.text.toString(),
+//                vm.colorPanelView!!.color)
 
             activity.finish()
         }

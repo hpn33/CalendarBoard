@@ -1,6 +1,5 @@
 package hpn332.cb.view.edit
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -18,7 +17,6 @@ import android.widget.RadioButton
 
 import hpn332.cb.R
 import hpn332.cb.model.adapter.AdapterListBacklog
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.model.stucture.CheckTagStructure
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
@@ -107,13 +105,13 @@ class FAddTask : Fragment() {
 		view.fab.setOnClickListener { v ->
 
 			if (vm.backlogId != 0) {
-				ProviderHelper.insertNewTask(
-						activity.intent.getIntExtra(Key.PROJECT, 0),
-						vm.backlogId,
-						title!!.text.toString(),
-						description!!.text.toString(),
-						"",
-						rank)
+//				ProviderHelper.insertNewTask(
+//						activity.intent.getIntExtra(Key.PROJECT, 0),
+//						vm.backlogId,
+//						title!!.text.toString(),
+//						description!!.text.toString(),
+//						"",
+//						rank)
 				activity.finish()
 
 			} else
@@ -148,7 +146,7 @@ class FAddTask : Fragment() {
 		List.L_TAGS.clear()
 		List.L_CHECK.clear()
 
-		ProviderHelper.queryListTag(List.L_TAGS)
+//		ProviderHelper.queryListTag(List.L_TAGS)
 
 		for (arrayList in List.L_TAGS) {
 			List.L_CHECK.add(

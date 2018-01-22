@@ -1,7 +1,5 @@
 package hpn332.cb.view.edit
 
-import android.arch.lifecycle.Observer
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -11,9 +9,7 @@ import android.view.ViewGroup
 
 import hpn332.cb.R
 import hpn332.cb.model.stucture.Project
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.utils.Key
-import hpn332.cb.utils.List
 import hpn332.cb.view.edit.AEdit.Companion.vm
 import kotlinx.android.synthetic.main.content_edit_project_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*

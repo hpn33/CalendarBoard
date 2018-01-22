@@ -11,9 +11,6 @@ import android.util.Log
 import hpn332.cb.R
 import hpn332.cb.view.edit.FAddTag
 import hpn332.cb.model.adapter.AdapterListTag
-import hpn332.cb.model.stucture.Tag
-import hpn332.cb.utils.helper.ProviderHelper
-import hpn332.cb.utils.List
 import kotlinx.android.synthetic.main.activity_tag_list.*
 import kotlinx.android.synthetic.main.content_list_toolbar.*
 import kotlinx.android.synthetic.main.include_recycler_view.*

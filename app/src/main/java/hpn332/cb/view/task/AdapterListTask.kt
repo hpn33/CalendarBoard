@@ -16,7 +16,6 @@ import hpn332.cb.R
 import hpn332.cb.utils.List
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.model.stucture.Task
 import hpn332.cb.view.task.AListTask.Companion.vm
 import kotlinx.android.synthetic.main.row_item_task.view.*
@@ -68,9 +67,9 @@ class AdapterListTask(
 				nextStep.visibility = View.VISIBLE
 
 				nextStep.setOnClickListener {
-                    ProviderHelper.updateOneTaskToNextStep(
-							arrayList[position].id,
-							arrayList[position].step + 1)
+//                    ProviderHelper.updateOneTaskToNextStep(
+//							arrayList[position].id,
+//							arrayList[position].step + 1)
 
 					vm.onClickNext()
 				}
@@ -83,7 +82,7 @@ class AdapterListTask(
 
 			tagLayout.visibility = View.VISIBLE
 
-			ProviderHelper.queryListTag(List.L_TAGS)
+//			ProviderHelper.queryListTag(List.L_TAGS)
 
 			val tags = arrayList[adapterPosition].tag_id.split("`".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 

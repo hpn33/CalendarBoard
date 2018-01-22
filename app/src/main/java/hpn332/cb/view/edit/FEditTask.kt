@@ -15,7 +15,6 @@ import android.widget.RadioButton
 import java.util.ArrayList
 
 import hpn332.cb.R
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.model.stucture.CheckTagStructure
 import hpn332.cb.model.stucture.Task
 import hpn332.cb.utils.Key
@@ -120,20 +119,20 @@ class FEditTask : Fragment() {
         view.addTag.setOnClickListener { startActivity(Intent(context, FAddTag::class.java)) }
 
         view.fab.setOnClickListener {
-            ProviderHelper.updateOneTask(
-                id,
-                title!!.text.toString(),
-                description!!.text.toString(),
-                tags,
-                step,
-                rank)
+//            ProviderHelper.updateOneTask(
+//                id,
+//                title!!.text.toString(),
+//                description!!.text.toString(),
+//                tags,
+//                step,
+//                rank)
             Log.d(TAG, "onClick: update id ::" + id)
 
             activity.finish()
         }
 
         view.delete_imageView.setOnClickListener {
-            ProviderHelper.deleteOneTask(id)
+//            ProviderHelper.deleteOneTask(id)
             activity.finish()
         }
 
@@ -177,7 +176,7 @@ class FEditTask : Fragment() {
         List.L_TAGS.clear()
         List.L_CHECK.clear()
 
-        ProviderHelper.queryListTag(List.L_TAGS)
+//        ProviderHelper.queryListTag(List.L_TAGS)
 
         for (arrayList in List.L_TAGS) {
             List.L_CHECK.add(

@@ -10,14 +10,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 
 import hpn332.cb.model.adapter.AdapterListBacklog
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.R
-import hpn332.cb.R.id.tabs
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.utils.helper.ProviderHelper.Companion.init
 import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.include_backlog_list.*
@@ -143,7 +140,7 @@ class AListTask : AppCompatActivity() {
     private fun query() {
         Log.d(tag, "query: start")
 
-        ProviderHelper.queryListBacklogByProject(project_id, List.L_BACKLOG)
+//        ProviderHelper.queryListBacklogByProject(project_id, List.L_BACKLOG)
 
         queryOfTask(1)
 
@@ -155,12 +152,12 @@ class AListTask : AppCompatActivity() {
     private fun queryOfTask(backlogId: Int) {
         Log.d(tag, "queryOfTask: start")
 
-        ProviderHelper.queryListTaskByBacklogAndStep(
-            1, project_id, backlogId, List.L_TODO)
-        ProviderHelper.queryListTaskByBacklogAndStep(
-            2, project_id, backlogId, List.L_DOING)
-        ProviderHelper.queryListTaskByBacklogAndStep(
-            3, project_id, backlogId, List.L_DONE)
+//        ProviderHelper.queryListTaskByBacklogAndStep(
+//            1, project_id, backlogId, List.L_TODO)
+//        ProviderHelper.queryListTaskByBacklogAndStep(
+//            2, project_id, backlogId, List.L_DOING)
+//        ProviderHelper.queryListTaskByBacklogAndStep(
+//            3, project_id, backlogId, List.L_DONE)
 
         Log.d(tag, "queryOfTask: end")
     }

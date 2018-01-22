@@ -10,7 +10,6 @@ import android.widget.EditText
 
 import hpn332.cb.R
 import hpn332.cb.ButtonColor
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
 import hpn332.cb.view.edit.AEdit.Companion.vm
@@ -54,18 +53,18 @@ class FEditBacklog : Fragment() {
         description.setText(arrayList[position].desc)
 
         view.fab.setOnClickListener {
-            ProviderHelper.updateOneBacklog(
-                id,
-                title.text.toString(),
-                description.text.toString(),
-                vm.colorPanelView!!.color)
+//            ProviderHelper.updateOneBacklog(
+//                id,
+//                title.text.toString(),
+//                description.text.toString(),
+//                vm.colorPanelView!!.color)
 
             activity.finish()
             Log.d(TAG, "init: update id ::" + id)
         }
 
         view.delete_imageView.setOnClickListener {
-            ProviderHelper.deleteOneBacklog(id)
+//            ProviderHelper.deleteOneBacklog(id)
             activity.finish()
             Log.d(TAG, "init: delete :: " + id)
         }

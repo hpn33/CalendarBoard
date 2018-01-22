@@ -12,7 +12,6 @@ import hpn332.cb.R
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.List
 import hpn332.cb.utils.Utils
-import hpn332.cb.utils.helper.ProviderHelper
 import hpn332.library.view.ColorPickerView
 import kotlinx.android.synthetic.main.content_color_picker.view.*
 import kotlinx.android.synthetic.main.content_edit_tag_center.view.*
@@ -58,17 +57,17 @@ class FEditTag : Fragment() {
             .setOnClickListener { activity.finish() }
 
         view.delete_imageView.setOnClickListener {
-            ProviderHelper.deleteOneTag(arrayList[position].id)
+//            ProviderHelper.deleteOneTag(arrayList[position].id)
 
             activity.finish()
         }
 
         view.fab.setOnClickListener {
-            ProviderHelper.updateOneTag(
-                    arrayList[position].id,
-                    title!!.text.toString(),
-                    description!!.text.toString(),
-                    colorPicker!!.color)
+//            ProviderHelper.updateOneTag(
+//                    arrayList[position].id,
+//                    title!!.text.toString(),
+//                    description!!.text.toString(),
+//                    colorPicker!!.color)
             activity.finish()
         }
 

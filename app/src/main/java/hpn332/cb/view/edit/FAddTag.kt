@@ -10,7 +10,6 @@ import android.widget.EditText
 
 import hpn332.cb.R
 import hpn332.cb.utils.Utils
-import hpn332.cb.utils.helper.ProviderHelper
 import kotlinx.android.synthetic.main.content_color_picker.view.*
 import kotlinx.android.synthetic.main.content_edit_tag_center.view.*
 import kotlinx.android.synthetic.main.content_edit_toolbar.view.*
@@ -48,10 +47,10 @@ class FAddTag : Fragment() {
 		view.backArrow_imageView	            .setOnClickListener { activity.finish() }
 
 		view.fab.setOnClickListener {
-            ProviderHelper.insertNewTag(
-					title!!.text.toString(),
-					description!!.text.toString(),
-					colorPicker.color)
+//            ProviderHelper.insertNewTag(
+//					title!!.text.toString(),
+//					description!!.text.toString(),
+//					colorPicker.color)
 			activity.finish()
 		}
 
