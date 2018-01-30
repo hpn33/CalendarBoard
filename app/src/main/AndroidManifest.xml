@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.project.AListProject"
+            android:name=".view.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,15 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.tag.AListTag" />
-        <activity android:name=".view.task.AListTask" />
-
-        <provider
+        <activity android:name=".view.tag.TagActivity" />
+        <activity android:name=".view.project.ProjectActivity" />
+        <activity android:name=".view.backlog.BackLogActivity" />
+        <activity android:name=".view.edit.EditActivity" />
+    </application>
+</manifest><!--<provider
             android:name=".model.data.Provider"
             android:authorities="hpn332.cb"
-            android:exported="false" />
-
-        <activity android:name=".view.edit.AEdit" />
-    </application>
-
-</manifest>
+            android:exported="false" />-->

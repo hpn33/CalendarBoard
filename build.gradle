@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        k = '1.2.10'
+        k = '1.2.21'
         support = '26.1.0'
         arch = '1.0.0'
     }

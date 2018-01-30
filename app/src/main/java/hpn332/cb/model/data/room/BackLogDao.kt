@@ -3,7 +3,6 @@ package hpn332.cb.model.data.room
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import hpn332.cb.model.stucture.BackLog
-import hpn332.cb.model.stucture.Project
 
 /**
  * Created by hpn332 on 21/12/2017.
@@ -11,15 +10,33 @@ import hpn332.cb.model.stucture.Project
 @Dao
 interface BackLogDao {
 
+    /**
+     * get one backlog by id
+     *
+     * @param id
+     *
+     * @return backlog object
+     */
+    @Query("SELECT * FROM backlog WHERE id = :id")
+    fun one(id: Int): LiveData<BackLog>
+
     @Query("SELECT * FROM backlog")
     fun all(): LiveData<List<BackLog>>
 
     @Insert
-    fun insert(item: List<BackLog>)
+    fun insert(item: BackLog)
 
     @Update
-    fun update(item: List<BackLog>)
+    fun update(item: BackLog)
 
     @Delete
-    fun delete(item: List<BackLog>)
+    fun delete(item: BackLog)
+
+    /**
+     * delete one backlog
+     *
+     * @param id
+     */
+    @Query("DELETE FROM backlog WHERE id = :id")
+    fun deleteById(id: Int)
 }

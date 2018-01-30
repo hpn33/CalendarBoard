@@ -10,14 +10,14 @@ import java.util.concurrent.Executors
  */
 object AppExe {
 
-	val dickIO = Executors.newSingleThreadExecutor()
-	val networdIO = Executors.newFixedThreadPool(3)
-	val mainThread = object : Executor {
+    val dickIO = Executors.newSingleThreadExecutor()
+    val networdIO = Executors.newFixedThreadPool(3)
+    val mainThread = object : Executor {
 
-		private val mainThreadHandler = Handler(Looper.getMainLooper())
+        private val mainThreadHandler = Handler(Looper.getMainLooper())
 
-		override fun execute(command: Runnable?) {
-			mainThreadHandler.post(command)
-		}
-	}
+        override fun execute(command: Runnable?) {
+            mainThreadHandler.post(command)
+        }
+    }
 }

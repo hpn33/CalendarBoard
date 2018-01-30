@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-
 import hpn332.cb.R
-import hpn332.cb.view.fragment.DialogFragmentColorPicker
 import hpn332.cb.utils.Key
+import hpn332.cb.view.DialogFragmentColorPicker
 import hpn332.library.view.ColorPanelView
 
 abstract class EditView : AppCompatActivity(), DialogFragmentColorPicker.ColorPickerDialogListener {
@@ -17,33 +16,21 @@ abstract class EditView : AppCompatActivity(), DialogFragmentColorPicker.ColorPi
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_edit)
-		Log.d(tag, "onCreate: start")
 
 		init()
-
-		Log.d(tag, "onCreate: end")
 	}
 
-	private fun init() {
-		Log.d(tag, "init: start")
-
+	private fun init() =
 		setFragment(
 				checkTypeAndGetFragment(
 						intent.getIntExtra(Key.TYPE, 0)))
 
-		Log.d(tag, "init: end")
-	}
 
-	private fun setFragment(fragment: Fragment) {
-		Log.d(tag, "setFragment: start")
-
+	private fun setFragment(fragment: Fragment) =
 		supportFragmentManager
 				.beginTransaction()
 				.add(R.id.frameLayout, fragment)
 				.commit()
-
-		Log.d(tag, "setFragment: end")
-	}
 
 	override fun onColorSelected(color: Int) {
 		color_panel!!.color = color

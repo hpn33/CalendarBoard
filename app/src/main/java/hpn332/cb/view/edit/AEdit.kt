@@ -1,71 +1,43 @@
 package hpn332.cb.view.edit
 
-import android.arch.lifecycle.ViewModelProviders
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
-
-import hpn332.cb.R
-import hpn332.cb.view.fragment.DialogFragmentColorPicker
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import hpn332.cb.utils.Key
-import hpn332.cb.utils.Type
-import hpn332.cb.view.task.AListTask.Companion.vm
 
-class AEdit : AppCompatActivity(), DialogFragmentColorPicker.ColorPickerDialogListener {
+/**
+ *
+ */
+abstract class AEdit : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit)
-        Log.d(TAG, "onCreate: start")
+    override fun onCreateView(
+        inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        vm = ViewModelProviders.of(this).get(VMEdit::class.java)
+        val view = inflater!!.inflate(setView(), container, false)
 
-        savedInstanceState ?: setFragment(checkTypeAndGetFragment())
+        init(view, activity.intent.getIntExtra(Key.ID, 0))
 
-        Log.d(TAG, "onCreate: end")
+        return view
     }
 
-    private fun setFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.frameLayout, fragment)
-            .commit()
-    }
+    /**
+     * this take layout id
+     *
+     * @sample R.id.sample
+     *
+     * @return layout id
+     */
+    abstract fun setView(): Int
 
+    /**
+     * I have everything that need
+     * what do you want do?
+     *
+     * @param view can take element
+     * @param id can take data
+     */
+    abstract fun init(view: View, id: Int)
 
-    override fun onColorSelected(color: Int) {
-        vm.colorPanelView?.color = color
-        Log.d(TAG, "onColorSelected: color " + color)
-    }
-
-    override fun onDialogDismissed(color: Int) {
-        vm.colorPanelView?.color = color
-        Log.d(TAG, "onDialogDismissed: color " + color)
-    }
-
-    private fun checkTypeAndGetFragment(): Fragment {
-
-        return when (intent.getIntExtra(Key.TYPE, 0)) {
-            Type.ADD_PROJECT  -> FAddProject()
-            Type.ADD_BACKLOG  -> FAddBacklog()
-            Type.ADD_TASK     -> FAddTask()
-            Type.ADD_TAG      -> FAddTag()
-            Type.EDIT_PROJECT -> FEditProject()
-            Type.EDIT_BACKLOG -> FEditBacklog()
-            Type.EDIT_TASK    -> FEditTask()
-            Type.EDIT_TAG     -> FEditTag()
-            else              ->
-                throw IllegalArgumentException("Unknown type")
-        }
-    }
-
-    companion object {
-
-        private val TAG = "AEdit"
-
-        lateinit var vm: VMEdit
-
-    }
 }

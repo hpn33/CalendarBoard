@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="hpn332.cb.view.tag.AListTag">
+    tools:context="hpn332.cb.view.tag.TagActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/content_list_toolbar"/>
+        <include layout="@layout/content_list_toolbar" />
 
         <RelativeLayout
             android:id="@+id/relative_bottom"
@@ -19,8 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/appBarLayout">
 
-            <include
-                layout="@layout/include_recycler_view"/>
+            <include layout="@layout/include_recycler_view" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -30,6 +28,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_plus"/>
-
+        app:srcCompat="@drawable/ic_plus" />
 </android.support.design.widget.CoordinatorLayout>

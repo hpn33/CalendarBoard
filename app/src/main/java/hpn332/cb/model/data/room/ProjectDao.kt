@@ -11,9 +11,9 @@ import hpn332.cb.model.stucture.Project
 interface ProjectDao {
 
     /**
-     * get count of projects
+     * get countOfProject of projects
      *
-     * @return count of projects
+     * @return countOfProject of projects
      */
     @Query("SELECT COUNT(id) FROM project")
     fun count(): Int
@@ -41,8 +41,8 @@ interface ProjectDao {
      *
      * @param item
      */
-    @Insert
-    fun insert(item: List<Project>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(item: Project)
 
     /**
      * update one or more project
@@ -50,7 +50,7 @@ interface ProjectDao {
      * @param item
      */
     @Update
-    fun update(item: List<Project>)
+    fun update(item: Project)
 
     /**
      * delete one or more project
@@ -59,4 +59,12 @@ interface ProjectDao {
      */
     @Delete
     fun delete(item: List<Project>)
+
+    /**
+     * delete one project
+     *
+     * @param id
+     */
+    @Query("DELETE FROM project WHERE id = :id")
+    fun deleteById(id: Int)
 }
