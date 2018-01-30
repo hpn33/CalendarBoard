@@ -35,6 +35,7 @@
                             android:layout_weight="5"
                             android:padding="15dp"
                             android:text="project"
+                            android:textColor="@color/white"
                             android:textSize="20sp" />
 
                         <ImageView
@@ -52,6 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/l1"
+                        android:background="@color/low_white"
                         android:orientation="horizontal">
 
                         <TextView
@@ -61,14 +63,15 @@
                             android:layout_weight="5"
                             android:padding="8dp"
                             android:text="s"
+                            android:textColor="#000"
                             android:textSize="12sp" />
 
-                        <Button
+                        <!--<Button
                             android:id="@+id/backlog_button"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="backlog" />
+                            android:text="backlog" />-->
                     </LinearLayout>
                 </LinearLayout>
             </android.support.design.widget.CollapsingToolbarLayout>

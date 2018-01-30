@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import hpn332.cb.R
 import hpn332.cb.utils.Key
-import hpn332.cb.view.project.ProjectActivity.Companion.projectViewModel
+import hpn332.cb.view.project.DetailActivity.Companion.detailViewModel
 import kotlinx.android.synthetic.main.include_recycler_view.view.*
 
 class ProjectTaskListFragment : Fragment() {
@@ -30,15 +30,15 @@ class ProjectTaskListFragment : Fragment() {
         val taskAdapterList = ProjectAdapter(context)
 
         when (arguments.getInt(Key.STEP)) {
-            1 -> projectViewModel.getTodo().observe(this,
+            1 -> detailViewModel.getTodo().observe(this,
                 Observer {
                     taskAdapterList.setData(it!!)
                 })
-            2 -> projectViewModel.getDoing().observe(this,
+            2 -> detailViewModel.getDoing().observe(this,
                 Observer {
                     taskAdapterList.setData(it!!)
                 })
-            3 -> projectViewModel.getDone().observe(this,
+            3 -> detailViewModel.getDone().observe(this,
                 Observer {
                     taskAdapterList.setData(it!!)
                 })

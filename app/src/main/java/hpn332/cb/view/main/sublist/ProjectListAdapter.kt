@@ -10,7 +10,7 @@ import hpn332.cb.R
 import hpn332.cb.model.stucture.Project
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.view.project.ProjectActivity
+import hpn332.cb.view.project.DetailActivity
 import kotlinx.android.synthetic.main.row_item_project.view.*
 
 class ProjectListAdapter(context: Context) : RecyclerView.Adapter<ProjectListAdapter.ItemHolder>() {
@@ -49,7 +49,7 @@ class ProjectListAdapter(context: Context) : RecyclerView.Adapter<ProjectListAda
             percent.text = percent(item)
 
             view.setOnClickListener {
-                Utils.goTo(inflater.context, ProjectActivity::class.java, id = item.id)
+                Utils.goTo(inflater.context, DetailActivity::class.java, id = item.id)
             }
 
             view.setOnLongClickListener {

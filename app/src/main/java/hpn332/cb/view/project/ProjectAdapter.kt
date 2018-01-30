@@ -9,7 +9,7 @@ import hpn332.cb.R
 import hpn332.cb.model.stucture.Task
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.view.project.ProjectActivity.Companion.projectViewModel
+import hpn332.cb.view.project.DetailActivity.Companion.detailViewModel
 import kotlinx.android.synthetic.main.row_item_task.view.*
 
 class ProjectAdapter(context: Context) : RecyclerView.Adapter<ProjectAdapter.ItemHolder>() {
@@ -56,7 +56,7 @@ class ProjectAdapter(context: Context) : RecyclerView.Adapter<ProjectAdapter.Ite
                 nextStep.setOnClickListener {
 
                     item.step = item.step + 1
-                    projectViewModel.updateTask(item)
+                    detailViewModel.updateTask(item)
                 }
             }
 

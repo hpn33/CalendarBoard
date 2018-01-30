@@ -11,25 +11,23 @@ import hpn332.cb.model.adapter.SectionsPagerAdapter
 import hpn332.cb.utils.Key
 import hpn332.cb.utils.Type
 import hpn332.cb.utils.Utils
-import hpn332.cb.utils.Utils.onClick
 import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class ProjectActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
     companion object {
-        lateinit var projectViewModel: DetailViewModel
+        lateinit var detailViewModel: DetailViewModel
     }
 
     private lateinit var viewPager: ViewPager
     private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_task_list)
+        setContentView(R.layout.activity_detail)
 
-        projectViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
         edit_imageView.visibility = View.INVISIBLE
 
@@ -39,7 +37,7 @@ class ProjectActivity : AppCompatActivity() {
     private fun init() {
 
 
-        projectViewModel.project.id = intent.getIntExtra(Key.ID, 0)
+        detailViewModel.project.id = intent.getIntExtra(Key.ID, 0)
         viewPager = findViewById(R.id.viewpager)
         sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
 
@@ -52,29 +50,29 @@ class ProjectActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         tabs.setupWithViewPager(viewPager)
 
-        projectViewModel.getProject().observe(this,
+        detailViewModel.getProject().observe(this,
             Observer {
-                projectViewModel.project = it!!
+                detailViewModel.project = it!!
 
-                if (projectViewModel.project.title == "")
+                if (detailViewModel.project.title == "")
                     with(project_title) {
-                        visibility = View.GONE
+                        visibility = View.INVISIBLE
                         text = ""
                     }
                 else
                     with(project_title) {
-                        text = projectViewModel.project.title
+                        text = detailViewModel.project.title
                         visibility = View.VISIBLE
                     }
 
-                if (projectViewModel.project.desc == "")
+                if (detailViewModel.project.desc == "")
                     with(project_desc) {
                         text = ""
-                        visibility = View.GONE
+                        visibility = View.INVISIBLE
                     }
                 else
                     with(project_desc) {
-                        text = projectViewModel.project.desc
+                        text = detailViewModel.project.desc
                         visibility = View.VISIBLE
                     }
 
@@ -82,15 +80,11 @@ class ProjectActivity : AppCompatActivity() {
             })
 
         edit_imageView.setOnClickListener {
-            Utils.goToEdit(this, Type.EDIT_PROJECT, id = projectViewModel.project.id)
+            Utils.goToEdit(this, Type.EDIT_PROJECT, id = detailViewModel.project.id)
         }
 
-//        backlog_button.setOnClickListener {
-//            Utils.goTo(this, BackLogActivity::class.java)
-//        }
-
-        fab_task_plus.onClick {
-            Utils.goToEdit(this, Type.ADD_TASK, id = projectViewModel.project.id)
+        fab_task_plus.setOnClickListener {
+            Utils.goToEdit(this, Type.ADD_TASK, id = detailViewModel.project.id)
         }
     }
 }

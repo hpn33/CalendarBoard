@@ -21,10 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.tag.TagActivity" />
-        <activity android:name=".view.project.ProjectActivity" />
-        <activity android:name=".view.backlog.BackLogActivity" />
         <activity android:name=".view.edit.EditActivity" />
+        <activity android:name=".view.project.DetailActivity" />
+        
+        <activity android:name=".view.tag.TagActivity" />
+        <activity android:name=".view.backlog.BackLogActivity" />
     </application>
 </manifest><!--<provider
             android:name=".model.data.Provider"
