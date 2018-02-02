@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import hpn332.cb.R
 import hpn332.cb.model.adapter.SectionsPagerAdapter
-import hpn332.cb.view.main.sublist.BackLogListFragment
-import hpn332.cb.view.main.sublist.ProjectListFragment
-import hpn332.cb.view.main.sublist.TagListFragment
+import hpn332.cb.view.main.fragment.BackLogListFragment
+import hpn332.cb.view.main.fragment.ProjectListFragment
+import hpn332.cb.view.main.fragment.TagListFragment
 import kotlinx.android.synthetic.main.activity_project_list.*
 
 class MainActivity : AppCompatActivity() {

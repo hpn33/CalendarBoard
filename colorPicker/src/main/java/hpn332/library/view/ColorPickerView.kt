@@ -44,20 +44,10 @@ package hpn332.library.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.*
 import android.graphics.Bitmap.Config
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.ComposeShader
-import android.graphics.LinearGradient
-import android.graphics.Paint
 import android.graphics.Paint.Align
 import android.graphics.Paint.Style
-import android.graphics.Point
-import android.graphics.PorterDuff
-import android.graphics.Rect
-import android.graphics.RectF
-import android.graphics.Shader
 import android.graphics.Shader.TileMode
 import android.os.Bundle
 import android.os.Parcelable
@@ -66,7 +56,6 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
-
 import hpn332.library.R
 import hpn332.library.drawable.AlphaPatternDrawable
 
@@ -251,10 +240,10 @@ class ColorPickerView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     public override fun onRestoreInstanceState(state: Parcelable?) {
-        var state = state
+        var state1 = state
 
-        if (state is Bundle) {
-            val bundle = state as Bundle?
+        if (state1 is Bundle) {
+            val bundle = state1 as Bundle?
 
             mAlpha = bundle!!.getInt("alpha")
             mHue = bundle.getFloat("hue")
@@ -264,9 +253,9 @@ class ColorPickerView @JvmOverloads constructor(context: Context, attrs: Attribu
             mAlphaSliderText = bundle.getString("alpha_text")
 
 
-            state = bundle.getParcelable("instanceState")
+            state1 = bundle.getParcelable("instanceState")
         }
-        super.onRestoreInstanceState(state)
+        super.onRestoreInstanceState(state1)
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
@@ -584,8 +573,8 @@ class ColorPickerView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     private fun pointToSatVal(x: Float, y: Float): FloatArray {
-        var x = x
-        var y = y
+        var x1 = x
+        var y1 = y
 
         val rect = mSatValRect
         val result = FloatArray(2)
@@ -593,57 +582,57 @@ class ColorPickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         val width = rect!!.width().toFloat()
         val height = rect.height().toFloat()
 
-        x = when {
-            x < rect.left  -> 0f
-            x > rect.right -> width
-            else           -> x - rect.left
+        x1 = when {
+            x1 < rect.left  -> 0f
+            x1 > rect.right -> width
+            else           -> x1 - rect.left
         }
 
-        y = when {
-            y < rect.top    -> 0f
-            y > rect.bottom -> height
-            else            -> y - rect.top
+        y1 = when {
+            y1 < rect.top    -> 0f
+            y1 > rect.bottom -> height
+            else            -> y1 - rect.top
         }
 
-        result[0] = 1f / width * x
-        result[1] = 1f - 1f / height * y
+        result[0] = 1f / width * x1
+        result[1] = 1f - 1f / height * y1
 
         return result
     }
 
     private fun pointToHue(y: Float): Float {
-        var y = y
+        var y1 = y
 
         val rect = mHueRect
 
         val height = rect!!.height().toFloat()
 
-        y = when {
-            y < rect.top    -> 0f
-            y > rect.bottom -> height
-            else            -> y - rect.top
+        y1 = when {
+            y1 < rect.top    -> 0f
+            y1 > rect.bottom -> height
+            else            -> y1 - rect.top
         }
 
 
-        val hue = 360f - y * 360f / height
+        val hue = 360f - y1 * 360f / height
         Log.d("color-picker-view", "Hue: " + hue)
 
         return hue
     }
 
     private fun pointToAlpha(x: Int): Int {
-        var x = x
+        var x1 = x
 
         val rect = mAlphaRect
         val width = rect!!.width()
 
-        x = when {
-            x < rect.left  -> 0
-            x > rect.right -> width
-            else           -> x - rect.left
+        x1 = when {
+            x1 < rect.left  -> 0
+            x1 > rect.right -> width
+            else           -> x1 - rect.left
         }
 
-        return 0xff - x * 0xff / width
+        return 0xff - x1 * 0xff / width
     }
 
 
@@ -706,8 +695,8 @@ class ColorPickerView @JvmOverloads constructor(context: Context, attrs: Attribu
 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        var finalWidth = 0
-        var finalHeight = 0
+        val finalWidth: Int
+        val finalHeight: Int
 
         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)

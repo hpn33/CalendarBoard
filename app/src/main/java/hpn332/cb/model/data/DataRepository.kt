@@ -2,11 +2,11 @@ package hpn332.cb.model.data
 
 import android.arch.lifecycle.LiveData
 import hpn332.cb.App.Companion.db
-import hpn332.cb.AppExe.dickIO
 import hpn332.cb.model.stucture.BackLog
 import hpn332.cb.model.stucture.Project
 import hpn332.cb.model.stucture.Tag
 import hpn332.cb.model.stucture.Task
+import hpn332.cb.utils.helper.ExecutorHelper.dickIO
 
 /**
  *

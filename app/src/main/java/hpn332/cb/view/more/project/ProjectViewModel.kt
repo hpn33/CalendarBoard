@@ -1,30 +1,26 @@
-package hpn332.cb.view.detail
+package hpn332.cb.view.more.project
 
 import android.arch.lifecycle.ViewModel
 import hpn332.cb.model.data.DataRepository
-import hpn332.cb.model.stucture.BackLog
 import hpn332.cb.model.stucture.Project
-import hpn332.cb.model.stucture.Tag
 import hpn332.cb.model.stucture.Task
 
 /**
  * Created by hpn332 on 01/01/2018.
  */
-class DetailViewModel : ViewModel() {
+class ProjectViewModel : ViewModel() {
 
     private val repository = DataRepository()
 
-    var project = Project()
-    var backlog = BackLog()
-    var tag = Tag()
+    var project= Project()
 
     fun getTodo() = repository.todo(project.id)
     fun getDoing() = repository.doing(project.id)
     fun getDone() = repository.done(project.id)
 
     fun updateTask(item: Task) = repository.updateTask(item)
+    //    fun updateStepTask(id: Int, step: Int) = repository.updateStepTask(id, step)
 
-    fun getProjectById(id: Int) = repository.getProjectById(id)
-    fun getBackLogById(id: Int) = repository.getBackLogById(id)
-    fun getTagById(id: Int) = repository.getTagById(id)
+    fun getProject() = repository.getProjectById(project.id)
+    fun deleteProjectById(id: Int) = repository.deleteProjectById(id)
 }

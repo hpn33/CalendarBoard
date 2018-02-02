@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hpn332.cb.view.tag.TagActivity">
+    tools:context=".view.more.tag.TagActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

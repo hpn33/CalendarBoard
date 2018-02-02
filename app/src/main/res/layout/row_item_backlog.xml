@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="wrap_content"
@@ -12,6 +11,14 @@
         android:background="@color/colorPrimary"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/project_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="project"
+            android:textColor="@color/white" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,11 +28,12 @@
                 android:id="@+id/title_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="9"
+                android:background="@color/white"
                 android:gravity="start|center"
                 android:minHeight="50dp"
                 android:padding="10dp"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="25sp"
                 tools:text="Title" />
 
@@ -36,17 +44,6 @@
                 android:layout_weight="1"
                 android:background="@color/orange" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/description_textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="2dp"
-            android:background="@color/low_white"
-            android:gravity="start"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textSize="15sp"
-            tools:text="description" />
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

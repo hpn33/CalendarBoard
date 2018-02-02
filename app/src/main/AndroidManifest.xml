@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.edit.EditActivity" />
-        <activity android:name=".view.project.DetailActivity" />
+        <activity android:name="hpn332.cb.view.detail.DetailActivity" />
         
-        <activity android:name=".view.tag.TagActivity" />
-        <activity android:name=".view.backlog.BackLogActivity" />
+        <activity android:name="hpn332.cb.view.more.tag.TagActivity" />
+        <activity android:name="hpn332.cb.view.more.backlog.BackLogActivity" />
     </application>
 </manifest><!--<provider
             android:name=".model.data.Provider"

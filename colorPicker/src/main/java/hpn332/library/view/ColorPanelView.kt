@@ -17,7 +17,6 @@
 package hpn332.library.view
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
@@ -26,7 +25,6 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
-
 import hpn332.library.R
 import hpn332.library.drawable.AlphaPatternDrawable
 
@@ -78,14 +76,14 @@ class ColorPanelView @JvmOverloads constructor(context: Context, attrs: Attribut
 	}
 
 	public override fun onRestoreInstanceState(state: Parcelable?) {
-		var state = state
+		var state1 = state
 
-		if (state is Bundle) {
-			val bundle = state as Bundle?
+		if (state1 is Bundle) {
+			val bundle = state1 as Bundle?
 			mColor = bundle!!.getInt("color")
-			state = bundle.getParcelable("instanceState")
+            state1 = bundle.getParcelable("instanceState")
 		}
-		super.onRestoreInstanceState(state)
+		super.onRestoreInstanceState(state1)
 	}
 
 

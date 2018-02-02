@@ -11,6 +11,7 @@
 
     <color name="green">#13e400</color>
     <color name="orange">#ff8400</color>
+    <color name="oranged">#d16c00</color>
     <color name="blue">#3ca3fd</color>
     <color name="gold">#ffcd07</color>
 </resources>

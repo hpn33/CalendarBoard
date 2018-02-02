@@ -15,7 +15,7 @@ abstract class EditView : AppCompatActivity(), DialogFragmentColorPicker.ColorPi
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_edit)
+		setContentView(R.layout.activity_fragment)
 
 		init()
 	}
